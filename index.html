@@ -927,7 +927,7 @@ function updateAdmissionSummary(forceShow=false) {
     logToGoogleSheet(name, contact, b.display);
   }
 
-  box.innerHTML=`<strong>${esc(name||'Student')}</strong> wants admission in <strong>${esc(b?.display||'')}</strong>.<br/>Contact: ${esc(contact)}<br/>Counselling: <strong>${esc(b?.counselling||'')}</strong><br/><strong>क्रम:</strong> समुपदेशन → अर्ज भरणे → तपासणी → फी व पावती.`;
+  box.innerHTML=`<strong>${esc(name||'Student')}</strong> wants admission in <strong>${esc(b?.display||'')}</strong>.<br/>Contact: ${esc(contact)}<br/>Counselling: <strong>${esc(b?.counselling||'')}</strong><br/><strong>क्रम:</strong> समुपदेशन → अर्ज भरणे → अर्ज तपासणी → फी भरणे व पावती मिळवणे.`;
 
   if (panel?.classList.contains('show')||forceShow) _renderProcess();
   if (forceShow && panel) {
