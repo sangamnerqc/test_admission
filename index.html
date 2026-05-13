@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sangamner College – Admission Guide 2026–27</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --saffron: #D4450C;
+  --gold: #F0A500;
+  --deep: #0D1B2A;
+  --navy: #1B3A5C;
+  --cream: #FDF8F2;
+  --white: #FFFFFF;
+  --green: #1B6B3A;
+  --arts: #6B21A8;
+  --commerce: #1565C0;
+  --science: #0E7C5B;
+  --bvoc: #B45309;
+  --text: #1A1A2E;
+  --muted: #5A6070;
+  --border: #E8DDD0;
+  --shadow: 0 4px 24px rgba(13,27,42,0.10);
+  --shadow-lg: 0 8px 40px rgba(13,27,42,0.15);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--saffron); border-radius: 3px; }
+
+nav {
+  background: var(--deep); padding: 0 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px; position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.35);
+}
+.nav-brand { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--gold); line-height: 1.1; }
+.nav-brand span { color: rgba(255,255,255,0.55); font-size: 0.72rem; font-family: 'DM Sans', sans-serif; display: block; font-weight: 400; }
+.nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+.nav-links button {
+  background: none; border: none; color: rgba(255,255,255,0.7);
+  font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500;
+  padding: 0.45rem 0.85rem; border-radius: 6px; cursor: pointer; transition: all 0.2s;
+}
+.nav-links button:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.nav-links button.active { background: var(--saffron); color: #fff; }
+
+.page { display: none; }
+.page.active { display: block; animation: fadeUp 0.35s ease; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, var(--deep) 0%, var(--navy) 60%, #1a3a5e 100%);
+  padding: 3.5rem 2rem 4rem; text-align: center; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.hero-badge { display: inline-block; background: var(--saffron); color: #fff; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 20px; margin-bottom: 1.25rem; position: relative; z-index: 2; }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.75rem); color: #fff; line-height: 1.2; margin-bottom: 0.5rem; position: relative; z-index: 2; }
+.hero h1 em { color: var(--gold); font-style: normal; }
+.hero-sub { color: rgba(255,255,255,0.65); font-size: 0.92rem; margin-bottom: 0.4rem; position: relative; z-index: 2; }
+.hero-affil { color: rgba(255,255,255,0.45); font-size: 0.8rem; margin-bottom: 2rem; position: relative; z-index: 2; }
+.hero-cards { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem; position: relative; z-index: 2; }
+.hero-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 1.25rem 1.5rem; color: #fff; min-width: 140px; backdrop-filter: blur(8px); }
+.hero-card .hc-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); }
+.hero-card .hc-label { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 2px; }
+.hero-link { display: inline-block; background: var(--gold); color: var(--deep); font-weight: 700; font-size: 0.9rem; padding: 0.75rem 2rem; border-radius: 8px; text-decoration: none; transition: all 0.2s; position: relative; z-index: 10; cursor: pointer; }
+.hero-link:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+
+/* SECTION */
+.section { padding: 2.5rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 1.75rem; color: var(--deep); margin-bottom: 0.35rem; }
+.section-title span { color: var(--saffron); }
+.section-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+.divider { height: 3px; width: 48px; background: var(--saffron); border-radius: 2px; margin-bottom: 1.5rem; }
+
+/* QUICK CARDS */
+.quick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 1.25rem; }
+.quick-card { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+.quick-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.quick-head { padding: 1.5rem; color: #fff; }
+.quick-head.arts { background: linear-gradient(135deg, var(--arts), #9333ea); }
+.quick-head.science { background: linear-gradient(135deg, var(--science), #059669); }
+.quick-head.commerce { background: linear-gradient(135deg, var(--commerce), #1976D2); }
+.quick-head.bvoc { background: linear-gradient(135deg, var(--bvoc), #D97706); }
+.quick-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.quick-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; }
+.quick-desc { font-size: 0.82rem; opacity: 0.85; margin-top: 2px; }
+.quick-foot { background: var(--white); padding: 1rem 1.5rem; font-size: 0.85rem; color: var(--muted); }
+
+/* STREAM CARDS */
+.stream-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px,1fr)); gap: 1.5rem; }
+.stream-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; }
+.stream-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.stream-header { padding: 1.5rem; color: #fff; }
+.stream-header.arts { background: linear-gradient(135deg, var(--arts), #9333ea); }
+.stream-header.commerce { background: linear-gradient(135deg, var(--commerce), #1976D2); }
+.stream-header.science { background: linear-gradient(135deg, var(--science), #059669); }
+.stream-header.bvoc { background: linear-gradient(135deg, var(--bvoc), #D97706); }
+.stream-header.cs { background: linear-gradient(135deg, #0369A1, #0284C7); }
+.stream-header.bba { background: linear-gradient(135deg, #BE185D, #EC4899); }
+.stream-header.agri { background: linear-gradient(135deg, #3B6E22, #4D8B2D); }
+.stream-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.stream-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
+.stream-full { font-size: 0.8rem; opacity: 0.85; margin-top: 2px; }
+.stream-body { padding: 1.25rem 1.5rem; }
+.stream-eligibility { background: #F0FDF4; border-left: 3px solid var(--green); padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; font-size: 0.85rem; color: var(--green); font-weight: 500; margin-bottom: 1rem; }
+.stream-eligibility.cet { background: #FFF8F0; border-color: var(--bvoc); color: var(--bvoc); }
+.stream-subjects { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+.subject-tag { background: #F3F4F6; color: var(--muted); font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 20px; }
+.stream-contacts { border-top: 1px solid var(--border); padding-top: 1rem; }
+.stream-contacts h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 0.6rem; font-weight: 600; }
+.contact-row { display: flex; justify-content: space-between; align-items: flex-start; font-size: 0.82rem; padding: 0.35rem 0; border-bottom: 1px solid #F3F4F6; gap: 0.5rem; }
+.contact-row:last-child { border-bottom: none; }
+.contact-subject { color: var(--text); font-weight: 600; flex-shrink: 0; min-width: 80px; }
+.contact-name { color: var(--muted); font-size: 0.76rem; }
+.contact-phone { color: var(--saffron); font-weight: 600; text-decoration: none; font-size: 0.82rem; }
+.contact-phone:hover { text-decoration: underline; }
+
+/* CHECKER */
+.checker-wrap { background: var(--white); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; max-width: 720px; margin: 0 auto; }
+.checker-top { background: linear-gradient(135deg, var(--deep), var(--navy)); padding: 2rem; color: #fff; }
+.checker-top h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.35rem; }
+.checker-top p { font-size: 0.88rem; color: rgba(255,255,255,0.65); }
+.checker-form { padding: 2rem; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; font-weight: 600; font-size: 0.88rem; color: var(--deep); margin-bottom: 0.5rem; }
+.form-group label span { color: var(--saffron); }
+.form-control { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.92rem; color: var(--text); background: var(--cream); transition: border-color 0.2s; appearance: none; }
+.form-control:focus { outline: none; border-color: var(--saffron); background: #fff; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.btn-check { width: 100%; padding: 0.9rem; background: var(--saffron); color: #fff; border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; }
+.btn-check:hover { background: #B83A0A; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(212,69,12,0.35); }
+.result-box { display: none; margin-top: 1.5rem; border-radius: 12px; overflow: hidden; }
+.result-box.show { display: block; animation: fadeUp 0.3s ease; }
+.result-header { padding: 1.25rem 1.5rem; color: #fff; display: flex; align-items: center; gap: 0.75rem; }
+.result-header.eligible { background: var(--green); }
+.result-header.not-eligible { background: #DC2626; }
+.result-icon { font-size: 1.75rem; }
+.result-header h3 { font-size: 1.1rem; font-weight: 600; }
+.result-header p { font-size: 0.82rem; opacity: 0.85; margin-top: 2px; }
+.result-body { background: #F9FAFB; padding: 1.25rem 1.5rem; }
+.result-courses { display: flex; flex-direction: column; gap: 0.6rem; }
+.result-course-item { display: flex; align-items: center; gap: 0.75rem; background: #fff; padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--border); font-size: 0.88rem; font-weight: 500; }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.result-note { margin-top: 1rem; font-size: 0.82rem; color: var(--muted); background: #FFF8F0; border-left: 3px solid var(--gold); padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; }
+
+/* CHECKLIST */
+.checklist-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 1.5rem; }
+.checklist-card { background: var(--white); border-radius: 16px; box-shadow: var(--shadow); padding: 1.5rem; }
+.checklist-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.badge { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 20px; font-weight: 600; }
+.badge.required { background: #FEE2E2; color: #DC2626; }
+.badge.optional { background: #DCFCE7; color: #16A34A; }
+.badge.info { background: #DBEAFE; color: #1D4ED8; }
+.doc-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid #F3F4F6; font-size: 0.88rem; cursor: pointer; transition: background 0.15s; border-radius: 4px; }
+.doc-item:last-child { border-bottom: none; }
+.doc-checkbox { width: 20px; height: 20px; flex-shrink: 0; border: 2px solid var(--border); border-radius: 5px; background: #fff; transition: all 0.2s; margin-top: 1px; display: flex; align-items: center; justify-content: center; }
+.doc-item.checked .doc-checkbox { background: var(--green); border-color: var(--green); }
+.doc-item.checked .doc-checkbox::after { content: '✓'; color: #fff; font-size: 12px; font-weight: 700; }
+.doc-item.checked .doc-text { text-decoration: line-through; color: var(--muted); }
+.doc-text { line-height: 1.4; }
+.doc-sub { font-size: 0.76rem; color: var(--muted); margin-top: 2px; }
+.progress-bar-wrap { background: #F3F4F6; border-radius: 20px; height: 8px; margin: 1rem 0 0.25rem; overflow: hidden; }
+.progress-bar { height: 100%; border-radius: 20px; background: var(--green); transition: width 0.4s ease; }
+.progress-label { font-size: 0.8rem; color: var(--muted); text-align: right; }
+
+/* DEADLINES */
+.deadline-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); margin-top: 1rem; }
+.deadline-table thead { background: var(--deep); color: #fff; }
+.deadline-table th { padding: 0.9rem 1.1rem; font-size: 0.82rem; text-align: left; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+.deadline-table td { padding: 0.85rem 1.1rem; font-size: 0.88rem; border-bottom: 1px solid var(--border); }
+.deadline-table tr:last-child td { border-bottom: none; }
+.deadline-table tr:hover td { background: #FFF8F0; }
+.status-badge { display: inline-block; padding: 0.2rem 0.65rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+.status-open { background: #DCFCE7; color: #16A34A; }
+.status-upcoming { background: #FEF3C7; color: #92400E; }
+
+/* CONTACTS */
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 1rem; }
+.contact-card { background: var(--white); border-radius: 12px; padding: 1.25rem; box-shadow: var(--shadow); border-top: 3px solid var(--saffron); }
+.contact-card.arts-b { border-top-color: var(--arts); }
+.contact-card.commerce-b { border-top-color: var(--commerce); }
+.contact-card.science-b { border-top-color: var(--science); }
+.contact-card.pro-b { border-top-color: var(--bvoc); }
+.contact-card h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 0.75rem; font-weight: 600; }
+.contact-card .cn { font-weight: 600; margin-bottom: 0.25rem; }
+.contact-card .cn a { color: var(--deep); text-decoration: none; }
+.contact-card .cn a:hover { color: var(--saffron); }
+
+footer { background: var(--deep); color: rgba(255,255,255,0.55); text-align: center; padding: 2rem; font-size: 0.82rem; margin-top: 3rem; }
+footer a { color: var(--gold); text-decoration: none; }
+.footer-brand { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); margin-bottom: 0.35rem; }
+
+.notice-box { background: #FFF3CD; border: 1px solid #FBBF24; border-radius: 12px; padding: 1.25rem 1.5rem; }
+.notice-box strong { color: #92400E; }
+.notice-box p { font-size: 0.85rem; color: #78350F; line-height: 1.6; }
+
+/* ADMISSION PROCESS - MARATHI */
+.admission-wrap {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.4fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+.admission-form-card,
+.process-card,
+.step-info-card {
+  background: var(--white);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.admission-form-head {
+  background: linear-gradient(135deg, var(--deep), var(--navy));
+  color: #fff;
+  padding: 1.5rem;
+}
+.admission-form-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.45rem;
+  margin-bottom: 0.35rem;
+}
+.admission-form-head p {
+  font-size: 0.86rem;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.6;
+}
+.admission-form-body {
+  padding: 1.5rem;
+}
+.marathi-label {
+  display: block;
+  font-weight: 700;
+  color: var(--deep);
+  font-size: 0.9rem;
+  margin-bottom: 0.45rem;
+}
+.marathi-label span { color: var(--saffron); }
+.admission-summary {
+  margin-top: 1rem;
+  background: #FFF8F0;
+  border-left: 4px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 1rem;
+  font-size: 0.86rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+.admission-summary strong { color: var(--saffron); }
+.process-card {
+  padding: 1.5rem;
+}
+.process-title-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+.process-title-row h3 {
+  font-family: 'Playfair Display', serif;
+  color: var(--deep);
+  font-size: 1.35rem;
+}
+.process-badge {
+  background: #DCFCE7;
+  color: var(--green);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+}
+.process-tree {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(145px, 1fr));
+  gap: 1.1rem;
+  position: relative;
+  margin: 1.5rem 0;
+}
+.process-tree::before {
+  content: '';
+  position: absolute;
+  top: 42px;
+  left: 8%;
+  right: 8%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold), var(--green));
+  border-radius: 4px;
+  z-index: 0;
+}
+.process-step {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 1rem 0.85rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.process-step:hover,
+.process-step.active {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--saffron);
+}
+.step-circle {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--saffron), var(--gold));
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin-bottom: 0.65rem;
+  box-shadow: 0 6px 18px rgba(212,69,12,0.25);
+}
+.step-title {
+  font-weight: 800;
+  color: var(--deep);
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+}
+.step-desc {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.45;
+  min-height: 2.2rem;
+}
+.location-link {
+  display: inline-block;
+  margin-top: 0.65rem;
+  color: var(--saffron);
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 0.78rem;
+}
+.location-link:hover { text-decoration: underline; }
+.process-note {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  color: var(--green);
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+.step-info-card {
+  margin-top: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 5px solid var(--saffron);
+}
+.step-info-card h4 {
+  color: var(--deep);
+  font-size: 1rem;
+  margin-bottom: 0.45rem;
+}
+.step-info-card p {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+.step-info-card a {
+  color: var(--saffron);
+  font-weight: 800;
+  text-decoration: none;
+}
+.step-info-card a:hover { text-decoration: underline; }
+
+.process-panel {
+  display: none;
+}
+.process-panel.show {
+  display: block;
+  animation: fadeUp 0.35s ease;
+}
+.admission-required-note {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1D4ED8;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+.selected-branch-strip {
+  background: #FFF8F0;
+  border: 1px solid #FED7AA;
+  color: #92400E;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* LOG STATUS TOAST */
+#logToast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9000;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  max-width: 320px;
+}
+#logToast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+#logToast.success { background: var(--green); }
+#logToast.error   { background: #DC2626; }
+#logToast.sending { background: var(--navy); }
+
+@media (max-width: 850px) {
+  .admission-wrap { grid-template-columns: 1fr; }
+  .process-tree { grid-template-columns: 1fr; }
+  .process-tree::before {
+    top: 8%; bottom: 8%; left: 27px; right: auto;
+    width: 4px; height: auto;
+    background: linear-gradient(180deg, var(--saffron), var(--gold), var(--green));
+  }
+  .process-step { text-align: left; padding-left: 4.6rem; min-height: 92px; }
+  .step-circle { position: absolute; left: 0.8rem; top: 1rem; width: 44px; height: 44px; font-size: 1.15rem; }
+}
+
+@media (max-width: 600px) {
+  .nav-links button { font-size: 0.72rem; padding: 0.35rem 0.55rem; }
+  .nav-brand { font-size: 1rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .hero-cards { gap: 0.75rem; }
+  #logToast { left: 1rem; right: 1rem; bottom: 1rem; }
+}
+
+/* 7-second Marathi welcome intro */
+body.intro-active {
+  overflow: hidden;
+}
+body.intro-active nav,
+body.intro-active .page,
+body.intro-active footer {
+  visibility: hidden;
+}
+#welcomeIntro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--deep) 0%, var(--navy) 55%, var(--saffron) 100%);
+  color: var(--white);
+}
+#welcomeIntro::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(240,165,0,0.35), transparent 32%),
+              radial-gradient(circle at bottom right, rgba(255,255,255,0.12), transparent 35%);
+  pointer-events: none;
+}
+.welcome-box {
+  position: relative;
+  max-width: 980px;
+  padding: 2rem;
+}
+.welcome-text {
+  font-family: 'Playfair Display', 'DM Sans', serif;
+  font-size: clamp(1.6rem, 5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.55;
+  text-shadow: 0 4px 18px rgba(0,0,0,0.35);
+}
+.welcome-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(18px) scale(0.98);
+  margin: 0 0.16em;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.welcome-word.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.welcome-subline {
+  margin-top: 1.3rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.95;
+}
+#welcomeIntro.hide-intro {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+</style>
+</head>
+<body class="intro-active">
+
+<!-- Toast notification for Google Sheets logging -->
+<div id="logToast"></div>
+
+<!-- 7-second Marathi welcome intro -->
+<div id="welcomeIntro" aria-live="polite">
+  <div class="welcome-box">
+    <div class="welcome-text" id="welcomeText"></div>
+    <div class="welcome-subline">Sangamner College Admission Guide</div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-brand">
+    MahaPravesh
+    <span>Sangamner College · 2026–27</span>
+  </div>
+  <div class="nav-links">
+    <button class="active" onclick="showPage('home')">🏠 Home</button>
+    <button onclick="showPage('streams')">📚 Courses</button>
+    <button onclick="showPage('documents')">📄 Documents</button>
+    <button onclick="showPage('contacts')">📞 Contacts</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="page active">
+  <div class="hero">
+    <div class="hero-badge">📢 Admissions Open – 2026–27</div>
+    <h1>शिक्षण प्रसारक संस्थेचे,<br/> <em> संगमनेर नगरपालिका कला,</em><br/><em>दा.ज.मालपाणी वाणिज्य आणि ब.ना.सारडा विज्ञान महाविद्यालय (स्वायत्त), संगमनेर</em></h1>
+    <p class="hero-sub">ता. संगमनेर , जि. अहिल्यानगर , महाराष्ट्र (422 605)</p>
+    <p class="hero-affil">Affiliated to Savitribai Phule Pune Vidyapeeth, Pune &nbsp;|&nbsp; As per NEP 2020</p>
+    <div class="hero-cards">
+      <div class="hero-card"><div class="hc-num">4</div><div class="hc-label">Streams</div></div>
+      <div class="hero-card"><div class="hc-num">15+</div><div class="hc-label">Courses</div></div>
+      <div class="hero-card"><div class="hc-num">2026</div><div class="hc-label">Academic Year</div></div>
+      <div class="hero-card"><div class="hc-num">Online</div><div class="hc-label">Application</div></div>
+    </div>
+    <a class="hero-link" href="#admission" onclick="event.preventDefault(); showPage('admission');">🧭 प्रवेश प्रक्रिया पाहा →</a>
+  </div>
+
+  <div class="section">
+    <div class="section-title">What do you <span>need?</span></div>
+    <div class="divider"></div>
+    <div class="quick-grid">
+      <div class="quick-card" onclick="showPage('streams')">
+        <div class="quick-head arts"><div class="quick-icon">📚</div><div class="quick-title">Browse Courses</div><div class="quick-desc">All streams with subjects & faculty</div></div>
+        <div class="quick-foot">Arts · Commerce · Science · B.Voc</div>
+      </div>
+      <div class="quick-card" onclick="showPage('admission')">
+        <div class="quick-head science"><div class="quick-icon">🧭</div><div class="quick-title">प्रवेश प्रक्रिया</div><div class="quick-desc">विद्यार्थ्यांसाठी संपूर्ण प्रवेश मार्गदर्शन</div></div>
+        <div class="quick-foot">समुपदेशन · अर्ज · तपासणी · फी पावती</div>
+      </div>
+      <div class="quick-card" onclick="showPage('documents')">
+        <div class="quick-head commerce"><div class="quick-icon">📄</div><div class="quick-title">Document Checklist</div><div class="quick-desc">Track your admission documents</div></div>
+        <div class="quick-foot">Interactive checklist with deadlines</div>
+      </div>
+      <div class="quick-card" onclick="showPage('contacts')">
+        <div class="quick-head bvoc"><div class="quick-icon">📞</div><div class="quick-title">Contact Faculty</div><div class="quick-desc">Phone numbers for each department</div></div>
+        <div class="quick-foot">Arts · Commerce · Science · Pro</div>
+      </div>
+    </div>
+    <div class="notice-box" style="margin-top:2rem;">
+      <p><strong>⚠️ Important Notice: </strong>Admission to B.B.A., B.B.A.(C.A.) and B.C.A. (Science) is through <strong>CET as per AICTE norms</strong>. All FY B.A., B.Com., B.Sc. admissions are based on eligibility, category, and merit. The college reserves the right to modify the admission schedule if required.</p>
+    </div>
+  </div>
+</div>
+
+<!-- STREAMS -->
+<div id="streams" class="page">
+  <div class="section">
+    <div class="section-title">Courses <span>Offered</span></div>
+    <p class="section-sub">First Year undergraduate courses for Academic Year 2026–27 under NEP 2020</p>
+    <div class="divider"></div>
+    <div class="stream-grid">
+
+      <div class="stream-card">
+        <div class="stream-header arts">
+          <div class="stream-icon">🎭</div>
+          <div class="stream-name">F.Y. B.A.</div>
+          <div class="stream-full">Bachelor of Arts</div>
+        </div>
+        <div class="stream-body">
+          <div class="stream-eligibility">✅ HSC Pass (any stream) – Merit based</div>
+          <div class="stream-subjects">
+            <span class="subject-tag">Marathi</span><span class="subject-tag">Hindi</span><span class="subject-tag">English</span><span class="subject-tag">Sanskrit</span><span class="subject-tag">Economics</span><span class="subject-tag">Political Sci.</span><span class="subject-tag">Geography</span><span class="subject-tag">Philosophy</span><span class="subject-tag">Yoga</span>
+          </div>
+          <div class="stream-contacts">
+            <h4>📞 Faculty Contacts (F.Y.B.A.)</h4>
+            <div class="contact-row"><span class="contact-subject">Marathi</span><div><div class="contact-name">Pro.Dr. Limbekar A.S.</div><a class="contact-phone" href="tel:9326681567">9326681567</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Hindi</span><div><div class="contact-name">Pro.Dr. Patil J.P.</div><a class="contact-phone" href="tel:9860161123">9860161123</a></div></div>
+            <div class="contact-row"><span class="contact-subject">English</span><div><div class="contact-name">Pro.Dr. Tashildar R.B.</div><a class="contact-phone" href="tel:9890164500">9890164500</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Sanskrit</span><div><div class="contact-name">Pro.Dr. Mandlik A.A.</div><a class="contact-phone" href="tel:9422680181">9422680181</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Economics</span><div><div class="contact-name">Pro.Dr. Sanap G.K.</div><a class="contact-phone" href="tel:9822326389">9822326389</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Pol. Sci.</span><div><div class="contact-name">Pro.Dr. Benke S.A.</div><a class="contact-phone" href="tel:9540603070">9540603070</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Geography</span><div><div class="contact-name">Pro.Dr. Gaikwad A.R.</div><a class="contact-phone" href="tel:9890884093">9890884093</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Philosophy</span><div><div class="contact-name">Pro.Dr. Bhise Shreenivas</div><a class="contact-phone" href="tel:8421763549">8421763549</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Yoga</span><div><div class="contact-name">Pro.Dr. Waman R.R.</div><a class="contact-phone" href="tel:9822450768">9822450768</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stream-card">
+        <div class="stream-header commerce">
+          <div class="stream-icon">💼</div>
+          <div class="stream-name">F.Y. B.Com.</div>
+          <div class="stream-full">Bachelor of Commerce</div>
+        </div>
+        <div class="stream-body">
+          <div class="stream-eligibility">✅ HSC Pass (any stream) – Merit based</div>
+          <div class="stream-subjects">
+            <span class="subject-tag">Accountancy</span><span class="subject-tag">Business Economics</span><span class="subject-tag">Commerce</span><span class="subject-tag">Business Law</span><span class="subject-tag">Mathematics</span>
+          </div>
+          <div class="stream-contacts">
+            <h4>📞 Faculty Contacts (F.Y.B.Com.)</h4>
+            <div class="contact-row"><span class="contact-subject">Commerce</span><div><div class="contact-name">Dr. Mendkar V.A.</div><a class="contact-phone" href="tel:9822038727">9822038727</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Commerce</span><div><div class="contact-name">Pro. Tribhuvan R.B.</div><a class="contact-phone" href="tel:9890284181">9890284181</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Commerce</span><div><div class="contact-name">Pro. Ratne R.K.</div><a class="contact-phone" href="tel:9130660693">9130660693</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Commerce</span><div><div class="contact-name">Pro. Nagare R.B.</div><a class="contact-phone" href="tel:9623900635">9623900635</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stream-card">
+        <div class="stream-header science">
+          <div class="stream-icon">🔬</div>
+          <div class="stream-name">F.Y. B.Sc.</div>
+          <div class="stream-full">Bachelor of Science</div>
+        </div>
+        <div class="stream-body">
+          <div class="stream-eligibility">✅ HSC with Science – Merit based</div>
+          <div class="stream-subjects">
+            <span class="subject-tag">Physics</span><span class="subject-tag">Chemistry</span><span class="subject-tag">Botany</span><span class="subject-tag">Zoology</span><span class="subject-tag">Electronics</span><span class="subject-tag">Mathematics</span><span class="subject-tag">Microbiology</span>
+          </div>
+          <div class="stream-contacts">
+            <h4>📞 Faculty Contacts (F.Y.B.Sc.)</h4>
+            <div class="contact-row"><span class="contact-subject">Physics</span><div><div class="contact-name">Pro.Dr. Dalvi S.N.</div><a class="contact-phone" href="tel:9850084566">9850084566</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Chemistry</span><div><div class="contact-name">Pro.Dr. Trimbake P.T.</div><a class="contact-phone" href="tel:9096291607">9096291607</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Botany</span><div><div class="contact-name">Pro.Dr. Jadhav S.D.</div><a class="contact-phone" href="tel:9604555187">9604555187</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Zoology</span><div><div class="contact-name">Pro.Dr. Bhavare V.V.</div><a class="contact-phone" href="tel:9421436204">9421436204</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Electronics</span><div><div class="contact-name">Pro. Bhusal S.C.</div><a class="contact-phone" href="tel:9922303563">9922303563</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Mathematics</span><div><div class="contact-name">Pro.Dr. Gudde S.K.</div><a class="contact-phone" href="tel:9822165678">9822165678</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Microbiology</span><div><div class="contact-name">Pro. Maka Manisha</div><a class="contact-phone" href="tel:9028250856">9028250856</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stream-card">
+        <div class="stream-header cs">
+          <div class="stream-icon">💻</div>
+          <div class="stream-name">B.Sc. (CS)</div>
+          <div class="stream-full">Bachelor of Science – Computer Science</div>
+        </div>
+        <div class="stream-body">
+          <div class="stream-eligibility">✅ HSC Pass (any stream) – Merit based</div>
+          <div class="stream-subjects">
+            <span class="subject-tag">Programming</span><span class="subject-tag">Data Structures</span><span class="subject-tag">Database</span><span class="subject-tag">Networking</span><span class="subject-tag">Web Technology</span>
+          </div>
+          <div class="stream-contacts">
+            <h4>📞 Faculty Contact</h4>
+            <div class="contact-row"><span class="contact-subject">CS Dept.</span><div><div class="contact-name">Pro. Pansare S.V.</div><a class="contact-phone" href="tel:9767735518">9767735518</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stream-card">
+        <div class="stream-header bba">
+          <div class="stream-icon">📊</div>
+          <div class="stream-name">B.B.A.</div>
+          <div class="stream-full">Bachelor of Business Administration</div>
+        </div>
+        <div class="stream-body">
+          <div class="stream-eligibility cet">⚠️ CET required – As per AICTE norms</div>
+          <div class="stream-subjects">
+            <span class="subject-tag">Management</span><span class="subject-tag">Marketing</span><span class="subject-tag">Finance</span><span class="subject-tag">HR</span>
+          </div>
+          <div class="stream-contacts">
+            <h4>📞 Faculty Contact</h4>
+            <div class="contact-row"><span class="contact-subject">BBA</span><div><div class="contact-name">Dr. Kulkarni S.V.</div><a class="contact-phone" href="tel:9600601518">9600601518</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stream-card">
+        <div class="stream-header bba" style="background:linear-gradient(135deg,#7C3AED,#9333EA);">
+          <div class="stream-icon">🖥️</div>
+          <div class="stream-name">B.B.A. (C.A.)</div>
+          <div class="stream-full">BBA – Computer Application</div>
+        </div>
+        <div class="stream-body">
+          <div class="stream-eligibility cet">⚠️ CET required – As per AICTE norms</div>
+          <div class="stream-subjects">
+            <span class="subject-tag">Business</span><span class="subject-tag">Computer Applications</span><span class="subject-tag">Programming</span>
+          </div>
+          <div class="stream-contacts">
+            <h4>📞 Faculty Contact</h4>
+            <div class="contact-row"><span class="contact-subject">BBA CA</span><div><div class="contact-name">Pro. Khemnar T.T.</div><a class="contact-phone" href="tel:9420745004">9420745004</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stream-card">
+        <div class="stream-header bvoc">
+          <div class="stream-icon">🏭</div>
+          <div class="stream-name">B.Voc.</div>
+          <div class="stream-full">Bachelor of Vocation – 4 Specializations</div>
+        </div>
+        <div class="stream-body">
+          <div class="stream-eligibility">✅ HSC Pass (any stream) – Merit based</div>
+          <div class="stream-subjects">
+            <span class="subject-tag">Hospitality &amp; Tourism</span><span class="subject-tag">Software Dev.</span><span class="subject-tag">Dairy Products</span><span class="subject-tag">Accounting &amp; Taxation</span>
+          </div>
+          <div class="stream-contacts">
+            <h4>📞 Faculty Contacts</h4>
+            <div class="contact-row"><span class="contact-subject">Hospitality</span><div><div class="contact-name">Pro.Dr. Tiwari S.D.</div><a class="contact-phone" href="tel:9890907379">9890907379</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Software Dev.</span><div><div class="contact-name">Pro. Sayyad A.A.</div><a class="contact-phone" href="tel:9921846097">9921846097</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Dairy Products</span><div><div class="contact-name">Pro. Sahane P.P.</div><a class="contact-phone" href="tel:8600301321">8600301321</a></div></div>
+            <div class="contact-row"><span class="contact-subject">Accounting</span><div><div class="contact-name">Pro. Gosavi A.J.</div><a class="contact-phone" href="tel:9623900635">9623900635</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stream-card">
+        <div class="stream-header agri">
+          <div class="stream-icon">🌱</div>
+          <div class="stream-name">Agriculture &amp; Soil Sci.</div>
+          <div class="stream-full">B.Sc. Agriculture &amp; Soil Science</div>
+        </div>
+        <div class="stream-body">
+          <div class="stream-eligibility">✅ HSC with Science – Merit based</div>
+          <div class="stream-subjects">
+            <span class="subject-tag">Agriculture</span><span class="subject-tag">Soil Science</span><span class="subject-tag">Botany</span><span class="subject-tag">Chemistry</span>
+          </div>
+          <div class="stream-contacts">
+            <h4>📞 Faculty Contact</h4>
+            <div class="contact-row"><span class="contact-subject">Agriculture</span><div><div class="contact-name">Pro.Dr. Jadhav N.J.</div><a class="contact-phone" href="tel:9561651518">9561651518</a></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ADMISSION PROCESS -->
+<div id="admission" class="page">
+  <div class="section">
+    <div class="section-title">प्रवेश <span>प्रक्रिया</span></div>
+    <p class="section-sub">प्रथम विद्यार्थ्याची संपूर्ण माहिती English मध्ये भरा. त्यानंतरच प्रवेश प्रक्रियेचा वृक्ष-आरेख दिसेल.</p>
+    <div class="divider"></div>
+
+    <div class="admission-wrap">
+      <div class="admission-form-card">
+        <div class="admission-form-head">
+          <h2>🎓 Student Information</h2>
+          <p>All information must be filled in English. कृपया विद्यार्थी नाव, संपर्क क्रमांक आणि शाखा अचूक भरा.</p>
+        </div>
+        <div class="admission-form-body">
+          <div class="admission-required-note">
+            <strong>Important:</strong> Fill Student Name and Contact Number in English only. After clicking <strong>माझी प्रवेश प्रक्रिया दाखवा →</strong>, the admission process tree will open.
+          </div>
+          <div class="form-group">
+            <label class="marathi-label" for="studentName">Student Full Name <span>*</span></label>
+            <input type="text" class="form-control" id="studentName" placeholder="Example: Amit Sanjay Shinde" autocomplete="name" oninput="updateAdmissionSummary()"/>
+          </div>
+          <div class="form-group">
+            <label class="marathi-label" for="studentContact">Contact Number <span>*</span></label>
+            <input type="tel" class="form-control" id="studentContact" placeholder="Example: 9876543210" inputmode="tel" autocomplete="tel" oninput="updateAdmissionSummary()"/>
+          </div>
+          <div class="form-group">
+            <label class="marathi-label" for="studentBranch">Branch Seeking Admission <span>*</span></label>
+            <select class="form-control" id="studentBranch" onchange="updateAdmissionSummary()">
+              <option value="">-- Select Branch --</option>
+              <option value="arts">Arts</option>
+              <option value="commerce">Commerce</option>
+              <option value="science">Science</option>
+              <option value="bvoc">B.Voc.</option>
+              <option value="bba">BBA</option>
+              <option value="bcs">BCS / Computer Science</option>
+            </select>
+          </div>
+          <button class="btn-check" onclick="updateAdmissionSummary(true)">माझी प्रवेश प्रक्रिया दाखवा →</button>
+          <div class="admission-summary" id="admissionSummary">
+            <strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतरच प्रवेश प्रक्रियेचा वृक्ष-आरेख दिसेल.
+          </div>
+        </div>
+      </div>
+
+      <div id="processPanel" class="process-panel" aria-hidden="true">
+        <div class="process-card">
+          <div class="process-title-row">
+            <h3>🌳 प्रवेश प्रक्रियेचा वृक्ष-आरेख</h3>
+            <span class="process-badge">४ मुख्य टप्पे</span>
+          </div>
+          <div class="selected-branch-strip" id="selectedBranchStrip">
+            शाखा निवडल्यानंतर समुपदेशनाचे योग्य स्थान येथे दिसेल.
+          </div>
+
+          <div class="process-tree" aria-label="प्रवेश प्रक्रियेचा वृक्ष-आरेख">
+            <div class="process-step active" onclick="showProcessStep(1)">
+              <div class="step-circle">१</div>
+              <div class="step-title">समुपदेशन</div>
+              <div class="step-desc" id="step1Desc">शाखेनुसार समुपदेशन स्थान पाहा.</div>
+              <a class="location-link" id="step1LocationLink" href="#" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">📍 स्थान पाहा</a>
+            </div>
+
+            <div class="process-step" onclick="showProcessStep(2)">
+              <div class="step-circle">२</div>
+              <div class="step-title">अर्ज भरणे</div>
+              <div class="step-desc">सर्व शाखांसाठी अर्ज भरण्याचे स्थान: Student Facility Center / Setu Suvidha Kendra.</div>
+              <a class="location-link" href="https://www.google.com/maps/search/?api=1&query=Student+Facility+Center+Setu+Suvidha+Kendra+Sangamner+College" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">📍 स्थान पाहा</a>
+            </div>
+
+            <div class="process-step" onclick="showProcessStep(3)">
+              <div class="step-circle">३</div>
+              <div class="step-title">अर्ज तपासणी</div>
+              <div class="step-desc">सर्व शाखांसाठी अर्ज तपासणी स्थान: Saibaba Sabhagruh.</div>
+              <a class="location-link" href="https://www.google.com/maps/search/?api=1&query=Saibaba+Sabhagruh+Sangamner+College" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">📍 स्थान पाहा</a>
+            </div>
+
+            <div class="process-step" onclick="showProcessStep(4)">
+              <div class="step-circle">४</div>
+              <div class="step-title">फी भरणे व पावती घेणे</div>
+              <div class="step-desc">सर्व शाखांसाठी फी भरण्याचे स्थान: Account Section.</div>
+              <a class="location-link" href="https://www.google.com/maps/search/?api=1&query=Account+Section+Sangamner+College" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">📍 स्थान पाहा</a>
+            </div>
+          </div>
+
+          <div class="process-note">
+            <strong>महत्त्वाचे:</strong> Arts, Commerce आणि Science शाखांसाठी समुपदेशन स्थान <strong>Saibaba Sabhagruh</strong> आहे. B.Voc., BBA आणि BCS साठी समुपदेशन संबंधित विभागात होईल. अर्ज भरणे, अर्ज तपासणी आणि फी भरणे यांची ठिकाणे सर्वांसाठी समान आहेत.
+          </div>
+        </div>
+
+        <div class="step-info-card" id="stepInfo">
+          <h4>१. समुपदेशन</h4>
+          <p>निवडलेल्या शाखेनुसार योग्य समुपदेशन स्थान येथे दिसेल.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DOCUMENTS -->
+<div id="documents" class="page">
+  <div class="section">
+    <div class="section-title">Document <span>Checklist</span></div>
+    <p class="section-sub">Click each item to mark it as ready. Track your progress before admission day.</p>
+    <div class="divider"></div>
+    <div class="checklist-grid">
+
+      <div class="checklist-card">
+        <h3>📋 Required Documents <span class="badge required">Must Have</span></h3>
+        <div class="progress-bar-wrap"><div class="progress-bar" id="req-bar" style="width:0%"></div></div>
+        <p class="progress-label" id="req-label">0 of 7 ready</p>
+        <div class="doc-item" onclick="toggleDoc(this,'req',7)"><div class="doc-checkbox"></div><div class="doc-text">HSC (12th) Mark Sheet Photocopy <div class="doc-sub"> </div></div></div>
+        <div class="doc-item" onclick="toggleDoc(this,'req',7)"><div class="doc-checkbox"></div><div class="doc-text">School Leaving / Transfer Certificate (LC/TC)<div class="doc-sub">From last attended school/college</div></div></div>
+        <div class="doc-item" onclick="toggleDoc(this,'req',7)"><div class="doc-checkbox"></div><div class="doc-text">Aadhar Card (photocopy)<div class="doc-sub">For ID verification and scholarship</div></div></div>
+        <div class="doc-item" onclick="toggleDoc(this,'req',7)"><div class="doc-checkbox"></div><div class="doc-text">Passport Size Photograph –  Softcopy<div class="doc-sub">Recent, white background</div></div></div>
+        <div class="doc-item" onclick="toggleDoc(this,'req',7)"><div class="doc-checkbox"></div><div class="doc-text">Caste Certificate (if applicable)<div class="doc-sub">For SC / ST / OBC / NT / VJ / DT categories</div></div></div>
+        <div class="doc-item" onclick="toggleDoc(this,'req',7)"><div class="doc-checkbox"></div><div class="doc-text">Non-Creamy Layer Certificate (OBC/NT)<div class="doc-sub">Issued within the last one year</div></div></div>
+      </div>
+
+      <div class="checklist-card">
+        <h3>🖥️ CET Courses (BBA/BCA) <span class="badge info">If Applicable</span></h3>
+        <div class="progress-bar-wrap"><div class="progress-bar" id="cet-bar" style="width:0%"></div></div>
+        <p class="progress-label" id="cet-label">0 of 4 ready</p>
+        <div class="doc-item" onclick="toggleDoc(this,'cet',4)"><div class="doc-checkbox"></div><div class="doc-text">CET Scorecard / Hall Ticket<div class="doc-sub">AICTE CET result printout</div></div></div>
+        <div class="doc-item" onclick="toggleDoc(this,'cet',4)"><div class="doc-checkbox"></div><div class="doc-text">CET Merit / Allotment Letter<div class="doc-sub">From centralized admission process</div></div></div>
+        <div class="doc-item" onclick="toggleDoc(this,'cet',4)"><div class="doc-checkbox"></div><div class="doc-text">Online Application Printout<div class="doc-sub">From sangamnercollege.vriddhionline.com</div></div></div>
+        <div class="doc-item" onclick="toggleDoc(this,'cet',4)"><div class="doc-checkbox"></div><div class="doc-text">Admission Fee Receipt<div class="doc-sub">After paying fees online</div></div></div>
+      </div>
+
+      <div class="checklist-card">
+        <h3>🏆 Scholarship Documents <span class="badge optional">Recommended</span></h3>
+        <div class="progress-bar-wrap"><div class="progress-bar" id="sch-bar" style="width:0%"></div></div>
+        <p class="progress-label" id="sch-label">0 of 5 ready</p>
+        <div class="doc-item" onclick="toggleDoc(this,'sch',5)"><div class="doc-checkbox"></div><div class="doc-text">Income Certificate (family annual income)<div class="doc-sub">From Tahsildar – for EBC / free-ship</div></div></div>
+        <div class="doc-item" onclick="toggleDoc(this,'sch',5)"><div class="doc-checkbox"></div><div class="doc-text">Domicile Certificate (15 yrs in Maharashtra)<div class="doc-sub">Required for state government scholarship</div></div></div>
+        <div class="doc-item" onclick="toggleDoc(this,'sch',5)"><div class="doc-checkbox"></div><div class="doc-text">Bank Passbook (student's name)<div class="doc-sub">For DBT scholarship direct transfer</div></div></div>
+        <div class="doc-item" onclick="toggleDoc(this,'sch',5)"><div class="doc-checkbox"></div><div class="doc-text">Disability Certificate (if applicable)<div class="doc-sub">From competent medical authority</div></div></div>
+        <div class="doc-item" onclick="toggleDoc(this,'sch',5)"><div class="doc-checkbox"></div><div class="doc-text">Ex-Serviceman Certificate (if applicable)<div class="doc-sub">For ward of defence personnel</div></div></div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:2rem;">
+      <h3 style="font-size:1rem;font-weight:600;color:var(--deep);margin-bottom:0.5rem;">📅 Important Dates – 2026–27</h3>
+      <table class="deadline-table">
+        <thead><tr><th>Activity</th><th>Period</th><th>Mode</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Online Application Begins</td><td>June 2026 (Expected)</td><td>Online</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
+          <tr><td>Document Verification</td><td>June – July 2026</td><td>In Person</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
+          <tr><td>Merit List Display</td><td>July 2026 (Expected)</td><td>Online</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
+          <tr><td>Admission Confirmation – Round 1</td><td>July 2026</td><td>In Person</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
+          <tr><td>CET-based Admissions (BBA/BCA)</td><td>As per AICTE schedule</td><td>Central Process</td><td><span class="status-badge status-open">Open</span></td></tr>
+          <tr><td>Last Date for Fee Payment</td><td>As per merit list</td><td>Online / College</td><td><span class="status-badge status-upcoming">Upcoming</span></td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.79rem;color:var(--muted);margin-top:0.6rem;">* Dates are indicative. Always confirm from the college office or official website.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACTS -->
+<div id="contacts" class="page">
+  <div class="section">
+    <div class="section-title">Faculty &amp; Office <span>Contacts</span></div>
+    <p class="section-sub">Direct phone numbers for all departments – Academic Year 2026–27</p>
+    <div class="divider"></div>
+
+    <h3 style="font-size:1rem;font-weight:600;color:var(--deep);margin-bottom:1rem;">🏢 Branch-wise Office Contacts</h3>
+    <div class="contact-grid" style="margin-bottom:2rem;">
+      <div class="contact-card arts-b"><h4>🎭 Arts Branch (Kala Shakha)</h4><div class="cn"><a href="tel:7040481470">7040481470</a></div><div class="cn"><a href="tel:8806519740">8806519740</a></div></div>
+      <div class="contact-card commerce-b"><h4>💼 Commerce Branch (Vanijya)</h4><div class="cn"><a href="tel:8668634665">8668634665</a></div><div class="cn"><a href="tel:9503911740">9503911740</a></div></div>
+      <div class="contact-card science-b"><h4>🔬 Science Branch (Vidnyan)</h4><div class="cn"><a href="tel:7620111689">7620111689</a></div><div class="cn"><a href="tel:9446632451">9446632451</a></div></div>
+      <div class="contact-card pro-b"><h4>🏭 Professional / B.Voc.</h4><div class="cn"><a href="tel:9970823469">9970823469</a></div><div class="cn"><a href="tel:9284727954">9284727954</a></div></div>
+    </div>
+
+    <h3 style="font-size:1rem;font-weight:600;color:var(--deep);margin-bottom:1rem;">👨‍💼 Administration</h3>
+    <div class="contact-grid" style="margin-bottom:2rem;">
+      <div class="contact-card"><h4>प्राचार्य (Principal) </h4><div style="font-weight:600;margin-bottom:0.25rem;">Pro. Dr. Arun Gaikwad</div><div class="cn"><a href="tel:9822811761">9822811761</a></div></div>
+      <div class="contact-card"><h4> कुलसचिव  (Registrar)</h4><div style="font-weight:600;margin-bottom:0.25rem;">Shri. Santosh Phapale</div><div class="cn"><a href="tel:9921151188">9921151188</a></div></div>
+      <div class="contact-card"><h4>उप-प्राचार्य (Vice Principal) &amp; Admission Coordinator</h4><div style="font-weight:600;margin-bottom:0.25rem;">Pro. Dr. Ravindra Tashildar</div><div class="cn"><a href="tel:9850264499">9850264499</a></div></div>
+      <div class="contact-card"><h4>उप-प्राचार्य (Science Branch Coordinator) </h4><div style="font-weight:600;margin-bottom:0.25rem;">Pro. Dr. Pravin Tryambake</div><div class="cn"><a href="tel:9096298607">9096298607</a></div></div>
+      <div class="contact-card"><h4>Office Phone</h4><div class="cn"><a href="tel:02425225093">(02425) 225093</a></div></div>
+      <div class="contact-card"><h4>Online Admission Portal</h4><div style="font-size:0.83rem;color:var(--muted);margin-bottom:0.4rem;">Apply at:</div><a href="https://sangamnercollege.vriddhionline.com" target="_blank" style="color:var(--saffron);font-weight:600;font-size:0.88rem;word-break:break-all;">sangamnercollege.vriddhionline.com</a></div>
+    </div>
+
+    <div style="background:var(--deep);border-radius:12px;padding:1.5rem;color:#fff;">
+      <p style="font-size:0.88rem;opacity:0.8;line-height:1.8;">
+        📌 <strong> संपर्क पत्ता:</strong> संगमनेर नगरपालिका कला , दा. ज. मालपाणी वाणिज्य आणि ब. ना. सारडा विज्ञान महाविद्यालय ( स्वायत्त ), संगमनेर  422 605, ता. संगमनेर , जि. अहिल्यानगर , महाराष्ट्र .<br/>
+        🌐 <a href="https://www.sangamnercollege.edu.in" target="_blank" style="color:var(--gold);">www.sangamnercollege.edu.in</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">MahaPravesh · Sangamner College Admission Guide</div>
+  <p>Academic Year 2026–27 · Savitribai Phule Pune Vidyapeeth · NEP 2020</p>
+  <p style="margin-top:0.5rem;">
+    Official: <a href="https://www.sangamnercollege.edu.in" target="_blank">sangamnercollege.edu.in</a>
+    &nbsp;|&nbsp; Apply: <a href="https://sangamnercollege.vriddhionline.com" target="_blank">vriddhionline.com</a>
+  </p>
+</footer>
+
+<script>
+// ============================================================
+// ⚙️  CONFIGURATION — PASTE YOUR GOOGLE APPS SCRIPT URL HERE
+// ============================================================
+// Steps:
+// 1. Open your Google Sheet → Extensions → Apps Script
+// 2. Paste the doPost() function (see README below) and Deploy as Web App
+//    (Execute as: Me | Who has access: Anyone)
+// 3. Copy the Web App URL and replace the placeholder below:
+const GOOGLE_SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbw7nV9sfEhHc7xe8CiWTRnLoFz8K26-2p82rybpusRG_0A8EuOimzpizvM7gXWnNZQ/exec';
+// ============================================================
+// Apps Script code to paste (doPost function):
+// function doPost(e) {
+//   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+//   var data = JSON.parse(e.postData.contents);
+//   sheet.appendRow([data.timestamp, data.name, data.contact, data.branch]);
+//   return ContentService.createTextOutput(JSON.stringify({status:'ok'}))
+//     .setMimeType(ContentService.MimeType.JSON);
+// }
+// ============================================================
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const pages = ['home','streams','documents','contacts'];
+  document.querySelectorAll('.nav-links button').forEach((b,i) => b.classList.toggle('active', pages[i] === id));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Toast helper ──────────────────────────────────────────────
+function showToast(msg, type, duration = 4000) {
+  const toast = document.getElementById('logToast');
+  toast.textContent = msg;
+  toast.className = 'show ' + type;
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
+    toast.className = '';
+  }, duration);
+}
+
+// ── Log student data to Google Sheets ────────────────────────
+async function logToGoogleSheet(name, contact, branch) {
+  if (!GOOGLE_SHEET_WEBHOOK_URL || GOOGLE_SHEET_WEBHOOK_URL === 'YOUR_APPS_SCRIPT_WEB_APP_URL_HERE') {
+    console.warn('Google Sheet webhook URL not configured.');
+    return;
+  }
+  const payload = {
+    timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+    name: name,
+    contact: contact,
+    branch: branch
+  };
+  showToast('⏳ Saving your details…', 'sending', 10000);
+  try {
+    await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'no-cors',          // Apps Script requires no-cors from external pages
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    // no-cors means we can't read the response, but if no exception it went through
+    showToast('✅ माहिती यशस्वीरित्या नोंदवली गेली!', 'success');
+  } catch (err) {
+    console.error('Sheet log error:', err);
+    showToast('⚠️ माहिती जतन करताना त्रुटी आली. पुन्हा प्रयत्न करा.', 'error');
+  }
+}
+
+function toggleDoc(el, type, total) {
+  el.classList.toggle('checked');
+  const card = el.closest('.checklist-card');
+  const count = card.querySelectorAll('.doc-item.checked').length;
+  const pct = Math.round((count / total) * 100);
+  document.getElementById(`${type}-bar`).style.width = pct + '%';
+  document.getElementById(`${type}-label`).textContent = `${count} of ${total} ready`;
+}
+
+const branchCounsellingLocations = {
+  arts: { display: 'Arts', counselling: 'Saibaba Sabhagruh', query: 'Saibaba Sabhagruh Sangamner College' },
+  commerce: { display: 'Commerce', counselling: 'Saibaba Sabhagruh', query: 'Saibaba Sabhagruh Sangamner College' },
+  science: { display: 'Science', counselling: 'Saibaba Sabhagruh', query: 'Saibaba Sabhagruh Sangamner College' },
+  bvoc: { display: 'B.Voc.', counselling: 'B.Voc. Department, Sangamner College', query: 'B Voc Department Sangamner College' },
+  bba: { display: 'BBA', counselling: 'BBA Department, Sangamner College', query: 'BBA Department Sangamner College' },
+  bcs: { display: 'BCS / Computer Science', counselling: 'Computer Science Department, Sangamner College', query: 'Computer Science Department Sangamner College' }
+};
+
+const commonAdmissionLocations = {
+  formFilling: { title: '२. अर्ज भरणे', name: 'Student Facility Center, Setu Suvidha Kendra, Sangamner College', query: 'Student Facility Center Setu Suvidha Kendra Sangamner College', label: 'अर्ज भरण्याचे स्थान पाहा' },
+  formChecking: { title: '३. अर्ज तपासणी', name: 'Saibaba Sabhagruh, Sangamner College', query: 'Saibaba Sabhagruh Sangamner College', label: 'अर्ज तपासणी स्थान पाहा' },
+  account: { title: '४. फी भरणे व पावती घेणे', name: 'Account Section, Sangamner College', query: 'Account Section Sangamner College', label: 'Account Section स्थान पाहा' }
+};
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
+function mapLink(query) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+
+function getBranchData() {
+  const branchValue = document.getElementById('studentBranch')?.value || '';
+  return branchCounsellingLocations[branchValue] || null;
+}
+
+function buildProcessSteps() {
+  const branchData = getBranchData() || { display: 'Selected Branch', counselling: 'Saibaba Sabhagruh / संबंधित विभाग', query: 'Sangamner College Admission Counselling' };
+  return {
+    1: { title: '१. समुपदेशन', text: `${branchData.display} शाखेसाठी समुपदेशन स्थान: ${branchData.counselling}. येथे विद्यार्थ्याला विषय, पात्रता, कागदपत्रे आणि पुढील प्रक्रिया समजावून सांगितली जाईल.`, link: mapLink(branchData.query), label: 'समुपदेशन स्थान पाहा' },
+    2: { title: commonAdmissionLocations.formFilling.title, text: `अर्ज भरण्याचे स्थान सर्व विद्यार्थ्यांसाठी समान आहे: ${commonAdmissionLocations.formFilling.name}. येथे विद्यार्थी आपला प्रवेश अर्ज भरतील / ऑनलाइन अर्जासंबंधी मदत घेतील.`, link: mapLink(commonAdmissionLocations.formFilling.query), label: commonAdmissionLocations.formFilling.label },
+    3: { title: commonAdmissionLocations.formChecking.title, text: `अर्ज तपासणी स्थान सर्व शाखांसाठी समान आहे: ${commonAdmissionLocations.formChecking.name}. येथे भरलेला अर्ज आणि आवश्यक कागदपत्रांची पडताळणी होईल.`, link: mapLink(commonAdmissionLocations.formChecking.query), label: commonAdmissionLocations.formChecking.label },
+    4: { title: commonAdmissionLocations.account.title, text: `फी भरणे आणि पावती घेणे सर्व विद्यार्थ्यांसाठी ${commonAdmissionLocations.account.name} येथे होईल. फी भरल्यानंतर अधिकृत पावती घेणे आवश्यक आहे.`, link: mapLink(commonAdmissionLocations.account.query), label: commonAdmissionLocations.account.label }
+  };
+}
+
+function updateAdmissionSummary(forceShow = false) {
+  const name = document.getElementById('studentName')?.value.trim() || '';
+  const contact = document.getElementById('studentContact')?.value.trim() || '';
+  const branchData = getBranchData();
+  const box = document.getElementById('admissionSummary');
+  const processPanel = document.getElementById('processPanel');
+  if (!box) return;
+
+  if (!name && !contact && !branchData && !forceShow) {
+    box.innerHTML = '<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतरच प्रवेश प्रक्रियेचा वृक्ष-आरेख दिसेल.';
+    return;
+  }
+
+  if (forceShow) {
+    const contactDigits = contact.replace(/\D/g, '');
+    if (!name || !contact || !branchData) {
+      alert('Please fill Student Name, Contact Number and Branch in English.');
+      return;
+    }
+    if (contactDigits.length < 10) {
+      alert('Please enter a valid contact number.');
+      return;
+    }
+
+    // ── LOG TO GOOGLE SHEET ──────────────────────────────────
+    logToGoogleSheet(name, contact, branchData.display);
+    // ────────────────────────────────────────────────────────
+  }
+
+  const displayName = escapeHtml(name || 'Student');
+  const displayContact = escapeHtml(contact || 'Contact number not filled');
+  const displayBranch = escapeHtml(branchData?.display || 'Branch not selected');
+  const counselling = escapeHtml(branchData?.counselling || 'Location will be shown after branch selection');
+
+  box.innerHTML = `<strong>${displayName}</strong> wants admission in <strong>${displayBranch}</strong> branch.<br/>Contact Number: ${displayContact}<br/>Counselling Location: <strong>${counselling}</strong><br/><strong>पुढील क्रम:</strong> समुपदेशन → अर्ज भरणे → अर्ज तपासणी → फी भरणे व पावती घेणे.`;
+
+  if (processPanel?.classList.contains('show') || forceShow) {
+    renderProcessForBranch();
+  }
+
+  if (forceShow && processPanel) {
+    processPanel.classList.add('show');
+    processPanel.setAttribute('aria-hidden', 'false');
+    setTimeout(() => {
+      processPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 120);
+  }
+}
+
+function renderProcessForBranch() {
+  const branchData = getBranchData();
+  const steps = buildProcessSteps();
+  const strip = document.getElementById('selectedBranchStrip');
+  const step1Desc = document.getElementById('step1Desc');
+  const step1Link = document.getElementById('step1LocationLink');
+
+  if (strip && branchData) {
+    strip.innerHTML = `<strong>${escapeHtml(branchData.display)}</strong> branch selected. समुपदेशन स्थान: <strong>${escapeHtml(branchData.counselling)}</strong>.`;
+  }
+  if (step1Desc && branchData) {
+    step1Desc.textContent = `${branchData.display} शाखेसाठी: ${branchData.counselling}`;
+  }
+  if (step1Link) {
+    step1Link.href = steps[1].link;
+  }
+  showProcessStep(1);
+}
+
+function showProcessStep(stepNumber) {
+  document.querySelectorAll('.process-step').forEach((step, index) => {
+    step.classList.toggle('active', index + 1 === stepNumber);
+  });
+  const steps = buildProcessSteps();
+  const info = steps[stepNumber];
+  const box = document.getElementById('stepInfo');
+  if (!info || !box) return;
+  box.innerHTML = `<h4>${info.title}</h4><p>${info.text} <a href="${info.link}" target="_blank" rel="noopener noreferrer">${info.label}</a>.</p>`;
+}
+</script>
+
+<script>
+(function () {
+  const welcomeSentence = 'पदवी अभ्यासक्रमाच्या प्रवेशासाठी आलेल्या सर्व पालकांचे आणि विद्यार्थ्यांचे शिक्षण प्रसारक संस्थेचे संगमनेर महाविद्यालय, संगमनेर सहर्ष स्वागत करत आहे ';
+  const totalIntroTime = 7000;
+
+  function startWelcomeIntro() {
+    const intro = document.getElementById('welcomeIntro');
+    const textBox = document.getElementById('welcomeText');
+    if (!intro || !textBox) return;
+
+    const words = welcomeSentence.trim().split(/\s+/);
+    textBox.innerHTML = words.map(word => `<span class="welcome-word">${word}</span>`).join(' ');
+
+    const spans = textBox.querySelectorAll('.welcome-word');
+    const wordDelay = Math.max(120, Math.floor((totalIntroTime - 1000) / spans.length));
+
+    spans.forEach((span, index) => {
+      setTimeout(() => span.classList.add('show'), index * wordDelay);
+    });
+
+    setTimeout(() => {
+      intro.classList.add('hide-intro');
+      document.body.classList.remove('intro-active');
+      if (typeof showPage === 'function') showPage('home');
+      setTimeout(() => intro.remove(), 600);
+    }, totalIntroTime);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startWelcomeIntro);
+  } else {
+    startWelcomeIntro();
+  }
+})();
+</script>
+
+</body>
+</html>
