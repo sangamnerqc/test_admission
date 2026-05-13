@@ -78,24 +78,7 @@ nav {
 .bc-item.current { color: var(--deep); font-weight: 600; }
 .bc-sep { color: #C0BAB2; font-size: 0.75rem; }
 
-/* ── BACK / FORWARD BUTTONS ── */
-.nav-hist {
-  display: flex; align-items: center; gap: 0.4rem;
-  margin-right: 0.6rem;
-}
-.hist-btn {
-  width: 32px; height: 32px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 50%;
-  color: rgba(255,255,255,0.55);
-  font-size: 1rem; line-height: 1;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: all 0.2s;
-  flex-shrink: 0;
-}
-.hist-btn:not(:disabled):hover { background: rgba(255,255,255,0.2); color: #fff; border-color: rgba(255,255,255,0.45); }
-.hist-btn:disabled { opacity: 0.25; cursor: default; }
+
 
 .page { display: none; }
 .page.active { display: block; animation: fadeUp 0.3s ease; }
@@ -325,7 +308,6 @@ footer a { color: var(--gold); text-decoration: none; }
   .nav-brand { font-size: 0.95rem; }
   .hero-cards { gap: 0.75rem; }
   #logToast { left: 1rem; right: 1rem; bottom: 1rem; }
-  .hist-btn { width: 28px; height: 28px; font-size: 0.9rem; }
 }
 
 /* WELCOME INTRO */
@@ -363,20 +345,13 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
     MahaPravesh
     <span>Sangamner College · 2026–27</span>
   </div>
-  <div style="display:flex;align-items:center;gap:0.5rem;">
-    <!-- Back / Forward history buttons inside nav -->
-    <div class="nav-hist">
-      <button class="hist-btn" id="btnBack"    onclick="histBack()"    disabled title="Back">&#8592;</button>
-      <button class="hist-btn" id="btnForward" onclick="histForward()" disabled title="Forward">&#8594;</button>
-    </div>
-    <div class="nav-links">
+  <div class="nav-links">
       <button onclick="navigate('home')">🏠 Home</button>
       <button onclick="navigate('streams')">📚 Courses</button>
       <button onclick="navigate('admission')">🧭 प्रवेश</button>
       <button onclick="navigate('documents')">📄 Documents</button>
       <button onclick="navigate('contacts')">📞 Contacts</button>
     </div>
-  </div>
 </nav>
 
 <!-- Breadcrumb trail -->
@@ -759,9 +734,7 @@ function navigate(id) {
   _syncUI();
 }
 
-/* ── histBack / histForward ── for the in-nav ← → buttons ── */
-function histBack()    { history.back(); }
-function histForward() { history.forward(); }
+
 
 /* ── popstate ── fires on Android back, iOS swipe, browser ← → ── */
 window.addEventListener('popstate', function(e) {
@@ -815,16 +788,6 @@ function _syncUI() {
   document.querySelectorAll('.nav-links button').forEach((btn, i) => {
     btn.classList.toggle('active', ALL_PAGES[i] === id);
   });
-
-  // ← → in-nav buttons: we can't read browser history length perfectly,
-  // so we enable/disable based on our trail and browser API availability.
-  const btnB = document.getElementById('btnBack');
-  const btnF = document.getElementById('btnForward');
-  // back is available whenever we're not on the seed 'home' entry
-  if (btnB) btnB.disabled = (_bcTrail.length <= 1);
-  // forward: always enabled if browser has something; we can't know for sure
-  // so we leave it enabled and let the browser no-op if there's nothing ahead
-  if (btnF) btnF.disabled = false;
 
   // Breadcrumb
   const bc = document.getElementById('breadcrumb');
