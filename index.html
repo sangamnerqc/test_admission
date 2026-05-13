@@ -667,7 +667,15 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
 const GOOGLE_SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbw7nV9sfEhHc7xe8CiWTRnLoFz8K26-2p82rybpusRG_0A8EuOimzpizvM7gXWnNZQ/exec';
 
 // ═══════════════════════════════════════════════════
-//  HISTORY ROUTER  — full browser-style stack
+//  HISTORY ROUTER — synced with browser / Android back / iOS swipe
+//
+//  Strategy: use window.history.pushState so every page visit
+//  becomes a real browser history entry.  The Android hardware
+//  back button, iOS swipe-back gesture, and browser ← all fire
+//  the native 'popstate' event, which we catch and handle.
+//
+//  We ALSO maintain a lightweight breadcrumb trail array so the
+//  in-app breadcrumb bar always shows the full path.
 // ═══════════════════════════════════════════════════
 const PAGE_LABELS = {
   home:      '🏠 Home',
@@ -678,48 +686,51 @@ const PAGE_LABELS = {
 };
 const ALL_PAGES = ['home','streams','admission','documents','contacts'];
 
-// history stack  [ 'home', 'streams', 'admission', ... ]
-let histStack   = ['home'];
-let histPointer = 0;          // index into histStack pointing at current page
-let _navLock    = false;      // prevents re-entrant pushes during hist navigation
+// breadcrumb trail — grows as user navigates, used only for display
+let _bcTrail = ['home'];
 
-function currentPageId() { return histStack[histPointer]; }
+// Which page is currently visible
+function _currentPage() {
+  const s = history.state;
+  return (s && s.page) ? s.page : 'home';
+}
 
-/* ── navigate(id) — the ONLY function that should switch pages ── */
+/* ── navigate(id) ── called by every in-app link/button ── */
 function navigate(id) {
-  if (id === currentPageId()) return;   // already here
-  if (_navLock) { _renderPage(id); return; }
+  if (id === _currentPage()) return;          // already here — do nothing
 
-  // Truncate forward history (like every real browser)
-  histStack = histStack.slice(0, histPointer + 1);
-  histStack.push(id);
-  histPointer = histStack.length - 1;
+  // Push a new entry into the browser's own history stack.
+  // This is what makes Android back / iOS swipe fire popstate.
+  history.pushState({ page: id }, '', '#' + id);
+
+  // Extend breadcrumb trail
+  _bcTrail.push(id);
 
   _renderPage(id);
   _syncUI();
 }
 
-/* travel back through stack */
-function histBack() {
-  if (histPointer <= 0) return;
-  histPointer--;
-  _navLock = true;
-  _renderPage(currentPageId());
-  _navLock = false;
-  _syncUI();
-}
+/* ── histBack / histForward ── for the in-nav ← → buttons ── */
+function histBack()    { history.back(); }
+function histForward() { history.forward(); }
 
-/* travel forward through stack */
-function histForward() {
-  if (histPointer >= histStack.length - 1) return;
-  histPointer++;
-  _navLock = true;
-  _renderPage(currentPageId());
-  _navLock = false;
-  _syncUI();
-}
+/* ── popstate ── fires on Android back, iOS swipe, browser ← → ── */
+window.addEventListener('popstate', function(e) {
+  const id = (e.state && e.state.page) ? e.state.page : 'home';
 
-/* low-level render — only switches DOM, does NOT touch histStack */
+  // Trim or extend breadcrumb trail to match new location
+  const lastIdx = _bcTrail.lastIndexOf(id);
+  if (lastIdx !== -1) {
+    _bcTrail = _bcTrail.slice(0, lastIdx + 1);   // went back
+  } else {
+    _bcTrail.push(id);                            // went forward (rare)
+  }
+
+  _renderPage(id);
+  _syncUI();
+});
+
+/* ── low-level render — only switches DOM ── */
 function _renderPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const el = document.getElementById(id);
@@ -727,22 +738,28 @@ function _renderPage(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* keep nav buttons, back/forward buttons and breadcrumb in sync */
+/* ── _syncUI — keeps nav tabs, ← → buttons, breadcrumb in sync ── */
 function _syncUI() {
-  const id = currentPageId();
+  const id = _currentPage();
 
-  // nav tab highlight
+  // Nav tab highlight
   document.querySelectorAll('.nav-links button').forEach((btn, i) => {
     btn.classList.toggle('active', ALL_PAGES[i] === id);
   });
 
-  // ← → buttons
-  document.getElementById('btnBack').disabled    = (histPointer <= 0);
-  document.getElementById('btnForward').disabled = (histPointer >= histStack.length - 1);
+  // ← → in-nav buttons: we can't read browser history length perfectly,
+  // so we enable/disable based on our trail and browser API availability.
+  const btnB = document.getElementById('btnBack');
+  const btnF = document.getElementById('btnForward');
+  // back is available whenever we're not on the seed 'home' entry
+  if (btnB) btnB.disabled = (_bcTrail.length <= 1);
+  // forward: always enabled if browser has something; we can't know for sure
+  // so we leave it enabled and let the browser no-op if there's nothing ahead
+  if (btnF) btnF.disabled = false;
 
-  // breadcrumb  — build the entire visible trail (deduplicated consecutive)
+  // Breadcrumb
   const bc = document.getElementById('breadcrumb');
-  const trail = histStack.slice(0, histPointer + 1);
+  if (!bc) return;
 
   if (id === 'home') {
     bc.classList.remove('show');
@@ -753,10 +770,10 @@ function _syncUI() {
   bc.classList.add('show');
   bc.innerHTML = '';
 
-  // Show every unique step in the trail, grouped so consecutive same pages merge
-  const deduped = [trail[0]];
-  for (let i = 1; i < trail.length; i++) {
-    if (trail[i] !== trail[i-1]) deduped.push(trail[i]);
+  // Deduplicate consecutive identical entries for clean display
+  const deduped = [_bcTrail[0]];
+  for (let i = 1; i < _bcTrail.length; i++) {
+    if (_bcTrail[i] !== _bcTrail[i - 1]) deduped.push(_bcTrail[i]);
   }
 
   deduped.forEach((page, idx) => {
@@ -773,14 +790,22 @@ function _syncUI() {
     } else {
       item.className = 'bc-item clickable';
       item.textContent = PAGE_LABELS[page];
-      // clicking a breadcrumb crumb navigates there (pushes new entry)
       item.addEventListener('click', () => navigate(page));
     }
     bc.appendChild(item);
   });
 }
 
-// legacy alias so existing onclick="showPage(...)" calls still work
+/* ── Seed the browser history with the home entry on first load ──
+   This ensures there is always a 'back' target below 'home'
+   so Android's back button on the home page exits the app/browser
+   instead of doing nothing.                                        */
+(function _seedHistory() {
+  // Replace the current (blank) entry with our home state
+  history.replaceState({ page: 'home' }, '', '#home');
+})();
+
+// Legacy alias — all onclick="showPage(...)" calls still work
 function showPage(id) { navigate(id); }
 
 // ═══════════════════════════════════════════════════
@@ -912,7 +937,14 @@ function showProcessStep(n) {
     setTimeout(()=>{
       intro.classList.add('hide-intro');
       document.body.classList.remove('intro-active');
-      navigate('home');
+      // After the welcome splash, go straight to Pravesh Prakriya page.
+      // We push 'home' first (silent) so Android back from 'admission' goes to Home,
+      // then push 'admission' as the visible landing page.
+      history.replaceState({ page: 'home' }, '', '#home');
+      history.pushState({ page: 'admission' }, '', '#admission');
+      _bcTrail = ['home', 'admission'];
+      _renderPage('admission');
+      _syncUI();
       setTimeout(()=>intro.remove(),600);
     },totalTime);
   }
