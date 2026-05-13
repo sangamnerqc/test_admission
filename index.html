@@ -517,7 +517,7 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
 <div id="admission" class="page">
   <div class="section">
     <div class="section-title">प्रवेश <span>प्रक्रिया</span></div>
-    <p class="section-sub">प्रथम विद्यार्थ्याची संपूर्ण माहिती English मध्ये भरा. त्यानंतरच प्रवेश प्रक्रियेचा वृक्ष-आरेख दिसेल.</p>
+    <p class="section-sub">प्रथम विद्यार्थ्याची संपूर्ण माहिती English मध्ये भरा. त्यानंतरच संपूर्ण प्रवेश प्रक्रिया दिसेल.</p>
     <div class="divider"></div>
     <div class="admission-wrap">
       <div class="admission-form-card">
@@ -548,7 +548,7 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
             </select>
           </div>
           <button class="btn-check" onclick="updateAdmissionSummary(true)">माझी प्रवेश प्रक्रिया दाखवा →</button>
-          <div class="admission-summary" id="admissionSummary"><strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतरच प्रवेश प्रक्रियेचा वृक्ष-आरेख दिसेल.</div>
+          <div class="admission-summary" id="admissionSummary"><strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतरच संपूर्ण प्रवेश प्रक्रिया दिसेल.</div>
         </div>
       </div>
       <div id="processPanel" class="process-panel" aria-hidden="true">
@@ -557,7 +557,7 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
             <h3>🌳 प्रवेश प्रक्रियेचा वृक्ष-आरेख</h3>
             <span class="process-badge">४ मुख्य टप्पे</span>
           </div>
-          <div class="selected-branch-strip" id="selectedBranchStrip">शाखा निवडल्यानंतर समुपदेशनाचे योग्य स्थान येथे दिसेल.</div>
+          <div class="selected-branch-strip" id="selectedBranchStrip"> शाखा निवडल्यानंतर समुपदेशनाचे योग्य स्थान येथे दिसेल.</div>
           <div class="process-tree" aria-label="प्रवेश प्रक्रियेचा वृक्ष-आरेख">
             <div class="process-step active" onclick="showProcessStep(1)">
               <div class="step-circle">१</div><div class="step-title">समुपदेशन</div>
@@ -776,7 +776,7 @@ function _clearAdmissionForm() {
   if (nm)  nm.value  = '';
   if (ct)  ct.value  = '';
   if (br)  br.value  = '';
-  if (sm)  sm.innerHTML = '<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतरच प्रवेश प्रक्रियेचा वृक्ष-आरेख दिसेल.';
+  if (sm)  sm.innerHTML = '<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतरच संपूर्ण प्रवेश प्रक्रिया दिसेल.';
   if (pp)  { pp.classList.remove('show'); pp.setAttribute('aria-hidden','true'); }
 }
 
