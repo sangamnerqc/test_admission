@@ -263,6 +263,49 @@ footer a { color: var(--gold); text-decoration: none; }
 .btn-check { width: 100%; padding: 0.9rem; background: var(--saffron); color: #fff; border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; }
 .btn-check:hover { background: #B83A0A; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(212,69,12,0.35); }
 
+/* ── FLOATING BACK BUTTON ── */
+#floatBack {
+  position: fixed;
+  bottom: 1.6rem;
+  left: 1.5rem;
+  z-index: 8500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--deep);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 0.65rem 1.3rem 0.65rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 22px rgba(13,27,42,0.38);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s;
+}
+#floatBack.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+#floatBack:hover { background: var(--saffron); transform: translateY(-2px); }
+#floatBack .fb-arrow {
+  width: 28px; height: 28px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.05rem; flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  #floatBack { left: 50%; transform: translateX(-50%) translateY(10px); bottom: 1rem; font-size: 0.82rem; }
+  #floatBack.visible { transform: translateX(-50%) translateY(0); }
+  #floatBack:hover { transform: translateX(-50%) translateY(-2px); }
+}
+
 /* LOG TOAST */
 #logToast { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9000; padding: 0.75rem 1.25rem; border-radius: 10px; font-size: 0.86rem; font-weight: 600; color: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.2); opacity: 0; transform: translateY(12px); transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; max-width: 320px; }
 #logToast.show { opacity: 1; transform: translateY(0); }
@@ -301,6 +344,12 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
 <body class="intro-active">
 
 <div id="logToast"></div>
+
+<!-- ── FLOATING BACK BUTTON ── -->
+<button id="floatBack" onclick="floatGoBack()" aria-label="परत जा / Back">
+  <span class="fb-arrow">&#8592;</span>
+  परत जा
+</button>
 
 <div id="welcomeIntro" aria-live="polite">
   <div class="welcome-box">
@@ -736,6 +785,26 @@ function _renderPage(id) {
   const el = document.getElementById(id);
   if (el) el.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Clear admission form fields on every page switch (fresh start)
+  _clearAdmissionForm();
+
+  // Show / hide the floating back button
+  const fb = document.getElementById('floatBack');
+  if (fb) fb.classList.toggle('visible', id !== 'home');
+}
+
+function _clearAdmissionForm() {
+  const nm  = document.getElementById('studentName');
+  const ct  = document.getElementById('studentContact');
+  const br  = document.getElementById('studentBranch');
+  const sm  = document.getElementById('admissionSummary');
+  const pp  = document.getElementById('processPanel');
+  if (nm)  nm.value  = '';
+  if (ct)  ct.value  = '';
+  if (br)  br.value  = '';
+  if (sm)  sm.innerHTML = '<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतरच प्रवेश प्रक्रियेचा वृक्ष-आरेख दिसेल.';
+  if (pp)  { pp.classList.remove('show'); pp.setAttribute('aria-hidden','true'); }
 }
 
 /* ── _syncUI — keeps nav tabs, ← → buttons, breadcrumb in sync ── */
@@ -807,6 +876,9 @@ function _syncUI() {
 
 // Legacy alias — all onclick="showPage(...)" calls still work
 function showPage(id) { navigate(id); }
+
+// Floating back button handler
+function floatGoBack() { history.back(); }
 
 // ═══════════════════════════════════════════════════
 //  TOAST
