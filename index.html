@@ -467,6 +467,25 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
         </div>
       </div>
       <div class="stream-card">
+        <div class="stream-header science" style="background:linear-gradient(135deg,#0369A1,#0EA5E9);">
+          <div class="stream-icon">🤖</div>
+          <div class="stream-name">B.Sc. AI & ML</div>
+          <div class="stream-full">Artificial Intelligence & Machine Learning</div>
+        </div>
+        <div class="stream-body">
+          <div class="stream-eligibility">✅ HSC with Science – Merit based | 🆕 NEW COURSE!</div>
+          <div class="stream-subjects"><span class="subject-tag">AI Fundamentals</span><span class="subject-tag">Python</span><span class="subject-tag">Data Science</span><span class="subject-tag">Deep Learning</span><span class="subject-tag">ML Algorithms</span><span class="subject-tag">Neural Networks</span></div>
+          <div style="background: #EFF6FF; border-left: 4px solid #0EA5E9; border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin-bottom: 1rem; font-size: 0.85rem; color: #0369A1; line-height: 1.6;">
+            <strong>🎯 Learn AI. Build Smart Systems. Shape the Future.</strong><br/>Hands-on Projects • Real-world Datasets • Industry Exposure • Placement Support
+          </div>
+          <div class="stream-contacts">
+            <h4>📞 Admission Contacts</h4>
+            <div class="contact-row"><span class="contact-subject">Inquiry</span><div><div class="contact-name">Call for Details</div><a class="contact-phone" href="tel:8308158752">8308158752</a> / <a class="contact-phone" href="tel:9767786614">9767786614</a></div></div>
+            <div class="contact-row"><span class="contact-subject">More Info</span><div><div class="contact-name">Contact us</div><a class="contact-phone" href="tel:9890308845">9890308845</a></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="stream-card">
         <div class="stream-header bba"><div class="stream-icon">📊</div><div class="stream-name">B.B.A.</div><div class="stream-full">Bachelor of Business Administration</div></div>
         <div class="stream-body">
           <div class="stream-eligibility cet">⚠️ CET required – As per AICTE norms</div>
@@ -517,7 +536,7 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
 <div id="admission" class="page">
   <div class="section">
     <div class="section-title">प्रवेश <span>प्रक्रिया</span></div>
-    <p class="section-sub">प्रथम विद्यार्थ्याची संपूर्ण माहिती English मध्ये भरा. त्यानंतरच संपूर्ण प्रवेश प्रक्रिया दिसेल.</p>
+    <p class="section-sub">प्रथम विद्यार्थ्याची संपूर्ण माहिती English मध्ये भरा. त्यानंतरच प्रवेश प्रक्रियेचा वृक्ष-आरेख दिसेल.</p>
     <div class="divider"></div>
     <div class="admission-wrap">
       <div class="admission-form-card">
@@ -528,27 +547,28 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
         <div class="admission-form-body">
           <div class="admission-required-note"><strong>Important:</strong> Fill Student Name and Contact Number in English only. After clicking <strong>माझी प्रवेश प्रक्रिया दाखवा →</strong>, the admission process tree will open.</div>
           <div class="form-group">
-            <label class="marathi-label" for="studentName"> विद्यार्थ्यांचे संपूर्ण नाव <span>*</span></label>
+            <label class="marathi-label" for="studentName">Student Full Name <span>*</span></label>
             <input type="text" class="form-control" id="studentName" placeholder="Example: Amit Sanjay Shinde" autocomplete="name" oninput="updateAdmissionSummary()"/>
           </div>
           <div class="form-group">
-            <label class="marathi-label" for="studentContact"> संपर्क फोन नंबर  <span>*</span></label>
+            <label class="marathi-label" for="studentContact">Contact Number <span>*</span></label>
             <input type="tel" class="form-control" id="studentContact" placeholder="Example: 9876543210" inputmode="tel" autocomplete="tel" oninput="updateAdmissionSummary()"/>
           </div>
           <div class="form-group">
-            <label class="marathi-label" for="studentBranch">कोणत्या विद्या शाखेला प्रवेश घ्यायचा आहे <span>*</span></label>
+            <label class="marathi-label" for="studentBranch">Branch Seeking Admission <span>*</span></label>
             <select class="form-control" id="studentBranch" onchange="updateAdmissionSummary()">
               <option value="">-- Select Branch --</option>
               <option value="arts">Arts</option>
               <option value="commerce">Commerce</option>
               <option value="science">Science</option>
+              <option value="ai_ml">🤖 B.Sc. AI & ML (NEW)</option>
               <option value="bvoc">B.Voc.</option>
               <option value="bba">BBA</option>
               <option value="bcs">BCS / Computer Science</option>
             </select>
           </div>
           <button class="btn-check" onclick="updateAdmissionSummary(true)">माझी प्रवेश प्रक्रिया दाखवा →</button>
-          <div class="admission-summary" id="admissionSummary"><strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतरच संपूर्ण प्रवेश प्रक्रिया दिसेल.</div>
+          <div class="admission-summary" id="admissionSummary"><strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतरच प्रवेश प्रक्रियेचा वृक्ष-आरेख दिसेल.</div>
         </div>
       </div>
       <div id="processPanel" class="process-panel" aria-hidden="true">
@@ -557,7 +577,7 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
             <h3>🌳 प्रवेश प्रक्रियेचा वृक्ष-आरेख</h3>
             <span class="process-badge">४ मुख्य टप्पे</span>
           </div>
-          <div class="selected-branch-strip" id="selectedBranchStrip"> शाखा निवडल्यानंतर समुपदेशनाचे योग्य स्थान येथे दिसेल.</div>
+          <div class="selected-branch-strip" id="selectedBranchStrip">शाखा निवडल्यानंतर समुपदेशनाचे योग्य स्थान येथे दिसेल.</div>
           <div class="process-tree" aria-label="प्रवेश प्रक्रियेचा वृक्ष-आरेख">
             <div class="process-step active" onclick="showProcessStep(1)">
               <div class="step-circle">१</div><div class="step-title">समुपदेशन</div>
@@ -776,7 +796,7 @@ function _clearAdmissionForm() {
   if (nm)  nm.value  = '';
   if (ct)  ct.value  = '';
   if (br)  br.value  = '';
-  if (sm)  sm.innerHTML = '<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतरच संपूर्ण प्रवेश प्रक्रिया दिसेल.';
+  if (sm)  sm.innerHTML = '<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतरच प्रवेश प्रक्रियेचा वृक्ष-आरेख दिसेल.';
   if (pp)  { pp.classList.remove('show'); pp.setAttribute('aria-hidden','true'); }
 }
 
@@ -927,7 +947,7 @@ function updateAdmissionSummary(forceShow=false) {
     logToGoogleSheet(name, contact, b.display);
   }
 
-  box.innerHTML=`<strong>${esc(name||'Student')}</strong> wants admission in <strong>${esc(b?.display||'')}</strong>.<br/>Contact: ${esc(contact)}<br/>Counselling: <strong>${esc(b?.counselling||'')}</strong><br/><strong>क्रम:</strong> समुपदेशन → अर्ज भरणे → अर्ज तपासणी → फी भरणे व पावती मिळवणे.`;
+  box.innerHTML=`<strong>${esc(name||'Student')}</strong> wants admission in <strong>${esc(b?.display||'')}</strong>.<br/>Contact: ${esc(contact)}<br/>Counselling: <strong>${esc(b?.counselling||'')}</strong><br/><strong>क्रम:</strong> समुपदेशन → अर्ज भरणे → तपासणी → फी व पावती.`;
 
   if (panel?.classList.contains('show')||forceShow) _renderProcess();
   if (forceShow && panel) {
