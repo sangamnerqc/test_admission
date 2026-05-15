@@ -596,15 +596,15 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
         <div class="admission-form-body">
           <div class="admission-required-note"><strong>Important:</strong> Fill Student Name and Contact Number in English only. After clicking <strong>माझी प्रवेश प्रक्रिया दाखवा →</strong>, the admission process tree will open.</div>
           <div class="form-group">
-            <label class="marathi-label" for="studentName">Student Full Name <span>*</span></label>
+            <label class="marathi-label" for="studentName">विद्यार्थ्यांचे संपूर्ण नाव  <span>*</span></label>
             <input type="text" class="form-control" id="studentName" placeholder="Example: Amit Sanjay Shinde" autocomplete="name" oninput="updateAdmissionSummary()"/>
           </div>
           <div class="form-group">
-            <label class="marathi-label" for="studentContact">Contact Number <span>*</span></label>
+            <label class="marathi-label" for="studentContact">विद्यार्थ्यांचा मोबाइल नंबर <span>*</span></label>
             <input type="tel" class="form-control" id="studentContact" placeholder="Example: 9876543210" inputmode="tel" autocomplete="tel" oninput="updateAdmissionSummary()"/>
           </div>
           <div class="form-group">
-            <label class="marathi-label" for="studentBranch">Branch Seeking Admission <span>*</span></label>
+            <label class="marathi-label" for="studentBranch">कोणत्या विद्या शाखेला प्रवेश घ्यायचा आहे  <span>*</span></label>
             <select class="form-control" id="studentBranch" onchange="updateAdmissionSummary()">
               <option value="">-- Select Branch --</option>
               <option value="arts">Arts</option>
@@ -955,7 +955,6 @@ const branchData = {
   arts:     {display:'Arts',              counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
   commerce: {display:'Commerce',          counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
   science:  {display:'Science',           counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
-  ai_ml:    {display:'B.Sc. AI & ML',    counselling:'Science Department, Sangamner College',    query:'Science AI ML Department Sangamner College'},
   bvoc:     {display:'B.Voc.',           counselling:'B.Voc. Department, Sangamner College',     query:'B Voc Department Sangamner College'},
   bba:      {display:'BBA',              counselling:'BBA Department, Sangamner College',         query:'BBA Department Sangamner College'},
   bcs:      {display:'BCS / Comp. Sci.', counselling:'Computer Science Dept., Sangamner College', query:'Computer Science Department Sangamner College'}
@@ -1042,9 +1041,13 @@ function showProcessStep(n) {
     setTimeout(()=>{
       intro.classList.add('hide-intro');
       document.body.classList.remove('intro-active');
+      // After the welcome splash, go straight to Pravesh Prakriya page.
+      // We push 'home' first (silent) so Android back from 'admission' goes to Home,
+      // then push 'admission' as the visible landing page.
       history.replaceState({ page: 'home' }, '', '#home');
-      _bcTrail = ['home'];
-      _renderPage('home');
+      history.pushState({ page: 'admission' }, '', '#admission');
+      _bcTrail = ['home', 'admission'];
+      _renderPage('admission');
       _syncUI();
       setTimeout(()=>intro.remove(),600);
     },totalTime);
