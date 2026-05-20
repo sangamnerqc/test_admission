@@ -754,22 +754,19 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
 </footer>
 
 <script>
+
 // ═══════════════════════════════════════════════════
 //  GOOGLE SHEET WEBHOOK
 // ═══════════════════════════════════════════════════
-const GOOGLE_SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbw7nV9sfEhHc7xe8CiWTRnLoFz8K26-2p82rybpusRG_0A8EuOimzpizvM7gXWnNZQ/exec';
+
+const GOOGLE_SHEET_WEBHOOK_URL =
+'https://script.google.com/macros/s/AKfycbw7nV9sfEhHc7xe8CiWTRnLoFz8K26-2p82rybpusRG_0A8EuOimzpizvM7gXWnNZQ/exec';
+
 
 // ═══════════════════════════════════════════════════
-//  HISTORY ROUTER — synced with browser / Android back / iOS swipe
-//
-//  Strategy: use window.history.pushState so every page visit
-//  becomes a real browser history entry.  The Android hardware
-//  back button, iOS swipe-back gesture, and browser ← all fire
-//  the native 'popstate' event, which we catch and handle.
-//
-//  We ALSO maintain a lightweight breadcrumb trail array so the
-//  in-app breadcrumb bar always shows the full path.
+//  HISTORY ROUTER
 // ═══════════════════════════════════════════════════
+
 const PAGE_LABELS = {
   home:      '🏠 Home',
   streams:   '📚 Courses',
@@ -777,252 +774,764 @@ const PAGE_LABELS = {
   documents: '📄 Documents',
   contacts:  '📞 Contacts'
 };
-const ALL_PAGES = ['home','streams','admission','documents','contacts'];
 
-// breadcrumb trail — grows as user navigates, used only for display
+const ALL_PAGES = [
+  'home',
+  'streams',
+  'admission',
+  'documents',
+  'contacts'
+];
+
 let _bcTrail = ['home'];
 
-// Which page is currently visible
 function _currentPage() {
   const s = history.state;
   return (s && s.page) ? s.page : 'home';
 }
 
-/* ── navigate(id) ── called by every in-app link/button ── */
 function navigate(id) {
-  if (id === _currentPage()) return;          // already here — do nothing
 
-  // Push a new entry into the browser's own history stack.
-  // This is what makes Android back / iOS swipe fire popstate.
+  if (id === _currentPage()) return;
+
   history.pushState({ page: id }, '', '#' + id);
 
-  // Extend breadcrumb trail
   _bcTrail.push(id);
 
   _renderPage(id);
+
   _syncUI();
 }
 
-
-
-/* ── popstate ── fires on Android back, iOS swipe, browser ← → ── */
 window.addEventListener('popstate', function(e) {
-  const id = (e.state && e.state.page) ? e.state.page : 'home';
 
-  // Trim or extend breadcrumb trail to match new location
+  const id =
+    (e.state && e.state.page)
+    ? e.state.page
+    : 'home';
+
   const lastIdx = _bcTrail.lastIndexOf(id);
+
   if (lastIdx !== -1) {
-    _bcTrail = _bcTrail.slice(0, lastIdx + 1);   // went back
+    _bcTrail = _bcTrail.slice(0, lastIdx + 1);
   } else {
-    _bcTrail.push(id);                            // went forward (rare)
+    _bcTrail.push(id);
   }
 
   _renderPage(id);
+
   _syncUI();
 });
 
-/* ── low-level render — only switches DOM ── */
 function _renderPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const el = document.getElementById(id);
-  if (el) el.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // Clear admission form fields on every page switch (fresh start)
+  document
+    .querySelectorAll('.page')
+    .forEach(p => p.classList.remove('active'));
+
+  const el = document.getElementById(id);
+
+  if (el) el.classList.add('active');
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+
   _clearAdmissionForm();
 
-  // Show / hide the floating back button
   const fb = document.getElementById('floatBack');
-  if (fb) fb.classList.toggle('visible', id !== 'home');
+
+  if (fb) {
+    fb.classList.toggle('visible', id !== 'home');
+  }
 }
 
 function _clearAdmissionForm() {
+
   const nm  = document.getElementById('studentName');
   const ct  = document.getElementById('studentContact');
   const br  = document.getElementById('studentBranch');
+  const sb  = document.getElementById('studentSubject');
+
   const sm  = document.getElementById('admissionSummary');
   const pp  = document.getElementById('processPanel');
-  if (nm)  nm.value  = '';
-  if (ct)  ct.value  = '';
-  if (br)  br.value  = '';
-  if (sm)  sm.innerHTML = '<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतरच प्रवेश प्रक्रियेचा वृक्ष-आरेख दिसेल.';
-  if (pp)  { pp.classList.remove('show'); pp.setAttribute('aria-hidden','true'); }
+
+  if (nm) nm.value = '';
+
+  if (ct) ct.value = '';
+
+  if (br) br.value = '';
+
+  if (sb) {
+    sb.innerHTML =
+    '<option value="">-- Select Subject --</option>';
+  }
+
+  if (sm) {
+    sm.innerHTML =
+    '<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतरच प्रवेश प्रक्रियेचा वृक्ष-आरेख दिसेल.';
+  }
+
+  if (pp) {
+    pp.classList.remove('show');
+    pp.setAttribute('aria-hidden','true');
+  }
 }
 
-/* ── _syncUI — keeps nav tabs, ← → buttons, breadcrumb in sync ── */
 function _syncUI() {
+
   const id = _currentPage();
 
-  // Nav tab highlight
-  document.querySelectorAll('.nav-links button').forEach((btn, i) => {
-    btn.classList.toggle('active', ALL_PAGES[i] === id);
-  });
+  document
+    .querySelectorAll('.nav-links button')
+    .forEach((btn, i) => {
+      btn.classList.toggle(
+        'active',
+        ALL_PAGES[i] === id
+      );
+    });
 
-  // Breadcrumb
   const bc = document.getElementById('breadcrumb');
+
   if (!bc) return;
 
   if (id === 'home') {
+
     bc.classList.remove('show');
     bc.innerHTML = '';
+
     return;
   }
 
   bc.classList.add('show');
+
   bc.innerHTML = '';
 
-  // Deduplicate consecutive identical entries for clean display
   const deduped = [_bcTrail[0]];
+
   for (let i = 1; i < _bcTrail.length; i++) {
-    if (_bcTrail[i] !== _bcTrail[i - 1]) deduped.push(_bcTrail[i]);
+
+    if (_bcTrail[i] !== _bcTrail[i - 1]) {
+      deduped.push(_bcTrail[i]);
+    }
   }
 
   deduped.forEach((page, idx) => {
+
     if (idx > 0) {
+
       const sep = document.createElement('span');
-      sep.className = 'bc-sep'; sep.textContent = '›';
+
+      sep.className = 'bc-sep';
+      sep.textContent = '›';
+
       bc.appendChild(sep);
     }
+
     const item = document.createElement('span');
+
     const isLast = idx === deduped.length - 1;
+
     if (isLast) {
+
       item.className = 'bc-item current';
+
       item.textContent = PAGE_LABELS[page];
+
     } else {
+
       item.className = 'bc-item clickable';
+
       item.textContent = PAGE_LABELS[page];
+
       item.addEventListener('click', () => navigate(page));
     }
+
     bc.appendChild(item);
   });
 }
 
-/* ── Seed the browser history with the home entry on first load ──
-   This ensures there is always a 'back' target below 'home'
-   so Android's back button on the home page exits the app/browser
-   instead of doing nothing.                                        */
 (function _seedHistory() {
-  // Replace the current (blank) entry with our home state
-  history.replaceState({ page: 'home' }, '', '#home');
+
+  history.replaceState(
+    { page: 'home' },
+    '',
+    '#home'
+  );
+
 })();
 
-// Legacy alias — all onclick="showPage(...)" calls still work
-function showPage(id) { navigate(id); }
+function showPage(id) {
+  navigate(id);
+}
 
-// Floating back button handler
-function floatGoBack() { history.back(); }
+function floatGoBack() {
+  history.back();
+}
+
 
 // ═══════════════════════════════════════════════════
 //  TOAST
 // ═══════════════════════════════════════════════════
+
 function showToast(msg, type, duration = 4000) {
+
   const t = document.getElementById('logToast');
-  t.textContent = msg; t.className = 'show ' + type;
+
+  t.textContent = msg;
+
+  t.className = 'show ' + type;
+
   clearTimeout(t._t);
-  t._t = setTimeout(() => { t.className = ''; }, duration);
+
+  t._t = setTimeout(() => {
+    t.className = '';
+  }, duration);
 }
+
 
 // ═══════════════════════════════════════════════════
 //  GOOGLE SHEETS LOGGER
 // ═══════════════════════════════════════════════════
-async function logToGoogleSheet(name, contact, branch) {
-  if (!GOOGLE_SHEET_WEBHOOK_URL || GOOGLE_SHEET_WEBHOOK_URL.includes('YOUR_APPS')) return;
-  const payload = { timestamp: new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'}), name, contact, branch };
-  showToast('⏳ Saving your details…','sending',10000);
+
+async function logToGoogleSheet(
+  name,
+  contact,
+  branch,
+  subject
+) {
+
+  if (
+    !GOOGLE_SHEET_WEBHOOK_URL ||
+    GOOGLE_SHEET_WEBHOOK_URL.includes('YOUR_APPS')
+  ) return;
+
+  const payload = {
+
+    timestamp:
+      new Date().toLocaleString(
+        'en-IN',
+        { timeZone:'Asia/Kolkata' }
+      ),
+
+    name,
+    contact,
+    branch,
+    subject
+  };
+
+  showToast(
+    '⏳ Saving your details…',
+    'sending',
+    10000
+  );
+
   try {
-    await fetch(GOOGLE_SHEET_WEBHOOK_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
-    showToast('✅ माहिती यशस्वीरित्या नोंदवली गेली!','success');
+
+    await fetch(
+      GOOGLE_SHEET_WEBHOOK_URL,
+      {
+        method:'POST',
+        mode:'no-cors',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    showToast(
+      '✅ माहिती यशस्वीरित्या नोंदवली गेली!',
+      'success'
+    );
+
   } catch(e) {
+
     console.error(e);
-    showToast('⚠️ माहिती जतन करताना त्रुटी आली.','error');
+
+    showToast(
+      '⚠️ माहिती जतन करताना त्रुटी आली.',
+      'error'
+    );
   }
 }
+
 
 // ═══════════════════════════════════════════════════
 //  CHECKLIST
 // ═══════════════════════════════════════════════════
+
 function toggleDoc(el, type, total) {
+
   el.classList.toggle('checked');
-  const count = el.closest('.checklist-card').querySelectorAll('.doc-item.checked').length;
-  document.getElementById(`${type}-bar`).style.width = Math.round(count/total*100)+'%';
-  document.getElementById(`${type}-label`).textContent = `${count} of ${total} ready`;
+
+  const count =
+    el.closest('.checklist-card')
+      .querySelectorAll('.doc-item.checked')
+      .length;
+
+  document.getElementById(
+    `${type}-bar`
+  ).style.width =
+    Math.round(count/total*100)+'%';
+
+  document.getElementById(
+    `${type}-label`
+  ).textContent =
+    `${count} of ${total} ready`;
 }
+
 
 // ═══════════════════════════════════════════════════
 //  ADMISSION PROCESS
 // ═══════════════════════════════════════════════════
+
 const branchData = {
-  arts:     {display:'Arts',              counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
-  commerce: {display:'Commerce',          counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
-  science:  {display:'Science',           counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
-  ai_ml:    {display:'B.Sc. AI & ML (NEW)', counselling:'BCS. Department, Sangamner College',     query:'BCS Department Sangamner College'},
-  bvoc:     {display:'B.Voc.',           counselling:'B.Voc. Department, Sangamner College',     query:'B Voc Department Sangamner College'},
-  bba:      {display:'BBA',              counselling:'BBA Department, Sangamner College',         query:'BBA Department Sangamner College'},
-  bcs:      {display:'BCS / Comp. Sci.', counselling:'Computer Science Dept., Sangamner College', query:'Computer Science Department Sangamner College'}
-};
-const loc = {
-  form:    {t:'२. अर्ज भरणे',           n:'Student Facility Center, Setu Suvidha Kendra', q:'Student Facility Center Setu Suvidha Kendra Sangamner College', l:'अर्ज भरण्याचे स्थान पाहा'},
-  check:   {t:'३. अर्ज तपासणी',          n:'Saibaba Sabhagruh, Sangamner College',          q:'Saibaba Sabhagruh Sangamner College',                           l:'अर्ज तपासणी स्थान पाहा'},
-  account: {t:'४. फी भरणे व पावती घेणे', n:'Account Section, Sangamner College',            q:'Account Section Sangamner College',                            l:'Account Section स्थान पाहा'}
+
+  ba: {
+    display:'B.A.',
+    counselling:'Saibaba Sabhagruh',
+    query:'Saibaba Sabhagruh Sangamner College'
+  },
+
+  bcom: {
+    display:'B.Com.',
+    counselling:'Saibaba Sabhagruh',
+    query:'Saibaba Sabhagruh Sangamner College'
+  },
+
+  bsc: {
+    display:'B.Sc.',
+    counselling:'Saibaba Sabhagruh',
+    query:'Saibaba Sabhagruh Sangamner College'
+  },
+
+  bsc_cs: {
+    display:'B.Sc Computer Science',
+    counselling:'Computer Science Dept., Sangamner College',
+    query:'Computer Science Department Sangamner College'
+  },
+
+  bca_science: {
+    display:'BCA (Science)',
+    counselling:'Computer Science Dept., Sangamner College',
+    query:'Computer Science Department Sangamner College'
+  },
+
+  ai_ml: {
+    display:'B.Sc AI & ML',
+    counselling:'BCS Department, Sangamner College',
+    query:'BCS Department Sangamner College'
+  },
+
+  bvoc: {
+    display:'B.Voc.',
+    counselling:'B.Voc Department, Sangamner College',
+    query:'B Voc Department Sangamner College'
+  },
+
+  bba: {
+    display:'BBA',
+    counselling:'BBA Department, Sangamner College',
+    query:'BBA Department Sangamner College'
+  },
+
+  bba_ca: {
+    display:'BBA (CA)',
+    counselling:'BBA Department, Sangamner College',
+    query:'BBA Department Sangamner College'
+  }
 };
 
-const esc = v => String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
-const mq  = q => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
-const getBranch = () => branchData[document.getElementById('studentBranch')?.value||''] || null;
+
+// ═══════════════════════════════════════════════════
+// SUBJECT DATA
+// ═══════════════════════════════════════════════════
+
+const subjectData = {
+
+  ba: [
+    "Marathi",
+    "Hindi",
+    "English",
+    "Sanskrit",
+    "Economics",
+    "Politics",
+    "Geography",
+    "Philosophy",
+    "Yoga"
+  ],
+
+  bcom: [
+    "B.Com"
+  ],
+
+  bsc: [
+    "Physics",
+    "Chemistry",
+    "Mathematics",
+    "Electronics",
+    "Zoology",
+    "Botany",
+    "Microbiology"
+  ],
+
+  bsc_cs: [
+    "Computer Science"
+  ],
+
+  bca_science: [
+    "BCA (Science)"
+  ],
+
+  ai_ml: [
+    "Artificial Intelligence & Machine Learning"
+  ],
+
+  bvoc: [
+    "Hospitality and Tourism",
+    "Dairy Products and Processing",
+    "Software Development",
+    "Account and Taxation",
+    "Agriculture and Soil Science"
+  ],
+
+  bba: [
+    "BBA"
+  ],
+
+  bba_ca: [
+    "BBA (CA)"
+  ]
+};
+
+
+// ═══════════════════════════════════════════════════
+// LOAD SUBJECTS
+// ═══════════════════════════════════════════════════
+
+function loadSubjects() {
+
+  const branch =
+    document.getElementById('studentBranch').value;
+
+  const subjectSelect =
+    document.getElementById('studentSubject');
+
+  subjectSelect.innerHTML =
+    '<option value="">-- Select Subject --</option>';
+
+  if (!subjectData[branch]) return;
+
+  subjectData[branch].forEach(subject => {
+
+    const option = document.createElement('option');
+
+    option.value = subject;
+
+    option.textContent = subject;
+
+    subjectSelect.appendChild(option);
+  });
+}
+
+
+const loc = {
+
+  form: {
+    t:'२. अर्ज भरणे',
+    n:'Student Facility Center, Setu Suvidha Kendra',
+    q:'Student Facility Center Setu Suvidha Kendra Sangamner College',
+    l:'अर्ज भरण्याचे स्थान पाहा'
+  },
+
+  check: {
+    t:'३. अर्ज तपासणी',
+    n:'Saibaba Sabhagruh, Sangamner College',
+    q:'Saibaba Sabhagruh Sangamner College',
+    l:'अर्ज तपासणी स्थान पाहा'
+  },
+
+  account: {
+    t:'४. फी भरणे व पावती घेणे',
+    n:'Account Section, Sangamner College',
+    q:'Account Section Sangamner College',
+    l:'Account Section स्थान पाहा'
+  }
+};
+
+const esc = v =>
+String(v)
+.replace(/&/g,'&amp;')
+.replace(/</g,'&lt;')
+.replace(/>/g,'&gt;')
+.replace(/"/g,'&quot;')
+.replace(/'/g,'&#039;');
+
+const mq = q =>
+`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+
+const getBranch = () =>
+branchData[
+  document.getElementById('studentBranch')?.value || ''
+] || null;
+
+
+// ═══════════════════════════════════════════════════
+// STEPS
+// ═══════════════════════════════════════════════════
 
 function steps() {
-  const b = getBranch() || {display:'Selected Branch', counselling:'संबंधित विभाग', query:'Sangamner College'};
+
+  const b =
+    getBranch() || {
+      display:'Selected Branch',
+      counselling:'संबंधित विभाग',
+      query:'Sangamner College'
+    };
+
   return {
-    1:{title:'१. समुपदेशन',  text:`${b.display} शाखेसाठी समुपदेशन स्थान: ${b.counselling}.`, link:mq(b.query),  label:'समुपदेशन स्थान पाहा'},
-    2:{title:loc.form.t,    text:`${loc.form.n} येथे अर्ज भरता येईल.`,                       link:mq(loc.form.q),    label:loc.form.l},
-    3:{title:loc.check.t,   text:`${loc.check.n} येथे अर्ज तपासणी होईल.`,                    link:mq(loc.check.q),   label:loc.check.l},
-    4:{title:loc.account.t, text:`${loc.account.n} येथे फी भरणे व पावती मिळेल.`,             link:mq(loc.account.q), label:loc.account.l}
+
+    1:{
+      title:'१. समुपदेशन',
+      text:
+      `${b.display} शाखेसाठी समुपदेशन स्थान: ${b.counselling}.`,
+      link:mq(b.query),
+      label:'समुपदेशन स्थान पाहा'
+    },
+
+    2:{
+      title:loc.form.t,
+      text:`${loc.form.n} येथे अर्ज भरता येईल.`,
+      link:mq(loc.form.q),
+      label:loc.form.l
+    },
+
+    3:{
+      title:loc.check.t,
+      text:`${loc.check.n} येथे अर्ज तपासणी होईल.`,
+      link:mq(loc.check.q),
+      label:loc.check.l
+    },
+
+    4:{
+      title:loc.account.t,
+      text:`${loc.account.n} येथे फी भरणे व पावती मिळेल.`,
+      link:mq(loc.account.q),
+      label:loc.account.l
+    }
   };
 }
 
+
+// ═══════════════════════════════════════════════════
+// ADMISSION SUMMARY
+// ═══════════════════════════════════════════════════
+
 function updateAdmissionSummary(forceShow=false) {
-  const name    = document.getElementById('studentName')?.value.trim()||'';
-  const contact = document.getElementById('studentContact')?.value.trim()||'';
-  const b       = getBranch();
-  const box     = document.getElementById('admissionSummary');
-  const panel   = document.getElementById('processPanel');
+
+  const name =
+    document.getElementById('studentName')
+    ?.value.trim() || '';
+
+  const contact =
+    document.getElementById('studentContact')
+    ?.value.trim() || '';
+
+  const subject =
+    document.getElementById('studentSubject')
+    ?.value || '';
+
+  const b = getBranch();
+
+  const box =
+    document.getElementById('admissionSummary');
+
+  const panel =
+    document.getElementById('processPanel');
+
   if (!box) return;
 
-  if (!name && !contact && !b && !forceShow) {
-    box.innerHTML='<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा.'; return;
+  if (
+    !name &&
+    !contact &&
+    !b &&
+    !forceShow
+  ) {
+
+    box.innerHTML =
+    '<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा.';
+
+    return;
   }
+
   if (forceShow) {
-    if (!name||!contact||!b)                        { alert('Please fill Student Name, Contact Number and Branch.'); return; }
-    if (contact.replace(/\D/g,'').length < 10)      { alert('Please enter a valid 10-digit contact number.'); return; }
-    logToGoogleSheet(name, contact, b.display);
+
+    if (!name || !contact || !b) {
+
+      alert(
+      'Please fill Student Name, Contact Number and Course.'
+      );
+
+      return;
+    }
+
+    if (
+      contact.replace(/\D/g,'').length < 10
+    ) {
+
+      alert(
+      'Please enter a valid 10-digit contact number.'
+      );
+
+      return;
+    }
+
+    logToGoogleSheet(
+      name,
+      contact,
+      b.display,
+      subject
+    );
   }
 
-  box.innerHTML=`<strong>${esc(name||'Student')}</strong> wants admission in <strong>${esc(b?.display||'')}</strong>.<br/>Contact: ${esc(contact)}<br/>Counselling: <strong>${esc(b?.counselling||'')}</strong><br/><strong>क्रम:</strong> समुपदेशन → अर्ज भरणे → तपासणी → फी व पावती.`;
+  box.innerHTML = `
 
-  if (panel?.classList.contains('show')||forceShow) _renderProcess();
+  <strong>${esc(name || 'Student')}</strong>
+  wants admission in
+  <strong>${esc(b?.display || '')}</strong>
+  ${subject ? `(${esc(subject)})` : ''}.
+  <br/>
+
+  Contact: ${esc(contact)}
+  <br/>
+
+  Counselling:
+  <strong>${esc(b?.counselling || '')}</strong>
+  <br/>
+
+  <strong>क्रम:</strong>
+  समुपदेशन → अर्ज भरणे → तपासणी → फी व पावती.
+
+  `;
+
+  if (
+    panel?.classList.contains('show')
+    || forceShow
+  ) {
+    _renderProcess();
+  }
+
   if (forceShow && panel) {
-    panel.classList.add('show'); panel.setAttribute('aria-hidden','false');
-    setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),120);
+
+    panel.classList.add('show');
+
+    panel.setAttribute(
+      'aria-hidden',
+      'false'
+    );
+
+    setTimeout(() => {
+
+      panel.scrollIntoView({
+        behavior:'smooth',
+        block:'start'
+      });
+
+    }, 120);
   }
 }
 
+
+// ═══════════════════════════════════════════════════
+// PROCESS RENDER
+// ═══════════════════════════════════════════════════
+
 function _renderProcess() {
+
   const b = getBranch();
+
   const s = steps();
-  const strip=document.getElementById('selectedBranchStrip');
-  const d1=document.getElementById('step1Desc');
-  const l1=document.getElementById('step1LocationLink');
-  if(strip&&b) strip.innerHTML=`<strong>${esc(b.display)}</strong> branch — समुपदेशन: <strong>${esc(b.counselling)}</strong>.`;
-  if(d1&&b)   d1.textContent=`${b.display}: ${b.counselling}`;
-  if(l1)      l1.href=s[1].link;
+
+  const strip =
+    document.getElementById(
+      'selectedBranchStrip'
+    );
+
+  const d1 =
+    document.getElementById('step1Desc');
+
+  const l1 =
+    document.getElementById(
+      'step1LocationLink'
+    );
+
+  if (strip && b) {
+
+    strip.innerHTML = `
+    <strong>${esc(b.display)}</strong>
+    branch — समुपदेशन:
+    <strong>${esc(b.counselling)}</strong>.
+    `;
+  }
+
+  if (d1 && b) {
+
+    d1.textContent =
+    `${b.display}: ${b.counselling}`;
+  }
+
+  if (l1) {
+    l1.href = s[1].link;
+  }
+
   showProcessStep(1);
 }
 
+
+// ═══════════════════════════════════════════════════
+// SHOW STEP
+// ═══════════════════════════════════════════════════
+
 function showProcessStep(n) {
-  document.querySelectorAll('.process-step').forEach((s,i)=>s.classList.toggle('active',i+1===n));
-  const s=steps()[n], box=document.getElementById('stepInfo');
-  if(s&&box) box.innerHTML=`<h4>${s.title}</h4><p>${s.text} <a href="${s.link}" target="_blank" rel="noopener noreferrer">${s.label}</a>.</p>`;
+
+  document
+    .querySelectorAll('.process-step')
+    .forEach((s, i) => {
+
+      s.classList.toggle(
+        'active',
+        i + 1 === n
+      );
+    });
+
+  const s = steps()[n];
+
+  const box =
+    document.getElementById('stepInfo');
+
+  if (s && box) {
+
+    box.innerHTML = `
+      <h4>${s.title}</h4>
+
+      <p>
+        ${s.text}
+
+        <a
+          href="${s.link}"
+          target="_blank"
+          rel="noopener noreferrer">
+
+          ${s.label}
+
+        </a>.
+      </p>
+    `;
+  }
 }
+
 </script>
 
 <script>
