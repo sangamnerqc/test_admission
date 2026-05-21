@@ -281,6 +281,10 @@ nav {
   font-weight: 600;
   padding: 0.55rem 0.7rem;
 }
+.subject-name { display: block; color: var(--deep); font-weight: 800; margin-bottom: 0.2rem; }
+.subject-contact { display: block; color: var(--muted); font-size: 0.78rem; line-height: 1.45; }
+.subject-contact a { color: var(--saffron); font-weight: 800; text-decoration: none; }
+.subject-contact a:hover { text-decoration: underline; }
 
 .admission-wrap {
   display: grid;
@@ -762,7 +766,7 @@ body.intro-active footer { visibility: hidden; }
             <div class="process-step" onclick="showProcessStep(3)">
               <div class="step-circle">३</div>
               <div class="step-title">अर्ज तपासणी</div>
-              <div class="step-desc">सर्व शाखांसाठी: Saibaba Sabhagruh.</div>
+              <div class="step-desc">सर्व शाखांसाठी: RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन ).</div>
               <a class="location-link" href="https://maps.app.goo.gl/o2jjq7G18Lg4CqRGA" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">अर्ज तपासणी स्थान पाहा</a>
             </div>
             <div class="process-step" onclick="showProcessStep(4)">
@@ -773,7 +777,7 @@ body.intro-active footer { visibility: hidden; }
             </div>
           </div>
           <div class="process-note">
-            <strong>महत्त्वाचे:</strong> B.A., B.Com. आणि B.Sc. साठी समुपदेशन स्थान <strong>Saibaba Sabhagruh</strong> आहे. B.Sc Computer Science, BCA (Science), B.Sc AI & ML, B.Voc., BBA आणि BBA (CA) साठी समुपदेशन संबंधित विभागात होईल.
+            <strong>महत्त्वाचे:</strong> B.A., B.Com. आणि B.Sc. साठी समुपदेशन स्थान <strong>RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन )</strong> आहे. B.Sc Computer Science, BCA (Science), B.Sc AI & ML, B.Voc., BBA आणि BBA (CA) साठी समुपदेशन संबंधित विभागात होईल.
           </div>
         </div>
         <div class="step-info-card" id="stepInfo"><h4>१. समुपदेशन</h4><p>निवडलेल्या अभ्यासक्रमानुसार योग्य समुपदेशन स्थान येथे दिसेल.</p></div>
@@ -850,49 +854,87 @@ let _bcTrail = ["home"];
 const admissionTree = {
   ba: {
     display: "B.A.",
-    subjects: ["Marathi", "Hindi", "English", "Sanskrit", "Economics", "Politics", "Geography", "Philosophy", "Yoga"],
-    counselling: "Saibaba Sabhagruh",
-    query: "Saibaba Sabhagruh Sangamner College"
+    subjects: [
+      { name: "Marathi", person: "Pro. Dr. Limbekar A.S.", phone: "9326891567" },
+      { name: "Hindi", person: "Pro. Dr. Patil J.P.", phone: "9860286123" },
+      { name: "English", person: "Pro. Dr. Tashildar R.B.", phone: "9850264500" },
+      { name: "Sanskrit", person: "Pra. Dr. Mandlik A.A.", phone: "9422740189" },
+      { name: "Economics", person: "Pro. Dr. Sanap G.K.", phone: "9422326349" },
+      { name: "Politics", person: "Pro. Dr. Benke S.A.", phone: "9850603070" },
+      { name: "Geography", person: "Pro. Dr. Gayakwad R.D.", phone: "9850448093" },
+      { name: "Philosophy", person: "Pro. Dr. Bhise Shrinivas", phone: "8421756359" },
+      { name: "Yoga", person: "Pro. Dr. Waman R.R.", phone: "9822450768" }
+    ],
+    counselling: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन )",
+    query: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन ) Sangamner College"
   },
   bcom: {
     display: "B.Com.",
-    subjects: ["B.Com"],
-    counselling: "Saibaba Sabhagruh",
-    query: "Saibaba Sabhagruh Sangamner College"
+    subjects: [
+      { name: "B.Com", person: "Dr. Mendkar V.A.", phone: "9822038727" },
+      { name: "B.Com", person: "Pra. Tribhuvan R.B.", phone: "9890424181" },
+      { name: "B.Com", person: "Pra. Ratne R.K.", phone: "9130660693" },
+      { name: "B.Com", person: "Pra. Nagare R.B.", phone: "9623900635" }
+    ],
+    counselling: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन )",
+    query: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन ) Sangamner College"
   },
   bsc: {
     display: "B.Sc.",
-    subjects: ["Physics", "Chemistry", "Mathematics", "Electronics", "Zoology", "Botany", "Microbiology"],
-    counselling: "Saibaba Sabhagruh",
-    query: "Saibaba Sabhagruh Sangamner College"
+    subjects: [
+      { name: "Physics", person: "Pro. Dr. Dalvi S.N.", phone: "9850014466" },
+      { name: "Chemistry", person: "Pro. Dr. Tryambak P.T.", phone: "9096298607" },
+      { name: "Mathematics", person: "Pro. Dr. Gudde M.K.", phone: "9822965671" },
+      { name: "Electronics", person: "Pra. Bhusal S.C.", phone: "9922303683" },
+      { name: "Zoology", person: "Pro. Dr. Bhavare V.V.", phone: "9421438204" },
+      { name: "Botany", person: "Pra. Dr. Jadhav S.D.", phone: "8605558167" },
+      { name: "Microbiology", person: "Pra. Maka Manisha", phone: "9028250456" }
+    ],
+    counselling: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन )",
+    query: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन ) Sangamner College"
   },
   bsc_cs: {
     display: "B.Sc Computer Science",
-    subjects: ["Computer Science"],
+    subjects: [
+      { name: "Computer Science", person: "Pra. Pansare S.Y.", phone: "9767786614" }
+    ],
     counselling: "Computer Science Department, Sangamner College",
     query: "Computer Science Department Sangamner College"
   },
   bca_science: {
     display: "BCA (Science)",
-    subjects: ["BCA (Science)"],
+    subjects: [
+      { name: "BCA (Science)", person: "Pra. Pansare S.Y.", phone: "9767786614" }
+    ],
     counselling: "Computer Science Department, Sangamner College",
     query: "Computer Science Department Sangamner College"
   },
   bsc_ai_ml: {
     display: "B.Sc AI & ML",
-    subjects: ["Artificial Intelligence & Machine Learning"],
+    subjects: [
+      { name: "Artificial Intelligence & Machine Learning", person: "Pra. Dr. Jadhav N.J.", phone: "9561651551" }
+    ],
     counselling: "BCS Department, Sangamner College",
     query: "BCS Department Sangamner College"
   },
   bvoc: {
     display: "B.Voc.",
-    subjects: ["Hospitality and Tourism", "Dairy Products and Processing", "Software Development", "Account and Taxation", "Agriculture and Soil Science"],
+    subjects: [
+      { name: "Hospitality and Tourism", person: "Pro. Dr. Tiwari C.D.", phone: "9405907317" },
+      { name: "Dairy Products and Processing", person: "Pra. Sahane P.P.", phone: "8600301329" },
+      { name: "Software Development", person: "Pra. Sayyad A.A.", phone: "9921946097" },
+      { name: "Account and Taxation", person: "Pra. Gosavi A.G.", phone: "9623900635" },
+      { name: "Agriculture and Soil Science", person: "Pra. Dr. Jadhav N.J.", phone: "9561651551" }
+    ],
     counselling: "B.Voc. Department, Sangamner College",
     query: "B Voc Department Sangamner College"
   },
   bba: {
     display: "BBA",
-    subjects: ["BBA", "BBA (CA)"],
+    subjects: [
+      { name: "BBA", person: "Dr. Kulkarni S.V.", phone: "9860080151" },
+      { name: "BBA (CA)", person: "Pra. Khemnar T.T.", phone: "9420756004" }
+    ],
     counselling: "BBA Department, Sangamner College",
     query: "BBA Department Sangamner College"
   }
@@ -900,7 +942,7 @@ const admissionTree = {
 
 const loc = {
   form: { t: "२. अर्ज भरणे", n: "Student Facility Center, Setu Suvidha Kendra", q: "Student Facility Center Setu Suvidha Kendra Sangamner College", l: "अर्ज भरण्याचे स्थान पाहा" },
-  check: { t: "३. अर्ज तपासणी", n: "Saibaba Sabhagruh, Sangamner College", q: "Saibaba Sabhagruh Sangamner College", l: "अर्ज तपासणी स्थान पाहा" },
+  check: { t: "३. अर्ज तपासणी", n: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन ), Sangamner College", q: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन ) Sangamner College", l: "अर्ज तपासणी स्थान पाहा" },
   account: { t: "४. फी भरणे व पावती घेणे", n: "Account Section, Sangamner College", q: "Account Section Sangamner College", l: "फी भरण्याचे स्थान पाहा" }
 };
 
@@ -986,7 +1028,7 @@ function showToast(msg, type, duration = 4000) {
   toast._t = setTimeout(() => { toast.className = ""; }, duration);
 }
 
-async function logToGoogleSheet(name, contact, admissionYear, course, subject) {
+async function logToGoogleSheet(name, contact, admissionYear, course, subject, subjectContacts = []) {
   if (!GOOGLE_SHEET_WEBHOOK_URL || GOOGLE_SHEET_WEBHOOK_URL.includes("YOUR_APPS")) return;
   const payload = {
     timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
@@ -995,6 +1037,7 @@ async function logToGoogleSheet(name, contact, admissionYear, course, subject) {
     admissionYear,
     course,
     subject,
+    subjectContacts: subjectContacts.map(item => `${item.person} (${item.phone})`).join(", "),
     branch: `${admissionYear} - ${course} - ${subject}`
   };
   showToast("Saving your details...", "sending", 10000);
@@ -1028,6 +1071,13 @@ function getSubject() {
   return document.getElementById("studentSubject")?.value || "";
 }
 
+function getSubjectContacts() {
+  const course = getCourse();
+  const subject = getSubject();
+  if (!course || !subject) return [];
+  return course.subjects.filter(item => item.name === subject);
+}
+
 function getAdmissionYear() {
   return document.getElementById("studentYear")?.value || "";
 }
@@ -1038,7 +1088,8 @@ function handleCourseChange() {
   subjectSelect.innerHTML = '<option value="">-- Select Subject / Specialization --</option>';
   subjectSelect.disabled = !course;
   if (course) {
-    course.subjects.forEach(subject => {
+    const uniqueSubjects = [...new Set(course.subjects.map(subject => subject.name))];
+    uniqueSubjects.forEach(subject => {
       const option = document.createElement("option");
       option.value = subject;
       option.textContent = subject;
@@ -1068,6 +1119,7 @@ function updateAdmissionSummary(forceShow = false) {
   const admissionYear = getAdmissionYear();
   const course = getCourse();
   const subject = getSubject();
+  const subjectContacts = getSubjectContacts();
   const box = document.getElementById("admissionSummary");
   const panel = document.getElementById("processPanel");
   if (!box) return;
@@ -1086,10 +1138,14 @@ function updateAdmissionSummary(forceShow = false) {
       alert("Please enter a valid 10-digit contact number.");
       return;
     }
-    logToGoogleSheet(name, contact, admissionYear, course.display, subject);
+    logToGoogleSheet(name, contact, admissionYear, course.display, subject, subjectContacts);
   }
 
-  box.innerHTML = `<strong>${esc(name || "Student")}</strong> wants admission to <strong>${esc(admissionYear || "")}</strong> in <strong>${esc(course?.display || "")}</strong>${subject ? ` for <strong>${esc(subject)}</strong>` : ""}.<br />Contact: ${esc(contact)}<br />Counselling: <strong>${esc(course?.counselling || "")}</strong><br /><strong>क्रम:</strong> समुपदेशन → अर्ज भरणे → तपासणी → फी व पावती.`;
+  const facultyInfo = subjectContacts.length
+    ? `<br />Subject Contact: ${subjectContacts.map(item => `<strong>${esc(item.person)}</strong> - <a href="tel:${esc(item.phone)}">${esc(item.phone)}</a>`).join("<br />")}`
+    : "";
+
+  box.innerHTML = `<strong>${esc(name || "Student")}</strong> wants admission to <strong>${esc(admissionYear || "")}</strong> in <strong>${esc(course?.display || "")}</strong>${subject ? ` for <strong>${esc(subject)}</strong>` : ""}.<br />Contact: ${esc(contact)}<br />Counselling: <strong>${esc(course?.counselling || "")}</strong>${facultyInfo}<br /><strong>क्रम:</strong> समुपदेशन → अर्ज भरणे → तपासणी → फी व पावती.`;
 
   if (panel?.classList.contains("show") || forceShow) _renderProcess();
   if (forceShow && panel) {
@@ -1160,7 +1216,12 @@ function renderAdmissionTree() {
     courseTree.innerHTML = Object.values(admissionTree).map(course => `
       <div class="tree-card">
         <h3>${esc(course.display)}</h3>
-        <ul>${course.subjects.map(subject => `<li>${esc(subject)}</li>`).join("")}</ul>
+        <ul>${course.subjects.map(subject => `
+          <li>
+            <span class="subject-name">${esc(subject.name)}</span>
+            <span class="subject-contact">${esc(subject.person)} · <a href="tel:${esc(subject.phone)}">${esc(subject.phone)}</a></span>
+          </li>
+        `).join("")}</ul>
       </div>
     `).join("");
   }
