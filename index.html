@@ -607,13 +607,14 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
             <label class="marathi-label" for="studentBranch">कोणत्या विद्या शाखेला प्रवेश घ्यायचा आहे  <span>*</span></label>
             <select class="form-control" id="studentBranch" onchange="updateAdmissionSummary()">
               <option value="">-- Select Branch --</option>
-              <option value="arts">Arts</option>
-              <option value="commerce">Commerce</option>
-              <option value="science">Science</option>
+              <option value="arts">B.A. (Bachelor of Arts)</option>
+              <option value="commerce">B.Com. (Bachelor of Commerce)</option>
+              <option value="science">B.Sc. (Bachelor of Science)</option>
+              <option value="bcs">B.Sc. Computer Science</option>
+              <option value="bca">B.C.A. (Science)</option>
               <option value="ai_ml">B.Sc. AI & ML (NEW)</option>
-              <option value="bvoc">B.Voc.</option>
-              <option value="bba">BBA</option>
-              <option value="bcs">BCS / Computer Science</option>
+              <option value="bvoc">B.Voc. (Bachelor of Vocation)</option>
+              <option value="bba">B.B.A. (Bachelor of Business Administration)</option>
             </select>
           </div>
           <div class="form-group" id="subjectGroup" style="display:none;">
@@ -1002,13 +1003,14 @@ const admissionHierarchy = {
 //  ADMISSION PROCESS
 // ═══════════════════════════════════════════════════
 const branchData = {
-  arts:     {display:'Arts',              counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
-  commerce: {display:'Commerce',          counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
-  science:  {display:'Science',           counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
-  ai_ml:    {display:'B.Sc. AI & ML (NEW)', counselling:'BCS. Department, Sangamner College',     query:'BCS Department Sangamner College'},
-  bvoc:     {display:'B.Voc.',           counselling:'B.Voc. Department, Sangamner College',     query:'B Voc Department Sangamner College'},
-  bba:      {display:'BBA',              counselling:'BBA Department, Sangamner College',         query:'BBA Department Sangamner College'},
-  bcs:      {display:'BCS / Comp. Sci.', counselling:'Computer Science Dept., Sangamner College', query:'Computer Science Department Sangamner College'}
+  arts:     {display:'B.A. (Bachelor of Arts)',              counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
+  commerce: {display:'B.Com. (Bachelor of Commerce)',        counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
+  science:  {display:'B.Sc. (Bachelor of Science)',          counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
+  bcs:      {display:'B.Sc. Computer Science',               counselling:'Computer Science Department, Sangamner College', query:'Computer Science Department Sangamner College'},
+  bca:      {display:'B.C.A. (Science)',                     counselling:'BCA Department, Sangamner College',         query:'BCA Department Sangamner College'},
+  ai_ml:    {display:'B.Sc. AI & ML',                        counselling:'Science Department, Sangamner College',    query:'Science AI ML Department Sangamner College'},
+  bvoc:     {display:'B.Voc. (Bachelor of Vocation)',        counselling:'B.Voc. Department, Sangamner College',     query:'B Voc Department Sangamner College'},
+  bba:      {display:'B.B.A. (Bachelor of Business Administration)',  counselling:'BBA Department, Sangamner College',         query:'BBA Department Sangamner College'}
 };
 const loc = {
   form:    {t:'२. अर्ज भरणे',           n:'Student Facility Center, Setu Suvidha Kendra', q:'Student Facility Center Setu Suvidha Kendra Sangamner College', l:'अर्ज भरण्याचे स्थान पाहा'},
