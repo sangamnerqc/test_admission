@@ -186,17 +186,15 @@ nav {
 }
 .campus-photo-wrap img.fade-out { opacity: 0; }
 .campus-caption {
-  position: absolute;
-  left: 1.25rem;
-  right: 1.25rem;
-  bottom: 1.25rem;
   border-left: 4px solid var(--gold);
-  border-radius: 0 12px 12px 0;
-  background: rgba(13, 27, 42, 0.78);
+  background: rgba(13, 27, 42, 0.92);
   color: #fff;
-  padding: 0.9rem 1rem;
-  backdrop-filter: blur(8px);
+  min-height: 102px;
+  padding: 1rem 1.15rem;
+  opacity: 1;
+  transition: opacity 0.55s ease;
 }
+.campus-caption.fade-out { opacity: 0; }
 .campus-caption h2 {
   color: var(--gold);
   font-family: "Playfair Display", serif;
@@ -587,7 +585,7 @@ body.intro-active footer { visibility: hidden; }
   .nav-links button { font-size: 0.68rem; padding: 0.3rem 0.45rem; }
   #breadcrumb { top: 72px; }
   .campus-photo-wrap { aspect-ratio: 4 / 3; }
-  .campus-caption { left: 0.85rem; right: 0.85rem; bottom: 0.85rem; padding: 0.75rem 0.85rem; }
+  .campus-caption { min-height: 116px; padding: 0.85rem 0.95rem; }
   .campus-caption h2 { font-size: 1.05rem; }
   .campus-caption p { font-size: 0.8rem; }
   #floatBack { left: 50%; bottom: 1rem; transform: translateX(-50%) translateY(10px); font-size: 0.82rem; }
@@ -637,11 +635,11 @@ body.intro-active footer { visibility: hidden; }
     <a class="hero-link" href="#" onclick="event.preventDefault(); navigate('admission');">प्रवेश प्रक्रिया पाहा</a>
     <div class="campus-highlight" aria-label="College image highlights">
       <div class="campus-photo-wrap">
-        <img id="campusPhoto" src="Gymkhana -04.JPG" alt="Sangamner College Gymkhana" />
-        <div class="campus-caption">
-          <h2 id="campusTitle">Gymkhana</h2>
-          <p id="campusQuote">"A dedicated space for sports, fitness, discipline, and student energy on campus."</p>
-        </div>
+        <img id="campusPhoto" src="Gymkhana-Gymkhana -04.JPG" alt="Sangamner College Gymkhana" />
+      </div>
+      <div class="campus-caption" id="campusCaption">
+        <h2 id="campusTitle">Gymkhana</h2>
+        <p id="campusQuote">"A dedicated space for sports, fitness, discipline, and student energy on campus."</p>
       </div>
       <div class="campus-progress" aria-hidden="true"><span id="campusProgress"></span></div>
     </div>
@@ -832,7 +830,7 @@ body.intro-active footer { visibility: hidden; }
 
 <footer>
   <div class="footer-brand">MahaPravesh · Sangamner College Admission Guide</div>
-  <p>Academic Year 2026-27 · Savitribai Phule Pune University, Pune · NEP 2020</p>
+  <p>Academic Year 2026-27 · Savitribai Phule Pune Vidyapeeth · NEP 2020</p>
   <p style="margin-top:0.5rem;">Official: <a href="https://www.sangamnercollege.edu.in" target="_blank" rel="noopener noreferrer">sangamnercollege.edu.in</a> | Apply: <a href="https://sangamnercollege.vriddhionline.com" target="_blank" rel="noopener noreferrer">vriddhionline.com</a></p>
 </footer>
 
@@ -1170,37 +1168,37 @@ function renderAdmissionTree() {
 
 const campusHighlights = [
   {
-    image: "Gymkhana -04.JPG",
+    image: "Gymkhana-Gymkhana -04.JPG",
     title: "Gymkhana",
     quote: "\"A dedicated space for sports, fitness, discipline, and student energy on campus.\"",
     alt: "Sangamner College Gymkhana"
   },
   {
-    image: "Kaushlyabhavan -03.JPG",
+    image: "Kaushlyabhavan- Kaushlyabhavan -03.JPG",
     title: "Kaushlyabhavan",
     quote: "\"A skill-building environment where students learn through practice, training, and confidence.\"",
     alt: "Sangamner College Kaushlyabhavan"
   },
   {
-    image: "Lab HT -01.JPG",
+    image: "Hospitality and tourism lab- Lab HT -01.JPG",
     title: "Hospitality and Tourism Lab",
     quote: "\"A professional lab for hands-on learning in hospitality, service, and tourism operations.\"",
     alt: "Hospitality and tourism lab at Sangamner College"
   },
   {
-    image: "Lab HT -03.JPG",
+    image: "Hospitality and tourism lab second photo - Lab HT -03.JPG",
     title: "Hospitality and Tourism Lab",
     quote: "\"Students develop practical industry skills through guided lab sessions and real working setups.\"",
     alt: "Second view of hospitality and tourism lab at Sangamner College"
   },
   {
-    image: "Library -02.JPG",
+    image: "college library student reading section - Library -02.JPG",
     title: "Library Reading Section",
     quote: "\"A quiet academic space for focused study, reading, research, and self-learning.\"",
     alt: "Students reading in Sangamner College library"
   },
   {
-    image: "Republic Day-02.JPG",
+    image: "college NCC umit- Republic Day-02.JPG",
     title: "NCC Unit",
     quote: "\"The NCC unit builds leadership, patriotism, teamwork, and discipline through active participation.\"",
     alt: "Sangamner College NCC unit on Republic Day"
@@ -1209,21 +1207,24 @@ const campusHighlights = [
 
 function startCampusHighlights() {
   const photo = document.getElementById("campusPhoto");
+  const caption = document.getElementById("campusCaption");
   const title = document.getElementById("campusTitle");
   const quote = document.getElementById("campusQuote");
   const progress = document.getElementById("campusProgress");
-  if (!photo || !title || !quote || !progress) return;
+  if (!photo || !caption || !title || !quote || !progress) return;
 
   let index = 0;
   const show = nextIndex => {
     const item = campusHighlights[nextIndex];
     photo.classList.add("fade-out");
+    caption.classList.add("fade-out");
     setTimeout(() => {
       photo.src = item.image;
       photo.alt = item.alt;
       title.textContent = item.title;
       quote.textContent = item.quote;
       photo.classList.remove("fade-out");
+      caption.classList.remove("fade-out");
       progress.classList.remove("run");
       void progress.offsetWidth;
       progress.classList.add("run");
