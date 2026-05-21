@@ -604,19 +604,63 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
             <input type="tel" class="form-control" id="studentContact" placeholder="Example: 9876543210" inputmode="tel" autocomplete="tel" oninput="updateAdmissionSummary()"/>
           </div>
           <div class="form-group">
-            <label class="marathi-label" for="studentBranch">कोणत्या विद्या शाखेला प्रवेश घ्यायचा आहे  <span>*</span></label>
-            <select class="form-control" id="studentBranch" onchange="updateAdmissionSummary()">
-              <option value="">-- Select Branch --</option>
-              <option value="arts">B.A. (Bachelor of Arts)</option>
-              <option value="commerce">B.Com. (Bachelor of Commerce)</option>
-              <option value="science">B.Sc. (Bachelor of Science)</option>
-              <option value="bcs">B.Sc. Computer Science</option>
-              <option value="bca">B.C.A. (Science)</option>
-              <option value="ai_ml">B.Sc. AI & ML (NEW)</option>
-              <option value="bvoc">B.Voc. (Bachelor of Vocation)</option>
-              <option value="bba">B.B.A. (Bachelor of Business Administration)</option>
-            </select>
-          </div>
+  <select class="form-control" id="studentBranch" onchange="updateAdmissionSummary()">
+
+    <option value="">-- Select Course --</option>
+
+    <optgroup label="B.A.">
+      <option value="ba_marathi">B.A. – Marathi</option>
+      <option value="ba_hindi">B.A. – Hindi</option>
+      <option value="ba_english">B.A. – English</option>
+      <option value="ba_sanskrit">B.A. – Sanskrit</option>
+      <option value="ba_economics">B.A. – Economics</option>
+      <option value="ba_politics">B.A. – Politics</option>
+      <option value="ba_geography">B.A. – Geography</option>
+      <option value="ba_philosophy">B.A. – Philosophy</option>
+      <option value="ba_yoga">B.A. – Yoga</option>
+    </optgroup>
+
+    <optgroup label="B.Com.">
+      <option value="bcom">B.Com.</option>
+    </optgroup>
+
+    <optgroup label="B.Sc.">
+      <option value="bsc_physics">B.Sc. – Physics</option>
+      <option value="bsc_chemistry">B.Sc. – Chemistry</option>
+      <option value="bsc_mathematics">B.Sc. – Mathematics</option>
+      <option value="bsc_electronics">B.Sc. – Electronics</option>
+      <option value="bsc_zoology">B.Sc. – Zoology</option>
+      <option value="bsc_botany">B.Sc. – Botany</option>
+      <option value="bsc_microbiology">B.Sc. – Microbiology</option>
+    </optgroup>
+
+    <optgroup label="B.Sc Computer Science">
+      <option value="bsc_cs">Computer Science</option>
+    </optgroup>
+
+    <optgroup label="BCA (Science)">
+      <option value="bca_science">BCA (Science)</option>
+    </optgroup>
+
+    <optgroup label="B.Sc AI & ML">
+      <option value="ai_ml">Artificial Intelligence & Machine Learning</option>
+    </optgroup>
+
+    <optgroup label="B.Voc.">
+      <option value="bvoc_hospitality">Hospitality and Tourism</option>
+      <option value="bvoc_dairy">Dairy Products and Processing</option>
+      <option value="bvoc_software">Software Development</option>
+      <option value="bvoc_account_tax">Account and Taxation</option>
+      <option value="bvoc_agriculture">Agriculture and Soil Science</option>
+    </optgroup>
+
+    <optgroup label="BBA">
+      <option value="bba">BBA</option>
+      <option value="bba_ca">BBA (CA)</option>
+    </optgroup>
+
+  </select>
+</div>
           <div class="form-group" id="subjectGroup" style="display:none;">
             <label class="marathi-label" for="studentSubject">विषय/विशेषज्ञता निवडा <span>*</span></label>
             <select class="form-control" id="studentSubject" onchange="updateAdmissionSummary()">
@@ -1032,49 +1076,68 @@ function steps() {
   };
 }
 
-function updateAdmissionSummary(forceShow=false) {
-  const name    = document.getElementById('studentName')?.value.trim()||'';
-  const contact = document.getElementById('studentContact')?.value.trim()||'';
-  const branchVal = document.getElementById('studentBranch')?.value||'';
-  const subject = document.getElementById('studentSubject')?.value||'';
-  const b       = getBranch();
-  const box     = document.getElementById('admissionSummary');
-  const panel   = document.getElementById('processPanel');
-  const subjectGroup = document.getElementById('subjectGroup');
-  if (!box) return;
 
-  // Populate subject dropdown based on branch
-  if (branchVal && admissionHierarchy[branchVal]) {
-    subjectGroup.style.display = 'block';
-    const subjectSelect = document.getElementById('studentSubject');
-    subjectSelect.innerHTML = '<option value="">-- Select Subject/Specialization --</option>';
-    admissionHierarchy[branchVal].subjects.forEach(subj => {
-      const opt = document.createElement('option');
-      opt.value = subj;
-      opt.textContent = subj;
-      subjectSelect.appendChild(opt);
-    });
-  } else {
-    subjectGroup.style.display = 'none';
+function updateAdmissionSummary(showProcess = false) {
+
+  const name = document.getElementById("studentName").value.trim();
+  const contact = document.getElementById("studentContact").value.trim();
+  const branch = document.getElementById("studentBranch").value;
+
+  const branchNames = {
+
+    ba_marathi: "B.A. – Marathi",
+    ba_hindi: "B.A. – Hindi",
+    ba_english: "B.A. – English",
+    ba_sanskrit: "B.A. – Sanskrit",
+    ba_economics: "B.A. – Economics",
+    ba_politics: "B.A. – Politics",
+    ba_geography: "B.A. – Geography",
+    ba_philosophy: "B.A. – Philosophy",
+    ba_yoga: "B.A. – Yoga",
+
+    bcom: "B.Com.",
+
+    bsc_physics: "B.Sc. – Physics",
+    bsc_chemistry: "B.Sc. – Chemistry",
+    bsc_mathematics: "B.Sc. – Mathematics",
+    bsc_electronics: "B.Sc. – Electronics",
+    bsc_zoology: "B.Sc. – Zoology",
+    bsc_botany: "B.Sc. – Botany",
+    bsc_microbiology: "B.Sc. – Microbiology",
+
+    bsc_cs: "B.Sc Computer Science",
+
+    bca_science: "BCA (Science)",
+
+    ai_ml: "B.Sc AI & ML",
+
+    bvoc_hospitality: "B.Voc. – Hospitality and Tourism",
+    bvoc_dairy: "B.Voc. – Dairy Products and Processing",
+    bvoc_software: "B.Voc. – Software Development",
+    bvoc_account_tax: "B.Voc. – Account and Taxation",
+    bvoc_agriculture: "B.Voc. – Agriculture and Soil Science",
+
+    bba: "BBA",
+    bba_ca: "BBA (CA)"
+  };
+
+  const summary = document.getElementById("admissionSummary");
+
+  if (!name || !contact || !branch) {
+    summary.innerHTML =
+      "<strong>सूचना:</strong> कृपया सर्व माहिती भरा.";
+    return;
   }
 
-  if (!name && !contact && !branchVal && !forceShow) {
-    box.innerHTML='<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा.'; return;
-  }
-  if (forceShow) {
-    if (!name||!contact||!branchVal||!subject)                        { alert('Please fill Student Name, Contact Number, Branch and Subject/Specialization.'); return; }
-    if (contact.replace(/\D/g,'').length < 10)      { alert('Please enter a valid 10-digit contact number.'); return; }
-    logToGoogleSheet(name, contact, b.display, subject);
-  }
+  summary.innerHTML = `
+    <strong>विद्यार्थी:</strong> ${name}<br>
+    <strong>मोबाईल:</strong> ${contact}<br>
+    <strong>निवडलेला कोर्स:</strong> ${branchNames[branch]}
+  `;
 
-  box.innerHTML=`<strong>${esc(name||'Student')}</strong> wants admission in <strong>${esc(b?.display||'')}</strong>.<br/>Subject/Specialization: <strong>${esc(subject||'')}</strong><br/>Contact: ${esc(contact)}<br/>Counselling: <strong>${esc(b?.counselling||'')}</strong><br/><strong>क्रम:</strong> समुपदेशन (counselling)→ अर्ज भरणे → तपासणी → फी व पावती.`;
+  if (showProcess) {
+    document.getElementById("processPanel").classList.add("show");
 
-  if (panel?.classList.contains('show')||forceShow) _renderProcess();
-  if (forceShow && panel) {
-    panel.classList.add('show'); panel.setAttribute('aria-hidden','false');
-    setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),120);
-  }
-}
 
 function _renderProcess() {
   const b = getBranch();
