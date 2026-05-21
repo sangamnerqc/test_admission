@@ -617,7 +617,7 @@ body.intro-active nav, body.intro-active #breadcrumb, body.intro-active .page, b
             </select>
           </div>
           <div class="form-group" id="subjectGroup" style="display:none;">
-            <label class="marathi-label" for="studentSubject">विषय/वेष्टन्याचा विशेषज्ञता निवडा  <span>*</span></label>
+            <label class="marathi-label" for="studentSubject">विषय/विशेषज्ञता निवडा <span>*</span></label>
             <select class="form-control" id="studentSubject" onchange="updateAdmissionSummary()">
               <option value="">-- Select Subject/Specialization --</option>
             </select>
@@ -881,7 +881,7 @@ function _clearAdmissionForm() {
   if (br)  br.value  = '';
   if (sb)  sb.value  = '';
   if (sg)  sg.style.display = 'none';
-  if (sm)  sm.innerHTML = '<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा.';
+  if (sm)  sm.innerHTML = '<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतर प्रवेश प्रक्रिया दिसेल.';
   if (pp)  { pp.classList.remove('show'); pp.setAttribute('aria-hidden','true'); }
 }
 
@@ -963,13 +963,7 @@ function showToast(msg, type, duration = 4000) {
 // ═══════════════════════════════════════════════════
 async function logToGoogleSheet(name, contact, branch, subject) {
   if (!GOOGLE_SHEET_WEBHOOK_URL || GOOGLE_SHEET_WEBHOOK_URL.includes('YOUR_APPS')) return;
-  const payload = { 
-    timestamp: new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'}), 
-    name, 
-    contact, 
-    branch,
-    subject: subject || 'N/A'
-  };
+  const payload = { timestamp: new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'}), name, contact, branch, subject: subject || 'N/A' };
   showToast('⏳ Saving your details…','sending',10000);
   try {
     await fetch(GOOGLE_SHEET_WEBHOOK_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
@@ -991,73 +985,27 @@ function toggleDoc(el, type, total) {
 }
 
 // ═══════════════════════════════════════════════════
-//  ADMISSION HIERARCHY STRUCTURE - FINAL WITH SUBJECTS
+//  ADMISSION HIERARCHY WITH SUBJECTS
 // ═══════════════════════════════════════════════════
 const admissionHierarchy = {
-  arts: {
-    display: 'B.A. (Bachelor of Arts)',
-    emoji: '🎭',
-    counselling: 'Saibaba Sabhagruh',
-    query: 'Saibaba Sabhagruh Sangamner College',
-    subjects: ['Marathi', 'Hindi', 'English', 'Sanskrit', 'Economics', 'Politics', 'Geography', 'Philosophy', 'Yoga']
-  },
-  commerce: {
-    display: 'B.Com. (Bachelor of Commerce)',
-    emoji: '💼',
-    counselling: 'Saibaba Sabhagruh',
-    query: 'Saibaba Sabhagruh Sangamner College',
-    subjects: ['B.Com']
-  },
-  science: {
-    display: 'B.Sc. (Bachelor of Science)',
-    emoji: '🔬',
-    counselling: 'Saibaba Sabhagruh',
-    query: 'Saibaba Sabhagruh Sangamner College',
-    subjects: ['Physics', 'Chemistry', 'Mathematics', 'Electronics', 'Zoology', 'Botany', 'Microbiology']
-  },
-  bcs: {
-    display: 'B.Sc. Computer Science',
-    emoji: '💻',
-    counselling: 'Computer Science Department, Sangamner College',
-    query: 'Computer Science Department Sangamner College',
-    subjects: ['Computer Science']
-  },
-  bca: {
-    display: 'B.C.A. (Science)',
-    emoji: '🖥️',
-    counselling: 'BCA Department, Sangamner College',
-    query: 'BCA Department Sangamner College',
-    subjects: ['BCA (Science)']
-  },
-  ai_ml: {
-    display: 'B.Sc. AI & ML',
-    emoji: '🤖',
-    counselling: 'Science Department, Sangamner College',
-    query: 'Science AI ML Department Sangamner College',
-    subjects: ['Artificial Intelligence & Machine Learning']
-  },
-  bvoc: {
-    display: 'B.Voc. (Bachelor of Vocation)',
-    emoji: '🏭',
-    counselling: 'B.Voc. Department, Sangamner College',
-    query: 'B Voc Department Sangamner College',
-    subjects: ['Hospitality and Tourism', 'Dairy Products and Processing', 'Software Development', 'Account and Taxation', 'Agriculture and Soil Science']
-  },
-  bba: {
-    display: 'B.B.A. (Bachelor of Business Administration)',
-    emoji: '📊',
-    counselling: 'BBA Department, Sangamner College',
-    query: 'BBA Department Sangamner College',
-    subjects: ['BBA', 'BBA (CA)']
-  }
+  arts: { subjects: ['Marathi', 'Hindi', 'English', 'Sanskrit', 'Economics', 'Politics', 'Geography', 'Philosophy', 'Yoga'] },
+  commerce: { subjects: ['B.Com'] },
+  science: { subjects: ['Physics', 'Chemistry', 'Mathematics', 'Electronics', 'Zoology', 'Botany', 'Microbiology'] },
+  bcs: { subjects: ['Computer Science'] },
+  bca: { subjects: ['BCA (Science)'] },
+  ai_ml: { subjects: ['Artificial Intelligence & Machine Learning'] },
+  bvoc: { subjects: ['Hospitality and Tourism', 'Dairy Products and Processing', 'Software Development', 'Account and Taxation', 'Agriculture and Soil Science'] },
+  bba: { subjects: ['BBA', 'BBA (CA)'] }
 };
 
-// Legacy branchData for backward compatibility
+// ═══════════════════════════════════════════════════
+//  ADMISSION PROCESS
+// ═══════════════════════════════════════════════════
 const branchData = {
   arts:     {display:'Arts',              counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
   commerce: {display:'Commerce',          counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
   science:  {display:'Science',           counselling:'Saibaba Sabhagruh',                        query:'Saibaba Sabhagruh Sangamner College'},
-  ai_ml:    {display:'B.Sc. AI & ML (NEW)', counselling:'Science Department, Sangamner College', query:'Science AI ML Department Sangamner College'},
+  ai_ml:    {display:'B.Sc. AI & ML (NEW)', counselling:'BCS. Department, Sangamner College',     query:'BCS Department Sangamner College'},
   bvoc:     {display:'B.Voc.',           counselling:'B.Voc. Department, Sangamner College',     query:'B Voc Department Sangamner College'},
   bba:      {display:'BBA',              counselling:'BBA Department, Sangamner College',         query:'BBA Department Sangamner College'},
   bcs:      {display:'BCS / Comp. Sci.', counselling:'Computer Science Dept., Sangamner College', query:'Computer Science Department Sangamner College'}
@@ -1091,16 +1039,14 @@ function updateAdmissionSummary(forceShow=false) {
   const box     = document.getElementById('admissionSummary');
   const panel   = document.getElementById('processPanel');
   const subjectGroup = document.getElementById('subjectGroup');
-  
   if (!box) return;
 
-  // Show/hide subject dropdown based on branch selection
+  // Populate subject dropdown based on branch
   if (branchVal && admissionHierarchy[branchVal]) {
     subjectGroup.style.display = 'block';
-    const hierarchy = admissionHierarchy[branchVal];
     const subjectSelect = document.getElementById('studentSubject');
     subjectSelect.innerHTML = '<option value="">-- Select Subject/Specialization --</option>';
-    hierarchy.subjects.forEach(subj => {
+    admissionHierarchy[branchVal].subjects.forEach(subj => {
       const opt = document.createElement('option');
       opt.value = subj;
       opt.textContent = subj;
@@ -1114,12 +1060,12 @@ function updateAdmissionSummary(forceShow=false) {
     box.innerHTML='<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा.'; return;
   }
   if (forceShow) {
-    if (!name||!contact||!branchVal||!subject) { alert('Please fill all fields including Student Name, Contact Number, Branch and Subject/Specialization.'); return; }
+    if (!name||!contact||!branchVal||!subject)                        { alert('Please fill Student Name, Contact Number, Branch and Subject/Specialization.'); return; }
     if (contact.replace(/\D/g,'').length < 10)      { alert('Please enter a valid 10-digit contact number.'); return; }
     logToGoogleSheet(name, contact, b.display, subject);
   }
 
-  box.innerHTML=`<strong>${esc(name||'Student')}</strong> wants admission in <strong>${esc(b?.display||'')}</strong>.<br/>Subject/Specialization: <strong>${esc(subject||'')}</strong><br/>Contact: ${esc(contact)}<br/>Counselling: <strong>${esc(b?.counselling||'')}</strong><br/><strong>क्रम:</strong> समुपदेशन → अर्ज भरणे → तपासणी → फी व पावती.`;
+  box.innerHTML=`<strong>${esc(name||'Student')}</strong> wants admission in <strong>${esc(b?.display||'')}</strong>.<br/>Subject/Specialization: <strong>${esc(subject||'')}</strong><br/>Contact: ${esc(contact)}<br/>Counselling: <strong>${esc(b?.counselling||'')}</strong><br/><strong>क्रम:</strong> समुपदेशन (counselling)→ अर्ज भरणे → तपासणी → फी व पावती.`;
 
   if (panel?.classList.contains('show')||forceShow) _renderProcess();
   if (forceShow && panel) {
