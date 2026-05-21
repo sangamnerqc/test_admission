@@ -612,11 +612,11 @@ body.intro-active footer { visibility: hidden; }
       <div class="admission-form-card">
         <div class="admission-form-head">
           <h2>Student Information</h2>
-          <p>All information must be filled in English. Select course first, then select the subject or specialization from the final admission tree.</p>
+          <p>All information must be filled in English. Select admission year, course, and subject or specialization from the final admission tree.</p>
         </div>
         <div class="admission-form-body">
           <div class="admission-required-note">
-            <strong>Important:</strong> Fill Student Name, Contact Number, Course, and Subject/Specialization. After clicking <strong>माझी प्रवेश प्रक्रिया दाखवा</strong>, the admission process tree will open.
+            <strong>Important:</strong> Fill Student Name, Contact Number, Admission Year, Course, and Subject/Specialization. After clicking <strong>माझी प्रवेश प्रक्रिया दाखवा</strong>, the admission process tree will open.
           </div>
 
           <div class="form-group">
@@ -627,6 +627,17 @@ body.intro-active footer { visibility: hidden; }
           <div class="form-group">
             <label class="marathi-label" for="studentContact">विद्यार्थ्यांचा मोबाइल नंबर <span>*</span></label>
             <input type="tel" class="form-control" id="studentContact" placeholder="Example: 9876543210" inputmode="tel" autocomplete="tel" oninput="updateAdmissionSummary()" />
+          </div>
+
+          <div class="form-group">
+            <label class="marathi-label" for="studentYear">NEP ४ वर्षांच्या पदवी अभ्यासक्रमात कोणत्या वर्षाला प्रवेश घ्यायचा आहे <span>*</span></label>
+            <select class="form-control" id="studentYear" onchange="updateAdmissionSummary()">
+              <option value="">-- Select Admission Year --</option>
+              <option value="First Year">First Year / प्रथम वर्ष</option>
+              <option value="Second Year">Second Year / द्वितीय वर्ष</option>
+              <option value="Third Year">Third Year / तृतीय वर्ष</option>
+              <option value="Fourth Year">Fourth Year / चतुर्थ वर्ष</option>
+            </select>
           </div>
 
           <div class="form-group">
@@ -897,15 +908,16 @@ function showToast(msg, type, duration = 4000) {
   toast._t = setTimeout(() => { toast.className = ""; }, duration);
 }
 
-async function logToGoogleSheet(name, contact, course, subject) {
+async function logToGoogleSheet(name, contact, admissionYear, course, subject) {
   if (!GOOGLE_SHEET_WEBHOOK_URL || GOOGLE_SHEET_WEBHOOK_URL.includes("YOUR_APPS")) return;
   const payload = {
     timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
     name,
     contact,
+    admissionYear,
     course,
     subject,
-    branch: `${course} - ${subject}`
+    branch: `${admissionYear} - ${course} - ${subject}`
   };
   showToast("Saving your details...", "sending", 10000);
   try {
@@ -938,6 +950,10 @@ function getSubject() {
   return document.getElementById("studentSubject")?.value || "";
 }
 
+function getAdmissionYear() {
+  return document.getElementById("studentYear")?.value || "";
+}
+
 function handleCourseChange() {
   const course = getCourse();
   const subjectSelect = document.getElementById("studentSubject");
@@ -957,7 +973,9 @@ function handleCourseChange() {
 function steps() {
   const course = getCourse() || { display: "Selected Course", counselling: "संबंधित विभाग", query: "Sangamner College" };
   const subject = getSubject();
-  const selected = subject ? `${course.display} - ${subject}` : course.display;
+  const admissionYear = getAdmissionYear();
+  const selectedCourse = subject ? `${course.display} - ${subject}` : course.display;
+  const selected = admissionYear ? `${admissionYear} - ${selectedCourse}` : selectedCourse;
   return {
     1: { title: "१. समुपदेशन", text: `${selected} साठी समुपदेशन स्थान: ${course.counselling}.`, link: mq(course.query), label: "समुपदेशन स्थान पाहा" },
     2: { title: loc.form.t, text: `${loc.form.n} येथे अर्ज भरता येईल.`, link: mq(loc.form.q), label: loc.form.l },
@@ -969,30 +987,31 @@ function steps() {
 function updateAdmissionSummary(forceShow = false) {
   const name = document.getElementById("studentName")?.value.trim() || "";
   const contact = document.getElementById("studentContact")?.value.trim() || "";
+  const admissionYear = getAdmissionYear();
   const course = getCourse();
   const subject = getSubject();
   const box = document.getElementById("admissionSummary");
   const panel = document.getElementById("processPanel");
   if (!box) return;
 
-  if (!name && !contact && !course && !subject && !forceShow) {
+  if (!name && !contact && !admissionYear && !course && !subject && !forceShow) {
     box.innerHTML = "<strong>सूचना:</strong> वरील माहिती English मध्ये भरल्यानंतर बटणावर क्लिक करा. त्यानंतर प्रवेश प्रक्रिया दिसेल.";
     return;
   }
 
   if (forceShow) {
-    if (!name || !contact || !course || !subject) {
-      alert("Please fill Student Name, Contact Number, Course and Subject/Specialization.");
+    if (!name || !contact || !admissionYear || !course || !subject) {
+      alert("Please fill Student Name, Contact Number, Admission Year, Course and Subject/Specialization.");
       return;
     }
     if (contact.replace(/\D/g, "").length < 10) {
       alert("Please enter a valid 10-digit contact number.");
       return;
     }
-    logToGoogleSheet(name, contact, course.display, subject);
+    logToGoogleSheet(name, contact, admissionYear, course.display, subject);
   }
 
-  box.innerHTML = `<strong>${esc(name || "Student")}</strong> wants admission in <strong>${esc(course?.display || "")}</strong>${subject ? ` for <strong>${esc(subject)}</strong>` : ""}.<br />Contact: ${esc(contact)}<br />Counselling: <strong>${esc(course?.counselling || "")}</strong><br /><strong>क्रम:</strong> समुपदेशन → अर्ज भरणे → तपासणी → फी व पावती.`;
+  box.innerHTML = `<strong>${esc(name || "Student")}</strong> wants admission to <strong>${esc(admissionYear || "")}</strong> in <strong>${esc(course?.display || "")}</strong>${subject ? ` for <strong>${esc(subject)}</strong>` : ""}.<br />Contact: ${esc(contact)}<br />Counselling: <strong>${esc(course?.counselling || "")}</strong><br /><strong>क्रम:</strong> समुपदेशन → अर्ज भरणे → तपासणी → फी व पावती.`;
 
   if (panel?.classList.contains("show") || forceShow) _renderProcess();
   if (forceShow && panel) {
@@ -1005,14 +1024,15 @@ function updateAdmissionSummary(forceShow = false) {
 function _renderProcess() {
   const course = getCourse();
   const subject = getSubject();
+  const admissionYear = getAdmissionYear();
   const data = steps();
   const strip = document.getElementById("selectedBranchStrip");
   const desc = document.getElementById("step1Desc");
   const link = document.getElementById("step1LocationLink");
   if (strip && course) {
-    strip.innerHTML = `<strong>${esc(course.display)}</strong>${subject ? ` - <strong>${esc(subject)}</strong>` : ""} — समुपदेशन: <strong>${esc(course.counselling)}</strong>.`;
+    strip.innerHTML = `${admissionYear ? `<strong>${esc(admissionYear)}</strong> - ` : ""}<strong>${esc(course.display)}</strong>${subject ? ` - <strong>${esc(subject)}</strong>` : ""} — समुपदेशन: <strong>${esc(course.counselling)}</strong>.`;
   }
-  if (desc && course) desc.textContent = `${course.display}${subject ? ` - ${subject}` : ""}: ${course.counselling}`;
+  if (desc && course) desc.textContent = `${admissionYear ? `${admissionYear} - ` : ""}${course.display}${subject ? ` - ${subject}` : ""}: ${course.counselling}`;
   if (link) link.href = data[1].link;
   showProcessStep(1);
 }
@@ -1027,12 +1047,14 @@ function showProcessStep(n) {
 function _clearAdmissionForm() {
   const name = document.getElementById("studentName");
   const contact = document.getElementById("studentContact");
+  const admissionYear = document.getElementById("studentYear");
   const course = document.getElementById("studentCourse");
   const subject = document.getElementById("studentSubject");
   const summary = document.getElementById("admissionSummary");
   const panel = document.getElementById("processPanel");
   if (name) name.value = "";
   if (contact) contact.value = "";
+  if (admissionYear) admissionYear.value = "";
   if (course) course.value = "";
   if (subject) {
     subject.innerHTML = '<option value="">-- Select Subject / Specialization --</option>';
