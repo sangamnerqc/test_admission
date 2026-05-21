@@ -1277,44 +1277,25 @@ function startCampusHighlights() {
   if (!photo || !caption || !title || !quote || !progress) return;
 
   let index = 0;
-  const applyHighlight = item => {
+
+  function showCurrentImage() {
+    const item = campusHighlights[index];
+
     photo.src = item.image;
     photo.alt = item.alt;
     title.textContent = item.title;
     quote.textContent = item.quote;
-  };
-  const restartProgress = () => {
+
     progress.classList.remove("run");
     void progress.offsetWidth;
     progress.classList.add("run");
-  };
-  const show = nextIndex => {
-    const item = campusHighlights[nextIndex];
-    const nextImage = new Image();
-    photo.classList.add("fade-out");
-    caption.classList.add("fade-out");
+  }
 
-    nextImage.onload = () => {
-      applyHighlight(item);
-      photo.classList.remove("fade-out");
-      caption.classList.remove("fade-out");
-      restartProgress();
-    };
+  showCurrentImage();
 
-    nextImage.onerror = () => {
-      applyHighlight(item);
-      photo.classList.remove("fade-out");
-      caption.classList.remove("fade-out");
-      restartProgress();
-    };
-
-    nextImage.src = item.image;
-  };
-
-  show(index);
   setInterval(() => {
     index = (index + 1) % campusHighlights.length;
-    show(index);
+    showCurrentImage();
   }, 6000);
 }
 
