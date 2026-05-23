@@ -668,96 +668,53 @@ body.intro-active footer { visibility: hidden; }
 @media (max-width: 600px) {
 
   #welcomeIntro{
-
-    position:fixed;
-
-    inset:0;
-
-    overflow:hidden;
-
-    background:#000;
-
     padding:0;
+    overflow:hidden;
+    justify-content:flex-start;
+    background:#0D1B2A;
   }
 
   .welcome-box{
-
-    position:relative;
-
-    width:100vw;
-
-    height:100vh;
-
+    width:100%;
+    height:100%;
     padding:0;
-
-    overflow:hidden;
   }
 
   .welcome-subline{
-
-    position:absolute;
-
-    top:8px;
-
-    left:0;
-    right:0;
-
-    z-index:20;
-
-    text-align:center;
-
-    color:#fff;
-
-    font-size:0.72rem;
-
+    margin-top:0.4rem;
+    font-size:0.75rem;
     letter-spacing:1px;
+    position:relative;
+    z-index:5;
   }
 
   .welcome-text{
-
-    position:absolute;
-
-    top:28px;
-
-    left:0;
-    right:0;
-
-    z-index:20;
-
-    padding:0 0.8rem;
-
-    text-align:center;
-
-    color:#fff;
-
-    font-size:1rem;
-
+    font-size:1.05rem;
     line-height:1.35;
+    padding:0 0.5rem;
+    position:relative;
+    z-index:5;
   }
 
   .welcome-image-track{
 
-    position:absolute;
-
-    top:95px;
-
-    left:0;
+    position:relative;
 
     width:100vw;
 
-    height:calc(100vh - 95px);
+    height:88vh;
+
+    margin-top:0.3rem;
+
+    border-radius:0;
 
     overflow:hidden;
 
-    background:#000;
+    background:#0D1B2A;
   }
 
   .welcome-image-row{
-
-    position:relative;
-
     width:100%;
-
     height:100%;
   }
 
@@ -768,14 +725,13 @@ body.intro-active footer { visibility: hidden; }
     inset:0;
 
     width:100%;
-
     height:100%;
-
-    overflow:hidden;
 
     border:none;
 
     border-radius:0;
+
+    overflow:hidden;
   }
 
   .welcome-image-card img{
@@ -785,14 +741,13 @@ body.intro-active footer { visibility: hidden; }
     inset:0;
 
     width:100%;
-
     height:100%;
 
-    object-fit:cover;
+    object-fit:contain;
 
     object-position:center center;
 
-    transform:scale(1.18);
+    background:#0D1B2A;
   }
 
   .welcome-image-card span{
@@ -803,26 +758,28 @@ body.intro-active footer { visibility: hidden; }
     right:0;
     bottom:0;
 
-    z-index:30;
+    z-index:2;
 
-    padding:1rem;
+    margin:0;
 
-    background:linear-gradient(
-      transparent,
-      rgba(0,0,0,0.88)
-    );
+    padding:0.85rem;
+
+    min-height:auto;
+
+    background:rgba(0,0,0,0.45);
 
     color:#fff;
 
-    font-size:0.92rem;
+    font-size:0.88rem;
 
     line-height:1.4;
 
     text-align:center;
+
+    backdrop-filter:blur(3px);
   }
 
 }
-
 #welcomeIntro.hide-intro {
   opacity: 0;
   visibility: hidden;
