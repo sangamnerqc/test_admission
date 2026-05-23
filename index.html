@@ -656,26 +656,58 @@ body.intro-active footer { visibility: hidden; }
 }
 
 @media (max-width: 600px) {
-  .welcome-image-track {
-    width: 94vw;
-    height: 52vh;
-    margin-top: 0.8rem;
-    border-radius: 16px;
+
+  #welcomeIntro{
+    padding-top:0.5rem;
+    justify-content:flex-start;
   }
 
-  .welcome-image-card {
-    border-radius: 16px;
+  .welcome-box{
+    width:100%;
+    padding:0.5rem;
   }
 
-  .welcome-image-card img {
-    height: calc(100% - 56px);
+  .welcome-subline{
+    font-size:0.75rem;
+    margin-top:0.3rem;
+    letter-spacing:1px;
   }
 
-  .welcome-image-card span {
-    min-height: 56px;
-    font-size: 0.82rem;
-    padding: 0.6rem 0.7rem;
+  .welcome-text{
+    font-size:1.15rem;
+    line-height:1.45;
+    padding:0 0.4rem;
   }
+
+  .welcome-image-track{
+    width:96vw;
+    height:72vh;
+    margin-top:0.8rem;
+    border-radius:16px;
+    overflow:hidden;
+  }
+
+  .welcome-image-card{
+    border-radius:16px;
+  }
+
+  .welcome-image-card img{
+    width:100%;
+    height:calc(100% - 64px);
+
+    /* IMPORTANT */
+    object-fit:contain;
+
+    background:#0D1B2A;
+  }
+
+  .welcome-image-card span{
+    min-height:64px;
+    font-size:0.82rem;
+    padding:0.65rem 0.7rem;
+    line-height:1.4;
+  }
+
 }
 
 #welcomeIntro.hide-intro {
