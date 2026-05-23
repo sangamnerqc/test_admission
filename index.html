@@ -678,6 +678,53 @@ body.intro-active footer { visibility: hidden; }
   }
 }
 
+#welcomeIntro.hide-intro {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+
+@media (max-width: 850px) {
+  .admission-wrap { grid-template-columns: 1fr; }
+  .process-tree { grid-template-columns: 1fr; }
+  .process-tree::before {
+    top: 8%;
+    bottom: 8%;
+    left: 27px;
+    right: auto;
+    width: 4px;
+    height: auto;
+    background: linear-gradient(180deg, var(--saffron), var(--gold), var(--green));
+  }
+  .process-step { min-height: 92px; padding-left: 4.6rem; text-align: left; }
+  .step-circle { position: absolute; left: 0.8rem; top: 1rem; width: 44px; height: 44px; font-size: 1.15rem; }
+}
+@media (max-width: 600px) {
+  nav { align-items: flex-start; height: auto; min-height: 60px; padding: 0.8rem 1rem; }
+  .nav-brand { font-size: 0.95rem; }
+  .nav-links button { font-size: 0.68rem; padding: 0.3rem 0.45rem; }
+  #breadcrumb { top: 72px; }
+  .campus-photo-wrap { aspect-ratio: 4 / 3; }
+  .campus-caption { min-height: 116px; padding: 0.85rem 0.95rem; }
+  .campus-caption h2 { font-size: 1.05rem; }
+  .campus-caption p { font-size: 0.8rem; }
+
+  .welcome-box { padding: 0.8rem; }
+  .welcome-image-card { flex-basis: 280px; }
+  .welcome-image-card img { height: 180px; }
+  .welcome-image-card span {
+    font-size: 0.82rem;
+    min-height: 46px;
+    padding: 0.65rem 0.75rem;
+  }
+
+  #floatBack { left: 50%; bottom: 1rem; transform: translateX(-50%) translateY(10px); font-size: 0.82rem; }
+  #floatBack.visible { transform: translateX(-50%) translateY(0); }
+  #floatBack:hover { transform: translateX(-50%) translateY(-2px); }
+  #logToast { left: 1rem; right: 1rem; bottom: 1rem; }
+}
+
 </style>
 </head>
 <body class="intro-active">
@@ -692,22 +739,65 @@ body.intro-active footer { visibility: hidden; }
   <div class="welcome-box">
     <div class="welcome-subline">Sangamner College Admission Guide</div>
     <div class="welcome-text" id="welcomeText"></div>
+
     <div class="welcome-image-track" aria-label="College welcome image highlights">
       <div class="welcome-image-row">
-        <div class="welcome-image-card"><img src="campus.webp" alt="College campus highlight 1" /><span>Campus life at Sangamner College</span></div>
-        <div class="welcome-image-card"><img src="campus2.webp" alt="College campus highlight 2" /><span>Campus life at Sangamner College</span></div>
-        <div class="welcome-image-card"><img src="gentshostel.webp" alt="College campus highlight 3" /><span>Best hostel facility</span></div>
-        <div class="welcome-image-card"><img src="image9.webp" alt="College campus highlight 4" /><span>Practical and skill-based education</span></div>
-        <div class="welcome-image-card"><img src="image10.webp" alt="College campus highlight 5" /><span>Laboratories and hands-on training</span></div>
-        <div class="welcome-image-card"><img src="ladieshostel.webp" alt="College campus highlight 6" /><span>Safe and homely stay</span></div>
-        <div class="welcome-image-card"><img src="library books.webp" alt="College campus highlight 7" /><span>Library and reading culture</span></div>
-        <div class="welcome-image-card"><img src="modern classroom.webp" alt="College campus highlight 8" /><span>Student activities and confidence</span></div>
-        <div class="welcome-image-card"><img src="playground.webp" alt="College campus highlight 9" /><span>Sports, fitness, and discipline</span></div>
-        <div class="welcome-image-card"><img src="Gymkhana -04.webp" alt="College campus highlight 10" /><span>Welcome to admission 2026-27</span></div>
+
+        <div class="welcome-image-card">
+          <img src="campus.webp" alt="">
+          <span>Campus life at Sangamner College</span>
+        </div>
+
+        <div class="welcome-image-card">
+          <img src="campus2.webp" alt="">
+          <span>Campus life at Sangamner College</span>
+        </div>
+
+        <div class="welcome-image-card">
+          <img src="gentshostel.webp" alt="">
+          <span>Best hostel facility</span>
+        </div>
+
+        <div class="welcome-image-card">
+          <img src="image9.webp" alt="">
+          <span>Practical and skill-based education</span>
+        </div>
+
+        <div class="welcome-image-card">
+          <img src="image10.webp" alt="">
+          <span>Laboratories and hands-on training</span>
+        </div>
+
+        <div class="welcome-image-card">
+          <img src="ladieshostel.webp" alt="">
+          <span>Safe and homely stay</span>
+        </div>
+
+        <div class="welcome-image-card">
+          <img src="library books.webp" alt="">
+          <span>Library and reading culture</span>
+        </div>
+
+        <div class="welcome-image-card">
+          <img src="modern classroom.webp" alt="">
+          <span>Student activities and confidence</span>
+        </div>
+
+        <div class="welcome-image-card">
+          <img src="playground.webp" alt="">
+          <span>Sports, fitness, and discipline</span>
+        </div>
+
+        <div class="welcome-image-card">
+          <img src="Gymkhana -04.webp" alt="">
+          <span>Welcome to admission 2026-27</span>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
+
 
 
 <nav>
@@ -1407,7 +1497,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 (function() {
   const sentence = "पदवी अभ्यासक्रमाच्या प्रवेशासाठी आलेल्या सर्व पालकांचे आणि विद्यार्थ्यांचे शिक्षण प्रसारक संस्थेचे संगमनेर महाविद्यालय, संगमनेर सहर्ष स्वागत करत आहे";
-  const totalTime = 20000;
+  const totalTime = 10000;
   function run() {
     const intro = document.getElementById("welcomeIntro");
     const box = document.getElementById("welcomeText");
@@ -1433,3 +1523,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
+
+
