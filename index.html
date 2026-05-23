@@ -569,7 +569,7 @@ body.intro-active footer { visibility: hidden; }
 .welcome-image-track {
   position: relative;
   z-index: 1;
-  width: min(1280px, 94vw);
+  width: min(1120px, 92vw);
   margin: 1.6rem auto 0;
   overflow: hidden;
   border-radius: 16px;
@@ -581,7 +581,7 @@ body.intro-active footer { visibility: hidden; }
   animation: welcomeSlide 10s linear infinite;
 }
 .welcome-image-card {
-  flex: 0 0 280px;
+  flex: 0 0 190px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 14px;
   background: rgba(13, 27, 42, 0.58);
@@ -591,7 +591,7 @@ body.intro-active footer { visibility: hidden; }
 .welcome-image-card img {
   display: block;
   width: 100%;
-  height: 175px;
+  height: 118px;
   object-fit: cover;
 }
 .welcome-image-card span {
@@ -633,15 +633,22 @@ body.intro-active footer { visibility: hidden; }
   .campus-caption { min-height: 116px; padding: 0.85rem 0.95rem; }
   .campus-caption h2 { font-size: 1.05rem; }
   .campus-caption p { font-size: 0.8rem; }
-  .welcome-box { padding: 1rem; }
-  .welcome-image-card { flex-basis: 215px; }
-  .welcome-image-card img { height: 136px; }
-  .welcome-image-card span { font-size: 0.74rem; min-height: 40px; }
+
+  .welcome-box { padding: 0.8rem; }
+  .welcome-image-card { flex-basis: 280px; }
+  .welcome-image-card img { height: 180px; }
+  .welcome-image-card span {
+    font-size: 0.82rem;
+    min-height: 46px;
+    padding: 0.65rem 0.75rem;
+  }
+
   #floatBack { left: 50%; bottom: 1rem; transform: translateX(-50%) translateY(10px); font-size: 0.82rem; }
   #floatBack.visible { transform: translateX(-50%) translateY(0); }
   #floatBack:hover { transform: translateX(-50%) translateY(-2px); }
   #logToast { left: 1rem; right: 1rem; bottom: 1rem; }
 }
+
 </style>
 </head>
 <body class="intro-active">
@@ -658,7 +665,7 @@ body.intro-active footer { visibility: hidden; }
     <div class="welcome-subline">Sangamner College Admission Guide</div>
     <div class="welcome-image-track" aria-label="College welcome image highlights">
       <div class="welcome-image-row">
-         <div class="welcome-image-card"><img src="campus.webp" alt="College campus highlight 1" /><span>Campus life at Sangamner College</span></div>
+        <div class="welcome-image-card"><img src="campus.webp" alt="College campus highlight 1" /><span>Campus life at Sangamner College</span></div>
         <div class="welcome-image-card"><img src="campus2.webp" alt="College campus highlight 2" /><span>Campus life at Sangamner College</span></div>
         <div class="welcome-image-card"><img src="gentshostel.webp" alt="College campus highlight 3" /><span>Best hostel facility</span></div>
         <div class="welcome-image-card"><img src="image9.webp" alt="College campus highlight 4" /><span>Practical and skill-based education</span></div>
@@ -668,7 +675,6 @@ body.intro-active footer { visibility: hidden; }
         <div class="welcome-image-card"><img src="modern classroom.webp" alt="College campus highlight 8" /><span>Student activities and confidence</span></div>
         <div class="welcome-image-card"><img src="playground.webp" alt="College campus highlight 9" /><span></span>Sports, fitness, and discipline</div>
         <div class="welcome-image-card"><img src="Gymkhana -04.webp" alt="College campus highlight 10" /><span>Welcome to admission 2026-27</span></div>
-
       </div>
     </div>
   </div>
@@ -1401,3 +1407,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
