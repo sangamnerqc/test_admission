@@ -180,7 +180,7 @@ nav {
   width: 100%;
   height: 100%;
   display: block;
- object-fit: contain;
+  object-fit: cover;
   opacity: 1;
   transition: opacity 0.55s ease;
 }
@@ -523,48 +523,33 @@ body.intro-active nav,
 body.intro-active #breadcrumb,
 body.intro-active .page,
 body.intro-active footer { visibility: hidden; }
-
 #welcomeIntro {
   position: fixed;
   inset: 0;
   z-index: 9999;
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  padding: 1rem 0 0;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
   text-align: center;
   background: linear-gradient(135deg, var(--deep) 0%, var(--navy) 55%, var(--saffron) 100%);
   color: var(--white);
-  overflow: hidden;
 }
-
 #welcomeIntro::before {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at top left, rgba(240, 165, 0, 0.35), transparent 32%),
               radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.12), transparent 35%);
-  pointer-events: none;
 }
-
-.welcome-box {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  padding: 0.75rem 1rem 0;
-}
-
+.welcome-box { position: relative; max-width: 980px; padding: 2rem; }
 .welcome-text {
-  max-width: 1100px;
-  margin: 0 auto;
   font-family: "Playfair Display", "DM Sans", serif;
-  font-size: clamp(1.25rem, 4vw, 2.8rem);
+  font-size: clamp(1.6rem, 5vw, 3.2rem);
   font-weight: 900;
-  line-height: 1.35;
+  line-height: 1.55;
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
 }
-
 .welcome-word {
   display: inline-block;
   margin: 0 0.16em;
@@ -572,225 +557,57 @@ body.intro-active footer { visibility: hidden; }
   transform: translateY(18px) scale(0.98);
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
-
-.welcome-word.show {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
+.welcome-word.show { opacity: 1; transform: translateY(0) scale(1); }
 .welcome-subline {
-  margin-top: 0.8rem;
+  margin-top: 1.3rem;
   color: var(--gold);
-  font-size: 0.95rem;
-  font-weight: 900;
+  font-size: 0.9rem;
+  font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
-
-.welcome-image-track{
-
-  width:100vw;
-  height:85vh;
-
-  margin-top:0.4rem;
-
-  border-radius:0;
-
-  background:#0D1B2A;
+.welcome-image-track {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, 92vw);
+  margin: 1.6rem auto 0;
+  overflow: hidden;
+  border-radius: 16px;
 }
 .welcome-image-row {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  animation: welcomeSlide 10s linear infinite;
 }
-
 .welcome-image-card {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
+  flex: 0 0 190px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 18px;
+  border-radius: 14px;
   background: rgba(13, 27, 42, 0.58);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
   overflow: hidden;
-  animation: welcomeFade 20s linear infinite;
 }
-
-.welcome-image-card:nth-child(1) { animation-delay: 0s; }
-.welcome-image-card:nth-child(2) { animation-delay: 2s; }
-.welcome-image-card:nth-child(3) { animation-delay: 4s; }
-.welcome-image-card:nth-child(4) { animation-delay: 6s; }
-.welcome-image-card:nth-child(5) { animation-delay: 8s; }
-.welcome-image-card:nth-child(6) { animation-delay: 10s; }
-.welcome-image-card:nth-child(7) { animation-delay: 12s; }
-.welcome-image-card:nth-child(8) { animation-delay: 14s; }
-.welcome-image-card:nth-child(9) { animation-delay: 16s; }
-.welcome-image-card:nth-child(10) { animation-delay: 18s; }
-
-.welcome-image-card img{
-
-  width:100%;
-  height:100%;
-
-  object-fit:contain;
-
-  object-position:center center;
-
-  background:#0D1B2A;
+.welcome-image-card img {
+  display: block;
+  width: 100%;
+  height: 118px;
+  object-fit: cover;
 }
-
-.welcome-image-card span{
-
-  position:absolute;
-
-  bottom:0;
-  left:0;
-  right:0;
-
-  min-height:auto;
-
-  padding:0.8rem;
-
-  background:rgba(13,27,42,0.82);
-
-  font-size:0.9rem;
-
-  line-height:1.4;
+.welcome-image-card span {
+  display: block;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.35;
+  min-height: 42px;
+  padding: 0.55rem 0.65rem;
 }
-
-@keyframes welcomeFade {
-  0% { opacity: 0; transform: scale(1.02); }
-  1% { opacity: 1; transform: scale(1); }
-  9% { opacity: 1; transform: scale(1); }
-  10% { opacity: 0; transform: scale(0.99); }
-  100% { opacity: 0; transform: scale(0.99); }
+@keyframes welcomeSlide {
+  from { transform: translateX(100vw); }
+  to { transform: translateX(-100%); }
 }
-
-@media (max-width: 600px) {
-
-  #welcomeIntro{
-    padding:0;
-    overflow:hidden;
-    justify-content:flex-start;
-    background:#0D1B2A;
-  }
-
-  .welcome-box{
-    width:100%;
-    height:100%;
-    padding:0;
-  }
-
-  .welcome-subline{
-    margin-top:0.4rem;
-    font-size:0.75rem;
-    letter-spacing:1px;
-    position:relative;
-    z-index:5;
-  }
-
-  .welcome-text{
-    font-size:1.05rem;
-    line-height:1.35;
-    padding:0 0.5rem;
-    position:relative;
-    z-index:5;
-  }
-
-  .welcome-image-track{
-
-    position:relative;
-
-    width:100vw;
-
-    height:88vh;
-
-    margin-top:0.3rem;
-
-    border-radius:0;
-
-    overflow:hidden;
-
-    background:#0D1B2A;
-  }
-
-  .welcome-image-row{
-    width:100%;
-    height:100%;
-  }
-
-  .welcome-image-card{
-
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    border:none;
-
-    border-radius:0;
-
-    overflow:hidden;
-  }
-
- .welcome-image-card img{
-
-    position:absolute;
-
-    top:0;
-    left:0;
-
-    width:100%;
-
-    height:calc(100% - 70px);
-
-    object-fit:cover;
-
-    object-position:top center;
-
-    background:#0D1B2A;
-
-    transform:scale(1.22);
-}
- .welcome-image-card span{
-
-    position:absolute;
-
-    left:0;
-    right:0;
-    bottom:0;
-
-    z-index:2;
-
-    height:70px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:0.85rem;
-
-    background:rgba(0,0,0,0.55);
-
-    color:#fff;
-
-    font-size:0.88rem;
-
-    line-height:1.4;
-
-    text-align:center;
-
-    backdrop-filter:blur(3px);
-}
-#welcomeIntro.hide-intro {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
+#welcomeIntro.hide-intro { opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0.5s ease; }
 
 @media (max-width: 850px) {
   .admission-wrap { grid-template-columns: 1fr; }
@@ -844,68 +661,24 @@ body.intro-active footer { visibility: hidden; }
 
 <div id="welcomeIntro" aria-live="polite">
   <div class="welcome-box">
-    <div class="welcome-subline">Sangamner College Admission Guide</div>
     <div class="welcome-text" id="welcomeText"></div>
-
+    <div class="welcome-subline">Sangamner College Admission Guide</div>
     <div class="welcome-image-track" aria-label="College welcome image highlights">
       <div class="welcome-image-row">
-
-        <div class="welcome-image-card">
-          <img src="campus.webp" alt="">
-          <span>Campus life at Sangamner College</span>
-        </div>
-
-        <div class="welcome-image-card">
-          <img src="campus2.webp" alt="">
-          <span>Campus life at Sangamner College</span>
-        </div>
-
-        <div class="welcome-image-card">
-          <img src="gentshostel.webp" alt="">
-          <span>Best hostel facility</span>
-        </div>
-
-        <div class="welcome-image-card">
-          <img src="image9.webp" alt="">
-          <span>Practical and skill-based education</span>
-        </div>
-
-        <div class="welcome-image-card">
-          <img src="image10.webp" alt="">
-          <span>Laboratories and hands-on training</span>
-        </div>
-
-        <div class="welcome-image-card">
-          <img src="ladieshostel.webp" alt="">
-          <span>Safe and homely stay</span>
-        </div>
-
-        <div class="welcome-image-card">
-          <img src="library books.webp" alt="">
-          <span>Library and reading culture</span>
-        </div>
-
-        <div class="welcome-image-card">
-          <img src="modern classroom.webp" alt="">
-          <span>Student activities and confidence</span>
-        </div>
-
-        <div class="welcome-image-card">
-          <img src="playground.webp" alt="">
-          <span>Sports, fitness, and discipline</span>
-        </div>
-
-        <div class="welcome-image-card">
-          <img src="Gymkhana -04.webp" alt="">
-          <span>Welcome to admission 2026-27</span>
-        </div>
-
+        <div class="welcome-image-card"><img src="campus.webp" alt="College campus highlight 1" /><span>Campus life at Sangamner College</span></div>
+        <div class="welcome-image-card"><img src="campus2.webp" alt="College campus highlight 2" /><span>Campus life at Sangamner College</span></div>
+        <div class="welcome-image-card"><img src="gentshostel.webp" alt="College campus highlight 3" /><span>Best hostel facility</span></div>
+        <div class="welcome-image-card"><img src="image9.webp" alt="College campus highlight 4" /><span>Practical and skill-based education</span></div>
+        <div class="welcome-image-card"><img src="image10.webp" alt="College campus highlight 5" /><span>Laboratories and hands-on training</span></div>
+        <div class="welcome-image-card"><img src="ladieshostel.webp" alt="College campus highlight 6" /><span>Safe and homely stay</span></div>
+        <div class="welcome-image-card"><img src="library books.webp" alt="College campus highlight 7" /><span>Library and reading culture</span></div>
+        <div class="welcome-image-card"><img src="modern classroom.webp" alt="College campus highlight 8" /><span>Student activities and confidence</span></div>
+        <div class="welcome-image-card"><img src="playground.webp" alt="College campus highlight 9" /><span></span>Sports, fitness, and discipline</div>
+        <div class="welcome-image-card"><img src="Gymkhana -04.webp" alt="College campus highlight 10" /><span>Welcome to admission 2026-27</span></div>
       </div>
     </div>
   </div>
 </div>
-
-
 
 <nav>
   <div class="nav-brand" onclick="navigate('home')">
@@ -932,7 +705,7 @@ body.intro-active footer { visibility: hidden; }
     <a class="hero-link" href="#" onclick="event.preventDefault(); navigate('admission');">प्रवेश प्रक्रिया पाहा</a>
     <div class="campus-highlight" aria-label="College image highlights">
       <div class="campus-photo-wrap">
-        <img id="campusPhoto" src="Gymkhana -04.webp" alt="Sangamner College Gymkhana" />
+        <img id="campusPhoto" src="Gymkhana-Gymkhana -04.JPG" alt="Sangamner College Gymkhana" />
       </div>
       <div class="campus-caption" id="campusCaption">
         <h2 id="campusTitle">Gymkhana</h2>
@@ -1059,7 +832,7 @@ body.intro-active footer { visibility: hidden; }
             <div class="process-step" onclick="showProcessStep(3)">
               <div class="step-circle">३</div>
               <div class="step-title">अर्ज तपासणी</div>
-              <div class="step-desc">सर्व शाखांसाठी: RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन ).</div>
+              <div class="step-desc">सर्व शाखांसाठी: Saibaba Sabhagruh.</div>
               <a class="location-link" href="https://maps.app.goo.gl/o2jjq7G18Lg4CqRGA" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">अर्ज तपासणी स्थान पाहा</a>
             </div>
             <div class="process-step" onclick="showProcessStep(4)">
@@ -1070,7 +843,7 @@ body.intro-active footer { visibility: hidden; }
             </div>
           </div>
           <div class="process-note">
-            <strong>महत्त्वाचे:</strong> B.A., B.Com. आणि B.Sc. साठी समुपदेशन स्थान <strong>RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन )</strong> आहे. B.Sc Computer Science, BCA (Science), B.Sc AI & ML, B.Voc., BBA आणि BBA (CA) साठी समुपदेशन संबंधित विभागात होईल.
+            <strong>महत्त्वाचे:</strong> B.A., B.Com. आणि B.Sc. साठी समुपदेशन स्थान <strong>Saibaba Sabhagruh</strong> आहे. B.Sc Computer Science, BCA (Science), B.Sc AI & ML, B.Voc., BBA आणि BBA (CA) साठी समुपदेशन संबंधित विभागात होईल.
           </div>
         </div>
         <div class="step-info-card" id="stepInfo"><h4>१. समुपदेशन</h4><p>निवडलेल्या अभ्यासक्रमानुसार योग्य समुपदेशन स्थान येथे दिसेल.</p></div>
@@ -1132,7 +905,7 @@ body.intro-active footer { visibility: hidden; }
 </footer>
 
 <script>
-const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyJPVi_LEF-CdzI5T9vuc8pjtXX59pGjm-FdVh8yABZ0dWhBhUBimmEM2_7Q8pV_5M/exec";
+const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbw7nV9sfEhHc7xe8CiWTRnLoFz8K26-2p82rybpusRG_0A8EuOimzpizvM7gXWnNZQ/exec";
 
 const PAGE_LABELS = {
   home: "Home",
@@ -1151,45 +924,45 @@ const admissionTree = {
       { name: "Marathi", person: "Pro. Dr. Limbekar A.S.", phone: "9326891567" },
       { name: "Hindi", person: "Pro. Dr. Patil J.P.", phone: "9860286123" },
       { name: "English", person: "Pro. Dr. Tashildar R.B.", phone: "9850264500" },
-      { name: "Sanskrit", person: "Pro. Dr. Mandlik A.A.", phone: "9422740189" },
+      { name: "Sanskrit", person: "Pra. Dr. Mandlik A.A.", phone: "9422740189" },
       { name: "Economics", person: "Pro. Dr. Sanap G.K.", phone: "9422326349" },
       { name: "Politics", person: "Pro. Dr. Benke S.A.", phone: "9850603070" },
-      { name: "Geography", person: "Pro. Dr. Gaikwad R.D.", phone: "9850448093" },
+      { name: "Geography", person: "Pro. Dr. Gayakwad R.D.", phone: "9850448093" },
       { name: "Philosophy", person: "Pro. Dr. Bhise Shrinivas", phone: "8421756359" },
       { name: "Yoga", person: "Pro. Dr. Waman R.R.", phone: "9822450768" }
     ],
-    counselling: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन )",
-    query: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन ) Sangamner College"
+    counselling: "Saibaba Sabhagruh",
+    query: "Saibaba Sabhagruh Sangamner College"
   },
   bcom: {
     display: "B.Com.",
     subjects: [
       { name: "B.Com", person: "Dr. Mendkar V.A.", phone: "9822038727" },
-      { name: "B.Com", person: "Pro. Tribhuvan R.B.", phone: "9890424181" },
-      { name: "B.Com", person: "Pro. Ratne R.K.", phone: "9130660693" },
-      { name: "B.Com", person: "Pro. Nagare R.B.", phone: "9623900635" }
+      { name: "B.Com", person: "Pra. Tribhuvan R.B.", phone: "9890424181" },
+      { name: "B.Com", person: "Pra. Ratne R.K.", phone: "9130660693" },
+      { name: "B.Com", person: "Pra. Nagare R.B.", phone: "9623900635" }
     ],
-    counselling: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन )",
-    query: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन ) Sangamner College"
+    counselling: "Saibaba Sabhagruh",
+    query: "Saibaba Sabhagruh Sangamner College"
   },
   bsc: {
     display: "B.Sc.",
     subjects: [
       { name: "Physics", person: "Pro. Dr. Dalvi S.N.", phone: "9850014466" },
-      { name: "Chemistry", person: "Pro. Dr. Tryambake P.T.", phone: "9096298607" },
-      { name: "Mathematics", person: "Pro. Dr. Gudade S.K.", phone: "9822965671" },
-      { name: "Electronics", person: "Pro. Bhusal S.C.", phone: "9922303683" },
+      { name: "Chemistry", person: "Pro. Dr. Tryambak P.T.", phone: "9096298607" },
+      { name: "Mathematics", person: "Pro. Dr. Gudde M.K.", phone: "9822965671" },
+      { name: "Electronics", person: "Pra. Bhusal S.C.", phone: "9922303683" },
       { name: "Zoology", person: "Pro. Dr. Bhavare V.V.", phone: "9421438204" },
-      { name: "Botany", person: "Pro. Dr. Jadhav S.D.", phone: "8605558167" },
-      { name: "Microbiology", person: "Pro. Maka Manisha", phone: "9028250456" }
+      { name: "Botany", person: "Pra. Dr. Jadhav S.D.", phone: "8605558167" },
+      { name: "Microbiology", person: "Pra. Maka Manisha", phone: "9028250456" }
     ],
-    counselling: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन )",
-    query: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन ) Sangamner College"
+    counselling: "Saibaba Sabhagruh",
+    query: "Saibaba Sabhagruh Sangamner College"
   },
   bsc_cs: {
     display: "B.Sc Computer Science",
     subjects: [
-      { name: "Computer Science", person: "Pro. Pansare S.Y.", phone: "9767786614" }
+      { name: "Computer Science", person: "Pra. Pansare S.Y.", phone: "9767786614" }
     ],
     counselling: "Computer Science Department, Sangamner College",
     query: "Computer Science Department Sangamner College"
@@ -1197,7 +970,7 @@ const admissionTree = {
   bca_science: {
     display: "BCA (Science)",
     subjects: [
-      { name: "BCA (Science)", person: "Pro. Pansare S.Y.", phone: "9767786614" }
+      { name: "BCA (Science)", person: "Pra. Pansare S.Y.", phone: "9767786614" }
     ],
     counselling: "Computer Science Department, Sangamner College",
     query: "Computer Science Department Sangamner College"
@@ -1205,7 +978,7 @@ const admissionTree = {
   bsc_ai_ml: {
     display: "B.Sc AI & ML",
     subjects: [
-      { name: "Artificial Intelligence & Machine Learning", person: "", phone: "8308158752, 9767786614, 9890308845, 8308158753" }
+      { name: "Artificial Intelligence & Machine Learning", person: "Pra. Dr. Jadhav N.J.", phone: "9561651551" }
     ],
     counselling: "BCS Department, Sangamner College",
     query: "BCS Department Sangamner College"
@@ -1214,10 +987,10 @@ const admissionTree = {
     display: "B.Voc.",
     subjects: [
       { name: "Hospitality and Tourism", person: "Pro. Dr. Tiwari C.D.", phone: "9405907317" },
-      { name: "Dairy Products and Processing", person: "Pro. Sahane P.P.", phone: "8600301329" },
-      { name: "Software Development", person: "Pro. Sayyad A.A.", phone: "9921946097" },
-      { name: "Account and Taxation", person: "Pro. Gosavi A.G.", phone: "9623900635" },
-      { name: "Agriculture and Soil Science", person: "Pro. Dr. Jadhav N.J.", phone: "9561651551" }
+      { name: "Dairy Products and Processing", person: "Pra. Sahane P.P.", phone: "8600301329" },
+      { name: "Software Development", person: "Pra. Sayyad A.A.", phone: "9921946097" },
+      { name: "Account and Taxation", person: "Pra. Gosavi A.G.", phone: "9623900635" },
+      { name: "Agriculture and Soil Science", person: "Pra. Dr. Jadhav N.J.", phone: "9561651551" }
     ],
     counselling: "B.Voc. Department, Sangamner College",
     query: "B Voc Department Sangamner College"
@@ -1226,7 +999,7 @@ const admissionTree = {
     display: "BBA",
     subjects: [
       { name: "BBA", person: "Dr. Kulkarni S.V.", phone: "9860080151" },
-      { name: "BBA (CA)", person: "Pro. Khemnar T.T.", phone: "9420756004" }
+      { name: "BBA (CA)", person: "Pra. Khemnar T.T.", phone: "9420756004" }
     ],
     counselling: "BBA Department, Sangamner College",
     query: "BBA Department Sangamner College"
@@ -1235,7 +1008,7 @@ const admissionTree = {
 
 const loc = {
   form: { t: "२. अर्ज भरणे", n: "Student Facility Center, Setu Suvidha Kendra", q: "Student Facility Center Setu Suvidha Kendra Sangamner College", l: "अर्ज भरण्याचे स्थान पाहा" },
-  check: { t: "३. अर्ज तपासणी", n: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन ), Sangamner College", q: "RB Building (प्राचार्य म वि कौंडिण्य संशोधन भवन ) Sangamner College", l: "अर्ज तपासणी स्थान पाहा" },
+  check: { t: "३. अर्ज तपासणी", n: "Saibaba Sabhagruh, Sangamner College", q: "Saibaba Sabhagruh Sangamner College", l: "अर्ज तपासणी स्थान पाहा" },
   account: { t: "४. फी भरणे व पावती घेणे", n: "Account Section, Sangamner College", q: "Account Section Sangamner College", l: "फी भरण्याचे स्थान पाहा" }
 };
 
@@ -1333,13 +1106,15 @@ async function logToGoogleSheet(name, contact, admissionYear, course, subject, s
     subjectContacts: subjectContacts.map(item => `${item.person} (${item.phone})`).join(", "),
     branch: `${admissionYear} - ${course} - ${subject}`
   };
+  const formData = new URLSearchParams();
+  Object.entries(payload).forEach(([key, value]) => formData.append(key, value));
+
   showToast("Saving your details...", "sending", 10000);
   try {
     await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
       method: "POST",
       mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      body: formData
     });
     showToast("माहिती यशस्वीरित्या नोंदवली गेली!", "success");
   } catch (error) {
@@ -1522,37 +1297,37 @@ function renderAdmissionTree() {
 
 const campusHighlights = [
   {
-    image: "Gymkhana -04.webp",
+    image: "Gymkhana-Gymkhana -04.JPG",
     title: "Gymkhana",
     quote: "\"A dedicated space for sports, fitness, discipline, and student energy on campus.\"",
     alt: "Sangamner College Gymkhana"
   },
   {
-    image: "Kaushlyabhavan -03.webp",
+    image: "Kaushlyabhavan- Kaushlyabhavan -03.JPG",
     title: "Kaushlyabhavan",
     quote: "\"A skill-building environment where students learn through practice, training, and confidence.\"",
     alt: "Sangamner College Kaushlyabhavan"
   },
   {
-    image: "Lab HT -01.webp",
+    image: "Hospitality and tourism lab- Lab HT -01.JPG",
     title: "Hospitality and Tourism Lab",
     quote: "\"A professional lab for hands-on learning in hospitality, service, and tourism operations.\"",
     alt: "Hospitality and tourism lab at Sangamner College"
   },
   {
-    image: "Lab HT -03.webp",
+    image: "Hospitality and tourism lab second photo - Lab HT -03.JPG",
     title: "Hospitality and Tourism Lab",
     quote: "\"Students develop practical industry skills through guided lab sessions and real working setups.\"",
     alt: "Second view of hospitality and tourism lab at Sangamner College"
   },
   {
-    image: "Library -02.webp",
+    image: "college library student reading section - Library -02.JPG",
     title: "Library Reading Section",
     quote: "\"A quiet academic space for focused study, reading, research, and self-learning.\"",
     alt: "Students reading in Sangamner College library"
   },
   {
-    image: "Republic Day-02.webp",
+    image: "college NCC umit- Republic Day-02.JPG",
     title: "NCC Unit",
     quote: "\"The NCC unit builds leadership, patriotism, teamwork, and discipline through active participation.\"",
     alt: "Sangamner College NCC unit on Republic Day"
@@ -1568,25 +1343,27 @@ function startCampusHighlights() {
   if (!photo || !caption || !title || !quote || !progress) return;
 
   let index = 0;
+  const show = nextIndex => {
+    const item = campusHighlights[nextIndex];
+    photo.classList.add("fade-out");
+    caption.classList.add("fade-out");
+    setTimeout(() => {
+      photo.src = item.image;
+      photo.alt = item.alt;
+      title.textContent = item.title;
+      quote.textContent = item.quote;
+      photo.classList.remove("fade-out");
+      caption.classList.remove("fade-out");
+      progress.classList.remove("run");
+      void progress.offsetWidth;
+      progress.classList.add("run");
+    }, 350);
+  };
 
-  function showCurrentImage() {
-    const item = campusHighlights[index];
-
-    photo.src = item.image;
-    photo.alt = item.alt;
-    title.textContent = item.title;
-    quote.textContent = item.quote;
-
-    progress.classList.remove("run");
-    void progress.offsetWidth;
-    progress.classList.add("run");
-  }
-
-  showCurrentImage();
-
+  show(index);
   setInterval(() => {
     index = (index + 1) % campusHighlights.length;
-    showCurrentImage();
+    show(index);
   }, 6000);
 }
 
@@ -1630,6 +1407,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
-
-
 
