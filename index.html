@@ -590,86 +590,8 @@ body.intro-active footer { visibility: hidden; }
 .welcome-image-track {
   position: relative;
   z-index: 1;
-  flex: 1;
-  width: 100vw;
-  margin-top: 1rem;
-  overflow: hidden;
-}
-
-.welcome-image-row {
-  display: flex;
-  width: max-content;
-  height: 100%;
-  gap: 1rem;
-  animation: welcomeSlide 10s linear infinite;
-}
-
-.welcome-image-card {
-  flex: 0 0 360px;
-  height: calc(100vh - 245px);
-  min-height: 320px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 18px;
-  background: rgba(13, 27, 42, 0.58);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-}
-
-.welcome-image-card img {
-  display: block;
-  width: 100%;
-  height: calc(100% - 58px);
-  object-fit: cover;
-}
-
-.welcome-image-card span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 58px;
-  padding: 0.65rem 0.8rem;
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 0.95rem;
-  font-weight: 900;
-  line-height: 1.3;
-}
-
-@keyframes welcomeSlide {
-  from { transform: translateX(100vw); }
-  to { transform: translateX(-100%); }
-}
-
-#welcomeIntro.hide-intro {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-@media (max-width: 600px) {
-  #welcomeIntro {
-    padding-top: 0.75rem;
-  }
-
-  .welcome-box {
-    padding: 0.5rem 0.75rem 0;
-  }
-
-  .welcome-text {
-    font-size: clamp(1.1rem, 6vw, 1.65rem);
-    line-height: 1.35;
-  }
-
-  .welcome-subline {
-    margin-top: 0.6rem;
-    font-size: 0.76rem;
-    letter-spacing: 1.4px;
-  }
-
-.welcome-image-track {
-  position: relative;
-  z-index: 1;
-  width: min(94vw, 720px);
-  height: min(56vh, 520px);
+  width: 96vw;
+  height: 62vh;
   margin: 1rem auto 0;
   border-radius: 18px;
   overflow: hidden;
@@ -690,24 +612,24 @@ body.intro-active footer { visibility: hidden; }
   border-radius: 18px;
   background: rgba(13, 27, 42, 0.58);
   overflow: hidden;
-  animation: welcomeFade 10s linear infinite;
+  animation: welcomeFade 20s linear infinite;
 }
 
 .welcome-image-card:nth-child(1) { animation-delay: 0s; }
-.welcome-image-card:nth-child(2) { animation-delay: 1s; }
-.welcome-image-card:nth-child(3) { animation-delay: 2s; }
-.welcome-image-card:nth-child(4) { animation-delay: 3s; }
-.welcome-image-card:nth-child(5) { animation-delay: 4s; }
-.welcome-image-card:nth-child(6) { animation-delay: 5s; }
-.welcome-image-card:nth-child(7) { animation-delay: 6s; }
-.welcome-image-card:nth-child(8) { animation-delay: 7s; }
-.welcome-image-card:nth-child(9) { animation-delay: 8s; }
-.welcome-image-card:nth-child(10) { animation-delay: 9s; }
+.welcome-image-card:nth-child(2) { animation-delay: 2s; }
+.welcome-image-card:nth-child(3) { animation-delay: 4s; }
+.welcome-image-card:nth-child(4) { animation-delay: 6s; }
+.welcome-image-card:nth-child(5) { animation-delay: 8s; }
+.welcome-image-card:nth-child(6) { animation-delay: 10s; }
+.welcome-image-card:nth-child(7) { animation-delay: 12s; }
+.welcome-image-card:nth-child(8) { animation-delay: 14s; }
+.welcome-image-card:nth-child(9) { animation-delay: 16s; }
+.welcome-image-card:nth-child(10) { animation-delay: 18s; }
 
 .welcome-image-card img {
   display: block;
   width: 100%;
-  height: calc(100% - 58px);
+  height: calc(100% - 64px);
   object-fit: cover;
 }
 
@@ -715,19 +637,19 @@ body.intro-active footer { visibility: hidden; }
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 58px;
-  padding: 0.65rem 0.8rem;
+  min-height: 64px;
+  padding: 0.7rem 0.8rem;
   color: rgba(255, 255, 255, 0.95);
   background: rgba(13, 27, 42, 0.92);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 900;
   line-height: 1.3;
   text-align: center;
 }
 
 @keyframes welcomeFade {
-  0% { opacity: 0; transform: scale(1.03); }
-  2% { opacity: 1; transform: scale(1); }
+  0% { opacity: 0; transform: scale(1.02); }
+  1% { opacity: 1; transform: scale(1); }
   9% { opacity: 1; transform: scale(1); }
   10% { opacity: 0; transform: scale(0.99); }
   100% { opacity: 0; transform: scale(0.99); }
@@ -735,64 +657,25 @@ body.intro-active footer { visibility: hidden; }
 
 @media (max-width: 600px) {
   .welcome-image-track {
-    width: 94vw;
-    height: 58vh;
+    width: 96vw;
+    height: 62vh;
     margin-top: 0.9rem;
+    border-radius: 16px;
+  }
+
+  .welcome-image-card {
+    border-radius: 16px;
   }
 
   .welcome-image-card img {
-    height: calc(100% - 62px);
+    height: calc(100% - 64px);
   }
 
   .welcome-image-card span {
-    min-height: 62px;
+    min-height: 64px;
     font-size: 0.9rem;
+    padding: 0.7rem 0.75rem;
   }
-}
-@keyframes welcomeSlide {
-  from { transform: translateX(100vw); }
-  to { transform: translateX(-100%); }
-}
-#welcomeIntro.hide-intro { opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0.5s ease; }
-
-@media (max-width: 850px) {
-  .admission-wrap { grid-template-columns: 1fr; }
-  .process-tree { grid-template-columns: 1fr; }
-  .process-tree::before {
-    top: 8%;
-    bottom: 8%;
-    left: 27px;
-    right: auto;
-    width: 4px;
-    height: auto;
-    background: linear-gradient(180deg, var(--saffron), var(--gold), var(--green));
-  }
-  .process-step { min-height: 92px; padding-left: 4.6rem; text-align: left; }
-  .step-circle { position: absolute; left: 0.8rem; top: 1rem; width: 44px; height: 44px; font-size: 1.15rem; }
-}
-@media (max-width: 600px) {
-  nav { align-items: flex-start; height: auto; min-height: 60px; padding: 0.8rem 1rem; }
-  .nav-brand { font-size: 0.95rem; }
-  .nav-links button { font-size: 0.68rem; padding: 0.3rem 0.45rem; }
-  #breadcrumb { top: 72px; }
-  .campus-photo-wrap { aspect-ratio: 4 / 3; }
-  .campus-caption { min-height: 116px; padding: 0.85rem 0.95rem; }
-  .campus-caption h2 { font-size: 1.05rem; }
-  .campus-caption p { font-size: 0.8rem; }
-
-  .welcome-box { padding: 0.8rem; }
-  .welcome-image-card { flex-basis: 280px; }
-  .welcome-image-card img { height: 180px; }
-  .welcome-image-card span {
-    font-size: 0.82rem;
-    min-height: 46px;
-    padding: 0.65rem 0.75rem;
-  }
-
-  #floatBack { left: 50%; bottom: 1rem; transform: translateX(-50%) translateY(10px); font-size: 0.82rem; }
-  #floatBack.visible { transform: translateX(-50%) translateY(0); }
-  #floatBack:hover { transform: translateX(-50%) translateY(-2px); }
-  #logToast { left: 1rem; right: 1rem; bottom: 1rem; }
 }
 
 </style>
@@ -1524,7 +1407,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 (function() {
   const sentence = "पदवी अभ्यासक्रमाच्या प्रवेशासाठी आलेल्या सर्व पालकांचे आणि विद्यार्थ्यांचे शिक्षण प्रसारक संस्थेचे संगमनेर महाविद्यालय, संगमनेर सहर्ष स्वागत करत आहे";
-  const totalTime = 10000;
+  const totalTime = 20000;
   function run() {
     const intro = document.getElementById("welcomeIntro");
     const box = document.getElementById("welcomeText");
