@@ -658,54 +658,68 @@ body.intro-active footer { visibility: hidden; }
 @media (max-width: 600px) {
 
   #welcomeIntro{
-    padding-top:0.5rem;
+    padding:0;
     justify-content:flex-start;
+    overflow:hidden;
   }
 
   .welcome-box{
     width:100%;
-    padding:0.5rem;
+    padding:0;
   }
 
   .welcome-subline{
-    font-size:0.75rem;
-    margin-top:0.3rem;
+    margin-top:0.5rem;
+    font-size:0.78rem;
     letter-spacing:1px;
   }
 
   .welcome-text{
     font-size:1.15rem;
-    line-height:1.45;
-    padding:0 0.4rem;
+    line-height:1.4;
+    padding:0 0.6rem;
   }
 
   .welcome-image-track{
-    width:96vw;
-    height:72vh;
-    margin-top:0.8rem;
-    border-radius:16px;
-    overflow:hidden;
+    width:100vw;
+    height:82vh;
+
+    margin-top:0.5rem;
+
+    border-radius:0;
+
+    box-shadow:none;
+  }
+
+  .welcome-image-row{
+    width:100%;
+    height:100%;
   }
 
   .welcome-image-card{
-    border-radius:16px;
+    border-radius:0;
+    border:none;
   }
 
   .welcome-image-card img{
+
     width:100%;
-    height:calc(100% - 64px);
+    height:calc(100% - 70px);
 
-    /* IMPORTANT */
-    object-fit:contain;
+    object-fit:cover;
 
-    background:#0D1B2A;
+    object-position:center center;
   }
 
   .welcome-image-card span{
-    min-height:64px;
-    font-size:0.82rem;
-    padding:0.65rem 0.7rem;
-    line-height:1.4;
+
+    min-height:70px;
+
+    font-size:0.95rem;
+
+    padding:0.8rem;
+
+    line-height:1.45;
   }
 
 }
