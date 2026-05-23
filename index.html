@@ -669,86 +669,95 @@ body.intro-active footer { visibility: hidden; }
 
   #welcomeIntro{
 
-    display:flex;
+    position:fixed;
 
-    flex-direction:column;
-
-    justify-content:flex-start;
-
-    align-items:center;
-
-    padding:0;
+    inset:0;
 
     overflow:hidden;
 
     background:#000;
-  }
-
-  .welcome-box{
-
-    width:100%;
-
-    height:100vh;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
 
     padding:0;
   }
 
-  .welcome-subline{
-
-    margin-top:10px;
-
-    font-size:0.72rem;
-
-    letter-spacing:1px;
-
-    color:#fff;
-
-    z-index:5;
-  }
-
-  .welcome-text{
-
-    width:100%;
-
-    padding:0.4rem 0.8rem;
-
-    text-align:center;
-
-    font-size:1rem;
-
-    line-height:1.35;
-
-    color:#fff;
-
-    z-index:5;
-  }
-
-  .welcome-image-track{
+  .welcome-box{
 
     position:relative;
 
     width:100vw;
 
-    flex:1;
+    height:100vh;
 
-    margin-top:8px;
+    padding:0;
 
     overflow:hidden;
+  }
 
-    border-radius:0;
+  .welcome-subline{
+
+    position:absolute;
+
+    top:8px;
+
+    left:0;
+    right:0;
+
+    z-index:20;
+
+    text-align:center;
+
+    color:#fff;
+
+    font-size:0.72rem;
+
+    letter-spacing:1px;
+  }
+
+  .welcome-text{
+
+    position:absolute;
+
+    top:28px;
+
+    left:0;
+    right:0;
+
+    z-index:20;
+
+    padding:0 0.8rem;
+
+    text-align:center;
+
+    color:#fff;
+
+    font-size:1rem;
+
+    line-height:1.35;
+  }
+
+  .welcome-image-track{
+
+    position:absolute;
+
+    top:95px;
+
+    left:0;
+
+    width:100vw;
+
+    height:calc(100vh - 95px);
+
+    overflow:hidden;
 
     background:#000;
   }
 
   .welcome-image-row{
 
+    position:relative;
+
     width:100%;
+
     height:100%;
   }
 
@@ -759,25 +768,31 @@ body.intro-active footer { visibility: hidden; }
     inset:0;
 
     width:100%;
+
     height:100%;
+
+    overflow:hidden;
 
     border:none;
 
     border-radius:0;
-
-    overflow:hidden;
   }
 
   .welcome-image-card img{
 
+    position:absolute;
+
+    inset:0;
+
     width:100%;
+
     height:100%;
 
     object-fit:cover;
 
     object-position:center center;
 
-    transform:scale(1.15);
+    transform:scale(1.18);
   }
 
   .welcome-image-card span{
@@ -788,16 +803,18 @@ body.intro-active footer { visibility: hidden; }
     right:0;
     bottom:0;
 
+    z-index:30;
+
     padding:1rem;
 
     background:linear-gradient(
       transparent,
-      rgba(0,0,0,0.82)
+      rgba(0,0,0,0.88)
     );
 
     color:#fff;
 
-    font-size:0.9rem;
+    font-size:0.92rem;
 
     line-height:1.4;
 
